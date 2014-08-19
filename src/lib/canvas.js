@@ -23,6 +23,8 @@ function( util, vent ){
         if ( opts !== undefined ) {
             this.height = this.elem.height = opts.height;
             this.width = this.elem.width = opts.width;
+            this.offscreen.height = opts.height;
+            this.offscreen.width = opts.width;
             this.bgColor = opts.bgColor;
         }
 
@@ -106,7 +108,7 @@ function( util, vent ){
     };
 
 
-    proto.addBGItem = function( sprite){
+    proto.addBGItem = function( sprite ){
         this.bgCache.push(sprite);
     };
 

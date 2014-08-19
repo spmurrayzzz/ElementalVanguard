@@ -28,7 +28,7 @@ function( vent, Enemy, pool ){
     createEnemy = function(){
         var enemy;
 
-        if ( lastCreated > new Date().getTime() - 5000 ) {
+        if ( lastCreated > new Date().getTime() - 3000 ) {
             return;
         }
 
