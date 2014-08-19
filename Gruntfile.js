@@ -14,8 +14,10 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
+    require('./build/compress')(grunt);
+
     grunt.registerTask('default', [
-         'jshint:app', 'concat_sourcemap', 'uglify'
+         'jshint:app', 'concat_sourcemap', 'uglify', 'compress'
     ]);
 
 };
