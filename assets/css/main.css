@@ -16,6 +16,7 @@ img {
 canvas {
     position: absolute;
     transform: translateZ(0);
+    border-radius: 18px;
     border: none;
 }
 
@@ -28,4 +29,7 @@ canvas {
     padding: 0;
     margin-top: -310px;
     margin-left: -410px;
+    box-shadow: 0px 0px 30px 2px #333;
+    border-radius: 18px;
+    overflow: hidden;
 }
