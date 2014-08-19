@@ -13,23 +13,25 @@ function( Star, SpeedLine, vent, util ){
         lines = [],
         canvas,
         update,
+        ctx,
         cfg;
 
 
     cfg = {
-        starCount: 150,
+        starCount: 1000,
         lineCount: 8
     };
 
 
-    init = function( game ){
-        canvas = game.canvas;
+    init = function( obj ){
+        canvas = obj;
+        ctx = canvas.getContext('2d');
     };
 
 
     bindEvents = function(){
-        vent.on('start', function( game ){
-            init(game);
+        vent.on('start', function( ){
+            init(util.getById('bg-canvas'));
             create();
         });
         vent.on('update', update);
@@ -45,25 +47,26 @@ function( Star, SpeedLine, vent, util ){
         }
         var out = {
             render: function(){
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
                 for (var i = 0; i < stars.length; i++) {
                     var star = stars[i];
-                    star.ctx.beginPath();
-                    star.ctx.arc(
+                    ctx.beginPath();
+                    ctx.arc(
                         star.position.x, star.position.y,
                         star.size, 0, 2 * Math.PI, false
                     );
-                    star.ctx.fillStyle = star.fillStyle;
-                    star.ctx.fill();
+                    ctx.fillStyle = star.fillStyle;
+                    ctx.fill();
                 }
                 for (i = 0; i < lines.length; i++) {
                     var line = lines[i];
-                    line.ctx.beginPath();
-                    line.ctx.rect(
+                    ctx.beginPath();
+                    ctx.rect(
                         line.position.x, line.position.y,
                         line.size.width, line.size.height
                     );
-                    line.ctx.fillStyle = line.fillStyle;
-                    line.ctx.fill();
+                    ctx.fillStyle = line.fillStyle;
+                    ctx.fill();
                 }
             }
         };

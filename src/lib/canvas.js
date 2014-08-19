@@ -55,8 +55,8 @@ function( util, vent ){
 
     proto.render = function( ){
         this.ctx.clearRect(0, 0, this.width, this.height);
-        this.ctx.fillStyle = this.bgColor;
-        this.ctx.fillRect(0, 0, this.width, this.height);
+        // this.ctx.fillStyle = this.bgColor;
+        // this.ctx.fillRect(0, 0, this.width, this.height);
 
         this.bgCache.forEach(function( sprite ){
             sprite.render();

@@ -1,14 +1,21 @@
 define('game',
 
-['Canvas', 'Player', 'vent'],
+['Canvas', 'Player', 'vent', 'util'],
 
-function( Canvas, Player, vent ){
+function( Canvas, Player, vent, util ){
 
     'use strict';
 
     var canvas,
         player,
+        bgCanvas,
         game;
+
+    bgCanvas = document.createElement('canvas');
+    bgCanvas.id = 'bg-canvas';
+    bgCanvas.height = window.innerHeight;
+    bgCanvas.width = window.innerWidth;
+    util.getById('game-container').appendChild(bgCanvas);
 
     canvas = new Canvas('game-container', {
         width: window.innerWidth,
