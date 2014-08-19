@@ -8,7 +8,7 @@ function( vent, Enemy, pool ){
         bindEvents,
         createEnemy,
         canvas,
-        checkCollisions,
+        checkLaserCollisions,
         colliders,
         enemyCache,
         lastCreated = new Date().getTime();
@@ -25,7 +25,7 @@ function( vent, Enemy, pool ){
         vent.on('start', function( game ){
             init(game);
             vent.on('update', createEnemy);
-            vent.on('update', checkCollisions);
+            vent.on('update', checkLaserCollisions);
         });
         vent.on('laser-cache-updated', function( laserCache ){
             colliders = laserCache;
@@ -35,7 +35,7 @@ function( vent, Enemy, pool ){
     createEnemy = function(){
         var enemy;
 
-        if ( lastCreated > new Date().getTime() - 500 ) {
+        if ( lastCreated > new Date().getTime() - 3000 ) {
             return;
         }
 
@@ -52,7 +52,7 @@ function( vent, Enemy, pool ){
     };
 
 
-    checkCollisions = function() {
+    checkLaserCollisions = function() {
         var dx,
             dy,
             distance;
@@ -64,6 +64,7 @@ function( vent, Enemy, pool ){
                 distance = Math.sqrt(dx * dx + dy * dy);
 
                 if ( distance < enemy.size + collider.size) {
+                    vent.emit('kaboom!', enemy.position.x, enemy.position.y);
                     enemy.destroy();
                     collider.destroy();
                 }

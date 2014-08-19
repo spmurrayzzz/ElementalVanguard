@@ -17,7 +17,7 @@ function( Sprite, vent, util ){
             speed: 2,
             friction: 2,
             velocity: 0,
-            velocityGoal: Math.random() * (8 - 3) + 3
+            velocityGoal: Math.random() * (2 - 1) + 1
         };
         this.position = {
             x: Math.random() * this.canvas.width,
