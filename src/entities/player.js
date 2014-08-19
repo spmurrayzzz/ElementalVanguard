@@ -57,13 +57,13 @@ function( Sprite, vent, Laser, util, pool ){
         ctx.shadowBlur = 40;
         ctx.shadowColor = "rgba(0, 220, 0, 0.6)";
 
-        ctx.fillStyle = 'rgb(100, 220, 0)';
+        ctx.fillStyle = 'rgba(120, 220, 0, 1)';
         ctx.beginPath();
         ctx.arc(pos.x, pos.y, this.size, 0, 2 * Math.PI, false);
         ctx.fill();
 
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = '#444';
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = 'rgba(0, 100, 0, 0.7)';
         ctx.stroke();
     };
 
