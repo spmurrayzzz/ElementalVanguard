@@ -55,9 +55,9 @@ function( Sprite, vent, Laser, util, pool ){
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
         ctx.shadowBlur = 40;
-        ctx.shadowColor = "rgba(255, 255, 255, 0.7)";
+        ctx.shadowColor = "rgba(0, 220, 0, 0.6)";
 
-        ctx.fillStyle = '#777';
+        ctx.fillStyle = 'rgb(100, 220, 0)';
         ctx.beginPath();
         ctx.arc(pos.x, pos.y, this.size, 0, 2 * Math.PI, false);
         ctx.fill();
