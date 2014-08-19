@@ -19,7 +19,7 @@ function( Sprite ){
             velocityGoal: Math.random() * (6 - 1) + 1
         };
         this.fillStyle = 'rgba(241,241,241,' +
-            Math.random() * ((0.8 - 0.3) + 0.3) + ')';
+            Math.random() * ((0.4 - 0.1) + 0.1) + ')';
         this.position = {
             x: Math.random() * this.canvas.width,
             y: Math.random() * this.canvas.height - this.size
