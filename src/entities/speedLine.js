@@ -2,7 +2,7 @@ define('SpeedLine',
 
 ['Sprite', 'vent', 'util'],
 
-function( Sprite, vent, util ){
+function( Sprite ){
 
     'use strict';
 
@@ -31,45 +31,10 @@ function( Sprite, vent, util ){
     proto = SpeedLine.prototype = Object.create(Sprite.prototype);
 
 
-    proto.create = function(){
-        vent.emit('bg-item-added', this);
-        return this;
-    };
+    proto.bindEvents = function(){};
 
 
-    proto.render = function(){
-        if ( this.destroyed ) {
-            return;
-        }
-        var ctx = this.ctx,
-            pos = this.position;
-
-        ctx.beginPath();
-        ctx.rect(pos.x, pos.y, this.size.width, this.size.height);
-        ctx.fillStyle = this.fillStyle;
-        ctx.fill();
-    };
-
-
-    proto.update = function(){
-        if ( this.destroyed ) {
-            return;
-        }
-
-        var p = this.physics,
-            pos = this.position,
-            approach = util.approach,
-            newX;
-
-        p.velocity = approach(p.velocityGoal, p.velocity, p.friction);
-        newX = pos.y + p.velocity;
-        if ( newX > this.canvas.height + this.size.height ) {
-            this.restart();
-        } else {
-            pos.y = newX;
-        }
-    };
-
+    proto.create = function(){ return this; };
 
     proto.restart = function(){
         this.position = {

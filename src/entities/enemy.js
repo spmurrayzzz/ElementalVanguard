@@ -23,7 +23,6 @@ function( Sprite, vent, util ){
             x: Math.random() * this.canvas.width,
             y: 0 - this.size
         };
-        this.ctx = this.canvas.elem.getContext('2d');
     }
 
     proto = Enemy.prototype = Object.create(Sprite.prototype);
@@ -45,9 +44,9 @@ function( Sprite, vent, util ){
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
         ctx.shadowBlur = 40;
-        ctx.shadowColor = this.fillStyle;
+        ctx.shadowColor = 'rgba(241, 241, 241, 1)';
 
-        ctx.fillStyle = this.fillStyle;//'#993366';
+        ctx.fillStyle = 'rgba(241, 241, 241, 1)';
         ctx.beginPath();
         ctx.arc(pos.x, pos.y, this.size, 0, 2 * Math.PI, false);
         ctx.fill();
