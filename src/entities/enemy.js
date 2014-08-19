@@ -50,10 +50,6 @@ function( Sprite, vent, util ){
         ctx.beginPath();
         ctx.arc(pos.x, pos.y, this.size, 0, 2 * Math.PI, false);
         ctx.fill();
-
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = '#444';
-        ctx.stroke();
     };
 
 
