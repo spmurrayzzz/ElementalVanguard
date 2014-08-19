@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    color: #333;
+    background-color: #f1f1f1;
+}
+
+img {
+    display: none;
+}
+
+canvas {
+    position: absolute;
+    transform: translateZ(0);
+}
+
+#game-container {
+    position: relative;
+}
