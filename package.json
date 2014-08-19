@@ -4,7 +4,7 @@
   "description": "js13k 2014 game submission.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "bower install && grunt"
+    "postinstall": "grunt"
   },
   "author": "Stephen Murray <spmurrayzzz>",
   "license": "MIT",
