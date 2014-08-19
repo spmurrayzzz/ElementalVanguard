@@ -19,12 +19,14 @@ function( vent, util, Particle ){
         ctx = cvs.getContext('2d');
         cvs.width = game.canvas.width;
         cvs.height = game.canvas.height;
+        cvs.id = 'effects-canvas';
         util.getById('game-container').appendChild(cvs);
         canvas = {
             width: cvs.width,
             height: cvs.height,
             ctx: ctx
         };
+        vent.emit('effects-canvas-added', canvas);
     };
 
     bindEvents = function(){

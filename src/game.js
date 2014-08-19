@@ -23,14 +23,14 @@ function( Canvas, Player, vent, util ){
     //   -- this is mostly being utlized for a performance boost
     bgCanvas = document.createElement('canvas');
     bgCanvas.id = 'bg-canvas';
-    bgCanvas.height = window.innerHeight;
-    bgCanvas.width = window.innerWidth;
+    bgCanvas.height = 600;
+    bgCanvas.width = 800;
     util.getById('game-container').appendChild(bgCanvas);
 
     // Create the canvas stage that we'll be using for primary game entities
     canvas = new Canvas('game-container', {
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: 800,
+        height: 600,
         bgColor: "#000"
     });
 

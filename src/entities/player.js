@@ -30,7 +30,7 @@ function( Sprite, vent, Laser, util, pool ){
     proto.create = function(){
         this.position = {
             x: this.canvas.width/2,
-            y: this.canvas.height
+            y: this.canvas.height - 52
         };
         this.isCreated = true;
         vent.on('keydown', this.move.bind(this));
