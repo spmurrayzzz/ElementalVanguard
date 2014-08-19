@@ -36,6 +36,7 @@ function( Sprite ){
 
     proto.create = function(){ return this; };
 
+
     proto.restart = function(){
         this.position = {
             x: Math.random() * this.canvas.width,
