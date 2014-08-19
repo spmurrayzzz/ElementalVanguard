@@ -8,12 +8,15 @@ function( vent, Enemy, pool ){
         bindEvents,
         createEnemy,
         canvas,
+        checkCollisions,
+        colliders,
         enemyCache,
         lastCreated = new Date().getTime();
 
 
     init = function( game ){
         enemyCache = [];
+        colliders = [];
         canvas = game.canvas;
     };
 
@@ -22,6 +25,10 @@ function( vent, Enemy, pool ){
         vent.on('start', function( game ){
             init(game);
             vent.on('update', createEnemy);
+            vent.on('update', checkCollisions);
+        });
+        vent.on('laser-cache-updated', function( laserCache ){
+            colliders = laserCache;
         });
     };
 
@@ -42,6 +49,26 @@ function( vent, Enemy, pool ){
         }
 
         lastCreated = new Date().getTime();
+    };
+
+
+    checkCollisions = function() {
+        var dx,
+            dy,
+            distance;
+
+        enemyCache.forEach(function( enemy ){
+            colliders.forEach(function( collider ){
+                dx = enemy.position.x - collider.position.x;
+                dy = enemy.position.y - collider.position.y;
+                distance = Math.sqrt(dx * dx + dy * dy);
+
+                if ( distance < enemy.size + collider.size) {
+                    enemy.destroy();
+                    collider.destroy();
+                }
+            });
+        });
     };
 
 

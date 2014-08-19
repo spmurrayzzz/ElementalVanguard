@@ -77,6 +77,7 @@ function( util, vent ){
 
     proto.addLaser = function( sprite ){
         this.laserCache.push(sprite);
+        vent.emit('laser-cache-updated', this.laserCache);
     };
 
 
