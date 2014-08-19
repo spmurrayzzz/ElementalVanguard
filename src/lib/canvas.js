@@ -13,7 +13,6 @@ function( util, vent ){
         }
         this.elem = document.createElement('canvas');
         this.elem.id = 'game-canvas';
-        this.elem.style.border = "1px solid #333";
         this.parent.appendChild(this.elem);
         this.ctx = this.elem.getContext('2d');
 

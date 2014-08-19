@@ -11,8 +11,8 @@ function( Canvas, Player, vent ){
         game;
 
     canvas = new Canvas('game-container', {
-        width: 800,
-        height: 600,
+        width: window.innerWidth,
+        height: window.innerHeight,
         bgColor: "#000"
     });
 
