@@ -27,7 +27,7 @@ function( Sprite, util ){
             return Math.sin(direction) * this.physics.velocity;
         };
 
-        this.life = Math.random() * (100-50) + 50;
+        this.life = Math.random() * (50-30) + 30;
         this.fillStyle = 'rgba(241,241,241,' +
             Math.random() * ((0.4 - 0.1) + 0.1) + ')';
         this.position = {

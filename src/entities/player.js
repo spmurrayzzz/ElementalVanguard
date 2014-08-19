@@ -119,6 +119,7 @@ function( Sprite, vent, Laser, util, pool ){
 
         laser.create(pos);
         this.lastFired = new Date().getTime();
+        vent.emit('shoot');
     };
 
 

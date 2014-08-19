@@ -19,7 +19,10 @@ module.exports = {
             'ENV': false,
             'Mustache': false,
             '_': false
-        }
+        },
+        ignores: [
+            'src/lib/jsfxr.js'
+        ]
     },
     gruntfile: {
         src: 'Gruntfile.js'
