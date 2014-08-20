@@ -1,3 +1,7 @@
+# Elemental Vanguard
+
+js13k 2014 submission
+
 ## Installation
 
 ```bash
