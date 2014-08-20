@@ -18,7 +18,7 @@ function( Star, SpeedLine, vent, util ){
 
 
     cfg = {
-        starCount: 500,
+        starCount: 150,
         lineCount: 8
     };
 
@@ -75,38 +75,42 @@ function( Star, SpeedLine, vent, util ){
 
 
     update = function(){
-        var newY;
+        var newY,
+            line,
+            star;
 
         for (var i = 0; i < stars.length; i++) {
-            stars[i].physics.velocity = util.approach(
-                stars[i].physics.velocityGoal,
-                stars[i].physics.velocity,
-                stars[i].physics.friction
+            star = stars[i];
+            star.physics.velocity = util.approach(
+                star.physics.velocityGoal,
+                star.physics.velocity,
+                star.physics.friction
             );
-            newY = stars[i].position.y + stars[i].physics.velocity;
-            if ( newY > stars[i].canvas.height + stars[i].size ) {
-                stars[i].restart();
+            newY = star.position.y + star.physics.velocity;
+            if ( newY > star.canvas.height + star.size ) {
+                star.restart();
             } else {
-                stars[i].position.y = newY;
+                star.position.y = newY;
             }
         }
 
         for (i = 0; i < lines.length; i++) {
-            lines[i].physics.velocity = util.approach(
-                lines[i].physics.velocityGoal,
-                lines[i].physics.velocity,
-                lines[i].physics.friction
+            line = lines[i];
+            line.physics.velocity = util.approach(
+                line.physics.velocityGoal,
+                line.physics.velocity,
+                line.physics.friction
             );
-            newY = lines[i].position.y + lines[i].physics.velocity;
-            if ( newY > lines[i].canvas.height + lines[i].size.height ) {
-                lines[i].restart();
+            newY = line.position.y + line.physics.velocity;
+            if ( newY > line.canvas.height + line.size.height ) {
+                line.restart();
             } else {
-                lines[i].position.y = newY;
+                line.position.y = newY;
             }
         }
     };
 
 
-    bindEvents();
+    // bindEvents();
 
 });
