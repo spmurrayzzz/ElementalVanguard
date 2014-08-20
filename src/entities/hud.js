@@ -65,6 +65,9 @@ function( vent, util ){
         vent.on('effects-canvas-added', function( obj ){
             init(obj);
         });
+        vent.on('enemy-down', function(){
+            score += 2;
+        });
     };
 
 
