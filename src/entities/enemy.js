@@ -85,7 +85,7 @@ function( Sprite, vent, util ){
             x: Math.random() * this.canvas.width,
             y: 0 - this.size
         };
-        this.physics.velocityGoal = Math.random() * (8 - 3) + 3;
+        this.physics.velocityGoal = Math.random() * (2 - 1) + 1;
         this.destroyed = false;
         this.fillStyle = util.randomColor();
         vent.emit('entity-added', this);
