@@ -63,17 +63,13 @@ function( Sprite, util, vent ){
             return;
         }
 
-        var p = this.physics,
-            pos = this.position,
-            approach = util.approach,
-            newX;
-
-        p.velocity = approach(p.velocityGoal, p.velocity, p.friction);
-        newX = pos.y + p.velocity;
-        if ( newX < 0 - this.size ) {
+        this.physics.velocity = util.approach(
+          this.physics.velocityGoal, this.physics.velocity, this.physics.friction
+        );
+        if ( this.position.y + this.physics.velocity < 0 - this.size ) {
             this.destroy();
         } else {
-            pos.y = newX;
+            this.position.y = this.position.y + this.physics.velocity;
         }
     };
 
