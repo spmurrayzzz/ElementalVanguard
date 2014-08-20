@@ -53,7 +53,7 @@ function( Sprite, vent, util ){
         this.ctx.shadowOffsetX = 0;
         this.ctx.shadowOffsetY = 0;
         this.ctx.shadowBlur = 40;
-        this.ctx.shadowColor = 'rgba(241, 241, 241, 1)';
+        this.ctx.shadowColor = this.fillStyle;
 
         this.ctx.fillStyle = this.fillStyle;
         this.ctx.beginPath();
