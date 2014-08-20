@@ -2,3 +2,6 @@
 node_modules/
 assets/js/js13k*
 index-compressed.html
+venv/
+fabConfig.json
+*.pyc
