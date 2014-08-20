@@ -5,6 +5,11 @@ define('spritePool', function(){
         recycle
         ;
 
+    function recycleFilter( obj ){
+        return obj.destroyed === true;
+    }
+
+
     register = function( name, item ){
         if ( typeof registry[name] === 'undefined' ) {
             registry[name] = [];
@@ -17,9 +22,7 @@ define('spritePool', function(){
         if ( typeof registry[name] === 'undefined' ) {
             registry[name] = [];
         }
-        var destroyed = registry[name].filter(function( obj ){
-            return obj.destroyed === true;
-        });
+        var destroyed = registry[name].filter(recycleFilter);
 
         if ( destroyed.length ) {
             if ( destroyed[0].recycle !== undefined ) {
