@@ -75,38 +75,33 @@ function( Star, SpeedLine, vent, util ){
 
 
     update = function(){
-        var star,
-            line,
-            newY;
+        var newY;
 
         for (var i = 0; i < stars.length; i++) {
-            star = stars[i];
-
-            star.physics.velocity = util.approach(
-                star.physics.velocityGoal,
-                star.physics.velocity,
-                star.physics.friction
+            stars[i].physics.velocity = util.approach(
+                stars[i].physics.velocityGoal,
+                stars[i].physics.velocity,
+                stars[i].physics.friction
             );
-            newY = star.position.y + star.physics.velocity;
-            if ( newY > star.canvas.height + star.size ) {
-                star.restart();
+            newY = stars[i].position.y + stars[i].physics.velocity;
+            if ( newY > stars[i].canvas.height + stars[i].size ) {
+                stars[i].restart();
             } else {
-                star.position.y = newY;
+                stars[i].position.y = newY;
             }
         }
 
         for (i = 0; i < lines.length; i++) {
-            line = lines[i];
-            line.physics.velocity = util.approach(
-                line.physics.velocityGoal,
-                line.physics.velocity,
-                line.physics.friction
+            lines[i].physics.velocity = util.approach(
+                lines[i].physics.velocityGoal,
+                lines[i].physics.velocity,
+                lines[i].physics.friction
             );
-            newY = line.position.y + line.physics.velocity;
-            if ( newY > line.canvas.height + line.size.height ) {
-                line.restart();
+            newY = lines[i].position.y + lines[i].physics.velocity;
+            if ( newY > lines[i].canvas.height + lines[i].size.height ) {
+                lines[i].restart();
             } else {
-                line.position.y = newY;
+                lines[i].position.y = newY;
             }
         }
     };

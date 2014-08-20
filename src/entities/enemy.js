@@ -58,17 +58,18 @@ function( Sprite, vent, util ){
             return;
         }
 
-        var p = this.physics,
-            pos = this.position,
-            approach = util.approach,
-            newX;
+        var newX;
 
-        p.velocity = approach(p.velocityGoal, p.velocity, p.friction);
-        newX = pos.y + p.velocity;
+        this.physics.velocity = util.approach(
+          this.physics.velocityGoal,
+          this.physics.velocity,
+          this.physics.friction
+        );
+        newX = this.position.y + this.physics.velocity;
         if ( newX > this.canvas.height + this.size ) {
             this.destroy();
         } else {
-            pos.y = newX;
+            this.position.y = newX;
         }
     };
 
