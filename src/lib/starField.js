@@ -18,7 +18,7 @@ function( Star, SpeedLine, vent, util ){
 
 
     cfg = {
-        starCount: 150,
+        starCount: 200,
         lineCount: 8
     };
 
@@ -111,6 +111,6 @@ function( Star, SpeedLine, vent, util ){
     };
 
 
-    // bindEvents();
+    bindEvents();
 
 });
