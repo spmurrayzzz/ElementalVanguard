@@ -40,6 +40,9 @@ function( vent, util, Particle ){
 
 
     update = function(){
+        if ( !particles.length ) {
+            return;
+        }
         for (var i = 0; i < particles.length; i++) {
             var particle = particles[i];
             particle.update();
@@ -51,6 +54,9 @@ function( vent, util, Particle ){
 
 
     render = function(){
+        if ( !particles.length ) {
+            return;
+        }
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         for (var i = 0; i < particles.length; i++) {
             var particle = particles[i];
