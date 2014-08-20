@@ -36,10 +36,8 @@ function( Sprite ){
 
 
     proto.restart = function(){
-        this.position = {
-            x: Math.random() * this.canvas.width,
-            y: -10
-        };
+        this.position.x = Math.random() * this.canvas.width;
+        this.position.y = -10;
     };
 
     return Star;
