@@ -45,26 +45,25 @@ function( Sprite, vent, Laser, util, pool ){
 
 
     proto.render = function(){
-        var pos = this.position,
-            ctx = this.ctx;
-
         if ( !this.isCreated ) {
             return false;
         }
 
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
-        ctx.shadowBlur = 40;
-        ctx.shadowColor = "rgba(0, 220, 0, 0.6)";
+        this.ctx.shadowOffsetX = 0;
+        this.ctx.shadowOffsetY = 0;
+        this.ctx.shadowBlur = 40;
+        this.ctx.shadowColor = "rgba(0, 220, 0, 0.6)";
 
-        ctx.fillStyle = 'rgba(120, 220, 0, 1)';
-        ctx.beginPath();
-        ctx.arc(pos.x, pos.y, this.size, 0, 2 * Math.PI, false);
-        ctx.fill();
+        this.ctx.fillStyle = 'rgba(120, 220, 0, 1)';
+        this.ctx.beginPath();
+        this.ctx.arc(
+          this.position.x, this.position.y, this.size, 0, 2 * Math.PI, false
+        );
+        this.ctx.fill();
 
-        ctx.lineWidth = 10;
-        ctx.strokeStyle = 'rgba(0, 100, 0, 0.7)';
-        ctx.stroke();
+        this.ctx.lineWidth = 10;
+        this.ctx.strokeStyle = 'rgba(0, 100, 0, 0.7)';
+        this.ctx.stroke();
     };
 
 
@@ -124,19 +123,17 @@ function( Sprite, vent, Laser, util, pool ){
 
 
     proto.update = function(){
-        var p = this.physics,
-            pos = this.position,
-            approach = util.approach,
-            newX;
+        this.physics.velocity = util.approach(
+          this.physics.velocityGoal, this.physics.velocity, 0.8
+        );
 
-        p.velocity = approach(p.velocityGoal, p.velocity, 0.8);
-        newX = pos.x + p.velocity;
-        if ( newX >= this.canvas.width - this.size ) {
-            pos.x = this.canvas.width - this.size;
-        } else if ( newX <= 0 + this.size ) {
-            pos.x = 0 + this.size;
+        if ( this.position.x + this.physics.velocity >=
+          this.canvas.width - this.size ) {
+            this.position.x = this.canvas.width - this.size;
+        } else if ( this.position.x + this.physics.velocity <= 0 + this.size ) {
+            this.position.x = 0 + this.size;
         } else {
-            pos.x = newX;
+            this.position.x = this.position.x + this.physics.velocity;
         }
     };
 

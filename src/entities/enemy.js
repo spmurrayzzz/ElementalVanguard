@@ -38,18 +38,18 @@ function( Sprite, vent, util ){
         if ( this.destroyed ) {
             return;
         }
-        var ctx = this.ctx,
-            pos = this.position;
 
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
-        ctx.shadowBlur = 40;
-        ctx.shadowColor = 'rgba(241, 241, 241, 1)';
+        this.ctx.shadowOffsetX = 0;
+        this.ctx.shadowOffsetY = 0;
+        this.ctx.shadowBlur = 40;
+        this.ctx.shadowColor = 'rgba(241, 241, 241, 1)';
 
-        ctx.fillStyle = 'rgba(241, 241, 241, 1)';
-        ctx.beginPath();
-        ctx.arc(pos.x, pos.y, this.size, 0, 2 * Math.PI, false);
-        ctx.fill();
+        this.ctx.fillStyle = 'rgba(241, 241, 241, 1)';
+        this.ctx.beginPath();
+        this.ctx.arc(
+          this.position.x, this.position.y, this.size, 0, 2 * Math.PI, false
+        );
+        this.ctx.fill();
     };
 
 
@@ -58,18 +58,17 @@ function( Sprite, vent, util ){
             return;
         }
 
-        var newX;
-
         this.physics.velocity = util.approach(
           this.physics.velocityGoal,
           this.physics.velocity,
           this.physics.friction
         );
-        newX = this.position.y + this.physics.velocity;
-        if ( newX > this.canvas.height + this.size ) {
+
+        if ( this.position.y + this.physics.velocity >
+          this.canvas.height + this.size ) {
             this.destroy();
         } else {
-            this.position.y = newX;
+            this.position.y = this.position.y + this.physics.velocity;
         }
     };
 
