@@ -17,7 +17,7 @@ function( Sprite, vent, util ){
             speed: 2,
             friction: 2,
             velocity: 0,
-            velocityGoal: Math.random() * (-1+0.5) + -0.5
+            velocityGoal: util.random(-1, -0.5)
          };
         this.fillStyle = '#684a3b';
         this.position = {
