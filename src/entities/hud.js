@@ -30,7 +30,7 @@ function( vent, util ){
             ctx.fill();
         },
         score: function( ctx ) {
-            ctx.font = "20px Georgia";
+            ctx.font = "20px Courier";
             ctx.fillStyle = '#f1f1f1';
             ctx.textAlign = 'right';
             ctx.fillText(
