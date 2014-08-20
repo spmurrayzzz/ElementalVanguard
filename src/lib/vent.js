@@ -73,10 +73,12 @@ define('vent', function(){
           var args = getArgs(arguments),
             events = splitEvents(args[0]),
             ev,
+            e,
             retains = [],
             handlers = slice.call(args, 1);
 
-          while ( ev = events.shift() ) {
+          for (e = 0; e < events.length; e++) {
+            ev = events[e];
             this._cache[ev] = this._cache[ev] || [];
             if ( handlers.length ) {
               for ( var i = 0; i < this._cache[ev].length; i++ ) {

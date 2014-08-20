@@ -82,13 +82,20 @@ function( util, vent ){
 
 
     proto.destroyLaser = function( sprite ) {
-        var target;
-        this.laserCache.forEach(function( obj, key ){
-            if ( obj.id === sprite.id ) {
-                target = key;
+        var spliceTargets = [],
+            laser,
+            i;
+
+        for (i = 0; i < this.laserCache.length; i++) {
+            laser = this.laserCache[i];
+            if ( laser.id === sprite.id ) {
+                spliceTargets.push(i);
             }
-        });
-        this.laserCache.splice(target, 1);
+        }
+
+        for (i = 0; i < spliceTargets.length; i++) {
+            this.laserCache.splice(spliceTargets[i], 1);
+        }
     };
 
 

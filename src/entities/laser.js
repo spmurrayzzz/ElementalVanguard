@@ -10,7 +10,7 @@ function( Sprite, util, vent ){
 
     function Laser(){
         Sprite.apply(this, arguments);
-        this.ctx = this.canvas.elem.getContext('2d');
+        this.ctx = this.canvas.ctx;
         this.size = 10;
         this.isCreated = false;
         this.physics = {
@@ -75,7 +75,8 @@ function( Sprite, util, vent ){
 
 
     proto.destroy = function(){
-        this.position = { x: 0, y: 0 };
+        this.position.x = 0;
+        this.position.y = 0;
         this.destroyed = true;
         vent.emit('laser-destroyed', this);
     };
