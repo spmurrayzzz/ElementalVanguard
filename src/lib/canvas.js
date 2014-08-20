@@ -54,19 +54,19 @@ function( util, vent ){
 
 
     proto.render = function( ){
-        this.ctx.clearRect(0, 0, this.width, this.height);
-        // this.ctx.fillStyle = this.bgColor;
-        // this.ctx.fillRect(0, 0, this.width, this.height);
+        var i;
 
-        this.bgCache.forEach(function( sprite ){
-            sprite.render();
-        });
-        this.laserCache.forEach(function( sprite ){
-            sprite.render();
-        });
-        this.entityCache.forEach(function( sprite ){
-            sprite.render();
-        });
+        this.ctx.clearRect(0, 0, this.width, this.height);
+
+        for (i = 0; i < this.bgCache.length; i++) {
+            this.bgCache[i].render();
+        }
+        for (i = 0; i < this.laserCache.length; i++) {
+            this.laserCache[i].render();
+        }
+        for (i = 0; i < this.entityCache.length; i++) {
+            this.entityCache[i].render();
+        }
     };
 
 
