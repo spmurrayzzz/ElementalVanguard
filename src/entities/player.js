@@ -49,6 +49,7 @@ function( Sprite, vent, Laser, util, pool ){
             return false;
         }
 
+        this.ctx.save();
         this.ctx.shadowOffsetX = 0;
         this.ctx.shadowOffsetY = 0;
         this.ctx.shadowBlur = 40;
@@ -59,11 +60,13 @@ function( Sprite, vent, Laser, util, pool ){
         this.ctx.arc(
           this.position.x, this.position.y, this.size, 0, 2 * Math.PI, false
         );
+        this.ctx.closePath();
         this.ctx.fill();
 
         this.ctx.lineWidth = 10;
         this.ctx.strokeStyle = 'rgba(0, 100, 0, 0.7)';
         this.ctx.stroke();
+        this.ctx.restore();
     };
 
 

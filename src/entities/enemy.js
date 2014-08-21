@@ -34,7 +34,7 @@ function( Sprite, vent, util ){
         this.inc = 0.2;
         this.position = {
             x: Math.random() * this.canvas.width,
-            y: 0 - this.size
+            y: 0 - this.size*2
         };
     }
 
@@ -53,49 +53,61 @@ function( Sprite, vent, util ){
         }
 
         var inc = 0.3,
-            curr = inc,
-            alpha = 0.9;
+            curr = inc*0.5,
+            alpha = 0.9,
+            grd;
 
 
         // Render primary body
-        this.ctx.shadowOffsetX = 0;
-        this.ctx.shadowOffsetY = 0;
-        this.ctx.shadowBlur = 40;
-        this.ctx.shadowColor = 'rgba(241, 241, 241, 1)';
+        // this.ctx.shadowOffsetX = 0;
+        // this.ctx.shadowOffsetY = 0;
+        // this.ctx.shadowBlur = 40;
+        // this.ctx.shadowColor = 'rgba(128,0,8,1.0)';
 
-        this.ctx.fillStyle = 'rgba(241, 241, 241, 1)';
+
+        // this.ctx.fillStyle = 'rgba(241, 241, 241, 1)';
         this.ctx.beginPath();
         this.ctx.arc(
           this.position.x, this.position.y, this.size, 0, 2 * Math.PI, false
         );
+        grd=this.ctx.createRadialGradient(
+            this.position.x, this.position.y, this.size*1.5,
+            this.position.x + 20, this.position.y + 20, this.size/2
+        );
+        grd.addColorStop(0,"#800008");
+        grd.addColorStop(1,"#c3000b");
+        this.ctx.shadowBlur = 40;
+        this.ctx.shadowColor = 'rgba(221,113,8,1.0)';
+        this.ctx.fillStyle = grd;
         this.ctx.fill();
 
 
         // Render orbiter
-        this.orbitAt += this.inc;
+        this.orbitAt += this.inc*1.2;
 
-        this.ctx.shadowBlur = 0;
-        this.ctx.fillStyle = 'rgba(255, 0, 0, 1)';
         this.ctx.beginPath();
+        this.ctx.shadowBlur = 0;
         this.ctx.arc(
           this.position.x + (this.size + 5) * Math.cos(this.orbitAt),
           this.position.y + (this.size + 5) * Math.sin(this.orbitAt),
           5, 0, 2 * Math.PI, false
         );
+        this.ctx.fillStyle = 'rgba(221,113,8,1.0)';
         this.ctx.fill();
 
         // Render trail
-        for (var i = 0; i < 5; i++) {
-            this.ctx.fillStyle = 'rgba(230, 0, 0, ' + alpha + ')';
+        for (var i = 20; i > 0; i--) {
+            this.ctx.fillStyle = 'rgba(221, 113, 8, ' + alpha + ')';
             this.ctx.beginPath();
             this.ctx.arc(
-              this.position.x + (this.size + 5) * Math.cos(this.orbitAt-curr),
-              this.position.y + (this.size + 5) * Math.sin(this.orbitAt-curr),
-              5, 0, 2 * Math.PI, false
+              this.position.x + (this.size + i/4) * Math.cos(this.orbitAt-curr),
+              this.position.y + (this.size + i/4) * Math.sin(this.orbitAt-curr),
+              i/4, 0, 2 * Math.PI, false
             );
+            this.ctx.closePath();
             this.ctx.fill();
-            curr += inc;
-            alpha -= inc + inc*0.5;
+            curr += inc*0.5;
+            alpha -= inc * 0.3;
         }
     };
 

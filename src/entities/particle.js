@@ -28,7 +28,7 @@ function( Sprite, util ){
         };
 
         this.life = Math.random() * (50-30) + 30;
-        this.fillStyle = 'rgba(241,241,241,' +
+        this.fillStyle = 'rgba(244,0,8,' +
             Math.random() * ((1 - 0.5) + 0.5) + ')';
         this.position = {
             x: Math.random() * this.canvas.width,
