@@ -2,14 +2,19 @@ define('audio', ['jsfxr', 'vent'], function( jsfxr, vent ){
 
     'use strict';
 
+    var ctx = new window.AudioContext();
+
     function register( namespace, sound ){
-        var player = new Audio(),
-            soundURL = jsfxr(sound);
+        var arrayBuffer = jsfxr(sound);
 
-        player.src = soundURL;
-
-        vent.on(namespace, function(){
-            player.play(sound);
+        ctx.decodeAudioData(arrayBuffer, function( buffer ){
+            console.log( buffer );
+            vent.on(namespace, function(){
+                var src = ctx.createBufferSource();
+                src.buffer = buffer;
+                src.connect(ctx.destination);
+                src.start(0);
+            });
         });
     }
 
