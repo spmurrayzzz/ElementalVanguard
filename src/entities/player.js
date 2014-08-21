@@ -115,20 +115,10 @@ function( Sprite, vent, Laser, util, pool ){
             return;
         }
 
-        // var rect;
-        // rect = this.canvas.elem.getBoundingClientRect();
-        // this.pointerData.x = ev.clientX - rect.left;
-        // this.pointerData.y = ev.clientY - rect.top;
-        // this.fireDirection = Math.atan2(
-        //     this.pointerData.y - this.position.y,
-        //     this.pointerData.x - this.position.x
-        // );
-
-
         var laser = pool.recycle('lasers'),
             pos = {
                 x: this.position.x,
-                y: this.position.y
+                y: this.position.y - this.size
             };
 
         if ( !laser ) {
