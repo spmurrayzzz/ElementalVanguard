@@ -112,7 +112,7 @@ define('util', function(){
                 ctx[key] = opts[key];
             }
         }
-        
+
         a = (Math.PI * 2)/sides;
         a = anticlockwise?-a:a;
         ctx.beginPath();

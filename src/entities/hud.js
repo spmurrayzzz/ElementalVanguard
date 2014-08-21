@@ -26,14 +26,51 @@ function( vent, util ){
                 'rgba(104, 74, 59, 0.3)'
             ],
             size: 15,
-            x: 50,
+            x: 30,
             y: 575,
             angle: 0,
             displayProps: {
                 shadowOffsetX: 0,
-                shadowOffsetY: 0,
-                shadowBlur: 5,
-                shadowColor: 'rgba(241, 241, 241, 0.5)'
+                shadowOffsetY: 0
+            }
+        },
+        waterEmblem: {
+            fillStyle: [
+                'rgba(0, 0, 220, 1)'
+            ],
+            size: 15,
+            x: 65,
+            y: 575,
+            angle: 0,
+            displayProps: {
+                shadowOffsetX: 0,
+                shadowOffsetY: 0
+            }
+        },
+        airEmblem: {
+            fillStyle: [
+                'rgba(241, 241, 241, 1)'
+            ],
+            size: 15,
+            x: 100,
+            y: 575,
+            angle: 0,
+            displayProps: {
+                shadowOffsetX: 0,
+                shadowOffsetY: 0
+            }
+        },
+        fireEmblem: {
+            fillStyle: [
+                'rgba(255, 0, 0, 1)'
+            ],
+            size: 15,
+            x: 135,
+            y: 575,
+            angle: 0,
+            displayProps: {
+                shadowOffsetX: 0,
+                shadowOffsetY: 0
             }
         }
     };
@@ -43,7 +80,7 @@ function( vent, util ){
         bar: function( ctx ){
             ctx.beginPath();
             ctx.rect(0, ctx.canvas.height - 50, ctx.canvas.width, 50);
-            ctx.fillStyle = '#111';
+            ctx.fillStyle = '#333';
             ctx.shadowBlur = 0;
             ctx.fill();
 
@@ -67,12 +104,25 @@ function( vent, util ){
             util.polygon(ctx, c.x, c.y, c.size, 7,
                 c.fillStyle[0], c.displayProps, c.angle
             );
+            util.circle(ctx, c.x, c.y, c.size, c.fillStyle[0]);
             util.polygon(ctx, c.x, c.y, c.size*0.8, 5,
                 c.fillStyle[1], {}, c.angle
             );
             util.polygon(ctx, c.x, c.y, c.size*0.3, 4,
                 c.fillStyle[2], {}, c.angle
             );
+        },
+        waterEmblem: function( ctx ){
+            var c = cfg.waterEmblem;
+            util.circle(ctx, c.x, c.y, c.size, c.fillStyle[0]);
+        },
+        airEmblem: function( ctx ){
+            var c = cfg.airEmblem;
+            util.circle(ctx, c.x, c.y, c.size, c.fillStyle[0]);
+        },
+        fireEmblem: function( ctx ){
+            var c = cfg.fireEmblem;
+            util.circle(ctx, c.x, c.y, c.size, c.fillStyle[0]);
         }
     };
 
@@ -117,6 +167,9 @@ function( vent, util ){
         draw('bar');
         draw('score');
         draw('earthEmblem');
+        draw('waterEmblem');
+        draw('airEmblem');
+        draw('fireEmblem');
     };
 
 
