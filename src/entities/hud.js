@@ -14,19 +14,43 @@ function( vent, util ){
         bindEvents,
         drawItems,
         score,
-        draw;
+        draw,
+        cfg;
+
+
+    cfg = {
+        earthEmblem: {
+            fillStyle: [
+                '#372720',
+                'rgba(73, 52, 42, 0.5)',
+                'rgba(104, 74, 59, 0.3)'
+            ],
+            size: 15,
+            x: 50,
+            y: 575,
+            angle: 0,
+            displayProps: {
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                shadowBlur: 5,
+                shadowColor: 'rgba(241, 241, 241, 0.5)'
+            }
+        }
+    };
 
 
     drawItems = {
         bar: function( ctx ){
-            ctx.fillStyle = '#111';
             ctx.beginPath();
             ctx.rect(0, ctx.canvas.height - 50, ctx.canvas.width, 50);
+            ctx.fillStyle = '#111';
+            ctx.shadowBlur = 0;
             ctx.fill();
 
-            ctx.fillStyle = '#444';
             ctx.beginPath();
             ctx.rect(0, ctx.canvas.height - 52, ctx.canvas.width, 2);
+            ctx.fillStyle = '#444';
+            ctx.shadowBlur = 0;
             ctx.fill();
         },
         score: function( ctx ) {
@@ -36,6 +60,18 @@ function( vent, util ){
             ctx.fillText(
                 'Score: ' + score,
                 ctx.canvas.width - 25, ctx.canvas.height - 20
+            );
+        },
+        earthEmblem: function( ctx ){
+            var c = cfg.earthEmblem;
+            util.polygon(ctx, c.x, c.y, c.size, 7,
+                c.fillStyle[0], c.displayProps, c.angle
+            );
+            util.polygon(ctx, c.x, c.y, c.size*0.8, 5,
+                c.fillStyle[1], {}, c.angle
+            );
+            util.polygon(ctx, c.x, c.y, c.size*0.3, 4,
+                c.fillStyle[2], {}, c.angle
             );
         }
     };
@@ -80,6 +116,7 @@ function( vent, util ){
         ctx.clearRect(0, 0, ctx.canvas.width, 50);
         draw('bar');
         draw('score');
+        draw('earthEmblem');
     };
 
 
