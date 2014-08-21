@@ -100,13 +100,14 @@ function( util, vent ){
 
 
     proto.destroySprite = function( sprite ) {
-        var target;
-        this.entityCache.forEach(function( obj, key ){
-            if ( obj.id === sprite.id ) {
-                target = key;
+        var entity;
+
+        for (var i = 0; i < this.entityCache.length; i++) {
+            entity = this.entityCache[i];
+            if ( entity.id === sprite.id ) {
+                return this.entityCache.splice(i, 1);
             }
-        });
-        this.entityCache.splice(target, 1);
+        }
     };
 
 
