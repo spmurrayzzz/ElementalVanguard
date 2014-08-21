@@ -19,6 +19,19 @@ function( Sprite, vent, util ){
             velocity: 0,
             velocityGoal: Math.random() * (2 - 1) + 1
         };
+        this.orbiter = {
+            physics: {
+                friction: 2,
+                velocity: 1,
+                velocityGoal: Math.random() * (2 - 1) + 1
+            },
+            current: {
+                x: 0,
+                y: 0
+            }
+        };
+        this.orbitAt = 0;
+        this.inc = 0.2;
         this.position = {
             x: Math.random() * this.canvas.width,
             y: 0 - this.size
@@ -39,6 +52,12 @@ function( Sprite, vent, util ){
             return;
         }
 
+        var inc = 0.3,
+            curr = inc,
+            alpha = 0.9;
+
+
+        // Render primary body
         this.ctx.shadowOffsetX = 0;
         this.ctx.shadowOffsetY = 0;
         this.ctx.shadowBlur = 40;
@@ -50,6 +69,34 @@ function( Sprite, vent, util ){
           this.position.x, this.position.y, this.size, 0, 2 * Math.PI, false
         );
         this.ctx.fill();
+
+
+        // Render orbiter
+        this.orbitAt += this.inc;
+
+        this.ctx.shadowBlur = 0;
+        this.ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+        this.ctx.beginPath();
+        this.ctx.arc(
+          this.position.x + (this.size + 5) * Math.cos(this.orbitAt),
+          this.position.y + (this.size + 5) * Math.sin(this.orbitAt),
+          5, 0, 2 * Math.PI, false
+        );
+        this.ctx.fill();
+
+        // Render trail
+        for (var i = 0; i < 5; i++) {
+            this.ctx.fillStyle = 'rgba(230, 0, 0, ' + alpha + ')';
+            this.ctx.beginPath();
+            this.ctx.arc(
+              this.position.x + (this.size + 5) * Math.cos(this.orbitAt-curr),
+              this.position.y + (this.size + 5) * Math.sin(this.orbitAt-curr),
+              5, 0, 2 * Math.PI, false
+            );
+            this.ctx.fill();
+            curr += inc;
+            alpha -= inc + inc*0.5;
+        }
     };
 
 
