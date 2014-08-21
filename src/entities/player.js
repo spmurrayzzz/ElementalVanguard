@@ -22,6 +22,14 @@ function( Sprite, vent, Laser, util, pool ){
         this.keyPressed = false;
         this.laserPool = [];
         this.lastFired = new Date().getTime();
+        this.displayProps = {
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowBlur: 40,
+            shadowColor: "rgba(0, 220, 0, 0.6)",
+            lineWidth: 10,
+            strokeStyle: 'rgba(0, 100, 0, 0.7)'
+        };
     }
 
     proto = Player.prototype = Object.create(Sprite.prototype);
@@ -53,15 +61,7 @@ function( Sprite, vent, Laser, util, pool ){
 
         util.circle(
             this.ctx, this.position.x, this.position.y, this.size,
-            'rgba(120, 220, 0, 1)',
-            {
-                shadowOffsetX: 0,
-                shadowOffsetY: 0,
-                shadowBlur: 40,
-                shadowColor: "rgba(0, 220, 0, 0.6)",
-                lineWidth: 10,
-                strokeStyle: 'rgba(0, 100, 0, 0.7)'
-            }
+            'rgba(120, 220, 0, 1)', this.displayProps
         );
 
         this.ctx.restore();

@@ -24,6 +24,12 @@ function( Sprite, vent, util ){
             x: 0,
             y: this.canvas.height + this.size
         };
+        this.displayProps = {
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowBlur: 40,
+            shadowColor: this.fillStyle
+        };
     }
 
     proto = Asteroid.prototype = Object.create(Sprite.prototype);
@@ -51,12 +57,7 @@ function( Sprite, vent, util ){
     proto.render = function(){
         util.circle(this.ctx,
             this.position.x, this.position.y, this.size, this.fillStyle,
-            {
-                shadowOffsetX: 0,
-                shadowOffsetY: 0,
-                shadowBlur: 40,
-                shadowColor: this.fillStyle
-            }
+            this.displayProps
         );
     };
 

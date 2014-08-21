@@ -36,6 +36,10 @@ function( Sprite, vent, util ){
             x: Math.random() * this.canvas.width,
             y: 0 - this.size*2
         };
+        this.displayProps = {
+            shadowBlur: 40,
+            shadowColor: 'rgba(221,113,8,1.0)'
+        };
     }
 
     proto = Enemy.prototype = Object.create(Sprite.prototype);
@@ -59,17 +63,14 @@ function( Sprite, vent, util ){
 
 
         // Render primary body
-        grd=this.ctx.createRadialGradient(
+        grd = this.ctx.createRadialGradient(
             this.position.x, this.position.y, this.size*1.5,
             this.position.x + 20, this.position.y + 20, this.size/2
         );
         grd.addColorStop(0,"#800008");
         grd.addColorStop(1,"#c3000b");
         util.circle(this.ctx,
-            this.position.x, this.position.y, this.size, grd, {
-                shadowBlur: 40,
-                shadowColor: 'rgba(221,113,8,1.0)'
-            }
+            this.position.x, this.position.y, this.size, grd, this.displayProps
         );
 
 
