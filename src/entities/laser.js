@@ -39,22 +39,15 @@ function( Sprite, util, vent ){
         if ( this.destroyed ) {
             return;
         }
-        var ctx = this.ctx,
-            pos = this.position;
-
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
-        ctx.shadowBlur = 40;
-        ctx.shadowColor = "rgba(241, 241, 241, 0.9)";
-
-        ctx.fillStyle = util.randomColor();//'#00d14e';
-        ctx.beginPath();
-        ctx.arc(pos.x, pos.y, this.size, 0, 2 * Math.PI, false);
-        ctx.fill();
-
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = '#444';
-        ctx.stroke();
+        var pos = this.position;
+        util.circle(this.ctx, pos.x, pos.y, this.size, util.randomColor(), {
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowBlur: 40,
+            shadowColor: "rgba(241, 241, 241, 0.9)",
+            lineWidth: 2,
+            strokeStyle: '#444'
+        });
     };
 
 

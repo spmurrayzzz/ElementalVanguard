@@ -50,23 +50,18 @@ function( Star, SpeedLine, vent, util ){
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 for (var i = 0; i < stars.length; i++) {
                     var star = stars[i];
-                    ctx.beginPath();
-                    ctx.arc(
+                    util.circle(ctx,
                         star.position.x, star.position.y,
-                        star.size, 0, 2 * Math.PI, false
+                        star.size, star.fillStyle
                     );
-                    ctx.fillStyle = star.fillStyle;
-                    ctx.fill();
                 }
                 for (i = 0; i < lines.length; i++) {
                     var line = lines[i];
-                    ctx.beginPath();
-                    ctx.rect(
+                    util.rect(ctx,
                         line.position.x, line.position.y,
-                        line.size.width, line.size.height
+                        line.size.width, line.size.height,
+                        line.fillStyle
                     );
-                    ctx.fillStyle = line.fillStyle;
-                    ctx.fill();
                 }
             }
         };

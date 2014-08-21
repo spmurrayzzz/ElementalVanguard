@@ -31,11 +31,47 @@ define('util', function(){
     }
 
 
+    function circle(ctx, x, y, radius, fillStyle, opts) {
+        var key;
+
+        ctx.beginPath();
+        ctx.fillStyle = fillStyle;
+        ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+        if ( opts !== undefined ) {
+            for ( key in opts ) {
+                ctx[key] = opts[key];
+            }
+        }
+        ctx.fill();
+        if ( opts !== undefined && opts.lineWidth !== undefined ) {
+            ctx.stroke();
+        }
+    }
+
+
+    function rect(ctx, x, y, width, height, fillStyle, opts) {
+        var key;
+
+        ctx.beginPath();
+        ctx.fillStyle = fillStyle;
+        ctx.rect(x, y, width, height);
+        if ( opts !== undefined ) {
+            for ( key in opts ) {
+                ctx[key] = opts[key];
+            }
+        }
+        ctx.fill();
+    }
+
+
     return {
         getById: document.getElementById.bind(document),
         approach: approach,
         guid: guid,
         randomColor: randomColor,
-        random: random
+        random: random,
+        circle: circle,
+        rect: rect
     };
+
 });

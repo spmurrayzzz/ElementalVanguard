@@ -70,15 +70,9 @@ function( Sprite, util ){
 
 
     proto.render = function(){
-        var ctx = this.ctx;
-
-        ctx.beginPath();
-        ctx.arc(
-            this.position.x, this.position.y,
-            this.size, 0, 2 * Math.PI, false
+        util.circle(this.ctx,
+            this.position.x, this.position.y, this.size, this.fillStyle
         );
-        ctx.fillStyle = this.fillStyle;
-        ctx.fill();
     };
 
     return Particle;

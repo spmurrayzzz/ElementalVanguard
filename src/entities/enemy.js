@@ -59,54 +59,37 @@ function( Sprite, vent, util ){
 
 
         // Render primary body
-        // this.ctx.shadowOffsetX = 0;
-        // this.ctx.shadowOffsetY = 0;
-        // this.ctx.shadowBlur = 40;
-        // this.ctx.shadowColor = 'rgba(128,0,8,1.0)';
-
-
-        // this.ctx.fillStyle = 'rgba(241, 241, 241, 1)';
-        this.ctx.beginPath();
-        this.ctx.arc(
-          this.position.x, this.position.y, this.size, 0, 2 * Math.PI, false
-        );
         grd=this.ctx.createRadialGradient(
             this.position.x, this.position.y, this.size*1.5,
             this.position.x + 20, this.position.y + 20, this.size/2
         );
         grd.addColorStop(0,"#800008");
         grd.addColorStop(1,"#c3000b");
-        this.ctx.shadowBlur = 40;
-        this.ctx.shadowColor = 'rgba(221,113,8,1.0)';
-        this.ctx.fillStyle = grd;
-        this.ctx.fill();
+        util.circle(this.ctx,
+            this.position.x, this.position.y, this.size, grd, {
+                shadowBlur: 40,
+                shadowColor: 'rgba(221,113,8,1.0)'
+            }
+        );
 
 
         // Render orbiter
         this.orbitAt += this.inc*1.2;
 
-        this.ctx.beginPath();
-        this.ctx.shadowBlur = 0;
-        this.ctx.arc(
+        util.circle(this.ctx,
           this.position.x + (this.size + 5) * Math.cos(this.orbitAt),
           this.position.y + (this.size + 5) * Math.sin(this.orbitAt),
-          5, 0, 2 * Math.PI, false
+          5, 'rgba(221,113,8,1.0)', { shadowBlur: 0 }
         );
-        this.ctx.fillStyle = 'rgba(221,113,8,1.0)';
-        this.ctx.fill();
 
         // Render trail
         for (var i = 20; i > 0; i--) {
-            this.ctx.fillStyle = 'rgba(221, 113, 8, ' + alpha + ')';
-            this.ctx.beginPath();
-            this.ctx.arc(
+            util.circle(this.ctx,
               this.position.x + (this.size + i/4) * Math.cos(this.orbitAt-curr),
               this.position.y + (this.size + i/4) * Math.sin(this.orbitAt-curr),
-              i/4, 0, 2 * Math.PI, false
+              i/4, 'rgba(221, 113, 8, ' + alpha + ')'
             );
-            this.ctx.closePath();
-            this.ctx.fill();
-            curr += inc*0.5;
+            curr += inc * 0.5;
             alpha -= inc * 0.3;
         }
     };

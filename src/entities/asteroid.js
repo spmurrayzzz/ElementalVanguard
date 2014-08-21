@@ -41,7 +41,6 @@ function( Sprite, vent, util ){
           this.physics.velocityGoal, this.physics.velocity, this.physics.friction
         );
         if ( this.position.y < 0 - this.size*2 ) {
-            console.log('about to destroy');
             this.destroy();
         } else {
             this.position.y = this.position.y + this.physics.velocity;
@@ -50,17 +49,15 @@ function( Sprite, vent, util ){
 
 
     proto.render = function(){
-        this.ctx.shadowOffsetX = 0;
-        this.ctx.shadowOffsetY = 0;
-        this.ctx.shadowBlur = 40;
-        this.ctx.shadowColor = this.fillStyle;
-
-        this.ctx.fillStyle = this.fillStyle;
-        this.ctx.beginPath();
-        this.ctx.arc(
-          this.position.x, this.position.y, this.size, 0, 2 * Math.PI, false
+        util.circle(this.ctx,
+            this.position.x, this.position.y, this.size, this.fillStyle,
+            {
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                shadowBlur: 40,
+                shadowColor: this.fillStyle
+            }
         );
-        this.ctx.fill();
     };
 
 

@@ -50,22 +50,20 @@ function( Sprite, vent, Laser, util, pool ){
         }
 
         this.ctx.save();
-        this.ctx.shadowOffsetX = 0;
-        this.ctx.shadowOffsetY = 0;
-        this.ctx.shadowBlur = 40;
-        this.ctx.shadowColor = "rgba(0, 220, 0, 0.6)";
 
-        this.ctx.fillStyle = 'rgba(120, 220, 0, 1)';
-        this.ctx.beginPath();
-        this.ctx.arc(
-          this.position.x, this.position.y, this.size, 0, 2 * Math.PI, false
+        util.circle(
+            this.ctx, this.position.x, this.position.y, this.size,
+            'rgba(120, 220, 0, 1)',
+            {
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                shadowBlur: 40,
+                shadowColor: "rgba(0, 220, 0, 0.6)",
+                lineWidth: 10,
+                strokeStyle: 'rgba(0, 100, 0, 0.7)'
+            }
         );
-        this.ctx.closePath();
-        this.ctx.fill();
 
-        this.ctx.lineWidth = 10;
-        this.ctx.strokeStyle = 'rgba(0, 100, 0, 0.7)';
-        this.ctx.stroke();
         this.ctx.restore();
     };
 
