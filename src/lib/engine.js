@@ -1,8 +1,8 @@
 define('engine',
 
-['vent', 'Enemy', 'spritePool'],
+['vent', 'Enemy', 'spritePool', 'Laser'],
 
-function( vent, Enemy, pool ){
+function( vent, Enemy, pool, Laser ){
 
     var init,
         bindEvents,
@@ -64,7 +64,10 @@ function( vent, Enemy, pool ){
                 distance = Math.sqrt(dx * dx + dy * dy);
 
                 if ( distance < enemy.size + collider.size) {
-                    vent.emit('kaboom! enemy-down', enemy.position.x, enemy.position.y);
+                    vent.emit('kaboom!', enemy.position.x, enemy.position.y);
+                    if ( collider instanceof Laser) {
+                        vent.emit('enemy-down');
+                    }
                     enemy.destroy();
                     collider.destroy();
                 }
