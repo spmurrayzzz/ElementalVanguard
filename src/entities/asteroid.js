@@ -19,7 +19,11 @@ function( Sprite, vent, util ){
             velocity: 0,
             velocityGoal: util.random(-1, -0.5)
          };
-        this.fillStyle = '#684a3b';
+        this.fillStyle = [
+            '#372720',
+            'rgba(73, 52, 42, 0.5)',
+            'rgba(104, 74, 59, 0.3)'
+        ];
         this.position = {
             x: 0,
             y: this.canvas.height + this.size
@@ -28,7 +32,7 @@ function( Sprite, vent, util ){
             shadowOffsetX: 0,
             shadowOffsetY: 0,
             shadowBlur: 40,
-            shadowColor: this.fillStyle
+            shadowColor: '#684a3b'
         };
         this.angle = Math.cos(Math.random());
     }
@@ -57,7 +61,13 @@ function( Sprite, vent, util ){
 
     proto.render = function(){
         util.polygon(this.ctx, this.position.x, this.position.y, this.size, 7,
-            this.fillStyle, this.displayProps, this.angle
+            this.fillStyle[0], this.displayProps, this.angle
+        );
+        util.polygon(this.ctx, this.position.x, this.position.y, this.size*0.8, 5,
+            this.fillStyle[1], {}, this.angle
+        );
+        util.polygon(this.ctx, this.position.x, this.position.y, this.size*0.3, 4,
+            this.fillStyle[2], {}, this.angle
         );
     };
 
