@@ -22,13 +22,18 @@ function( Sprite, vent, Laser, util, pool ){
         this.keyPressed = false;
         this.laserPool = [];
         this.lastFired = new Date().getTime();
+        this.fillStyle = 'rgba(120, 220, 0, 1)';
         this.displayProps = {
             shadowOffsetX: 0,
             shadowOffsetY: 0,
             shadowBlur: 40,
-            shadowColor: "rgba(0, 220, 0, 0.6)",
+            shadowColor: 'rgba(0, 220, 0, 0.6)',
             lineWidth: 10,
             strokeStyle: 'rgba(0, 100, 0, 0.7)'
+        };
+        this.pointerData = {
+            x: 0,
+            y: 0
         };
     }
 
@@ -52,16 +57,22 @@ function( Sprite, vent, Laser, util, pool ){
     };
 
 
+    proto.bindEvents = function(){
+        Sprite.prototype.bindEvents.call(this);
+        vent.on('click', function( ev ){
+            this.fire(ev);
+        }.bind(this));
+    };
+
+
     proto.render = function(){
         if ( !this.isCreated ) {
             return false;
         }
 
-        this.ctx.save();
-
         util.circle(
             this.ctx, this.position.x, this.position.y, this.size,
-            'rgba(120, 220, 0, 1)', this.displayProps
+            this.fillStyle, this.displayProps
         );
 
         this.ctx.restore();
@@ -99,15 +110,26 @@ function( Sprite, vent, Laser, util, pool ){
     };
 
 
-    proto.fire = function(){
+    proto.fire = function( ev ){
         if ( this.lastFired > new Date().getTime() - 200 ) {
             return;
         }
 
+        var rect;
+        rect = this.canvas.elem.getBoundingClientRect();
+        this.pointerData.x = ev.clientX - rect.left;
+        this.pointerData.y = ev.clientY - rect.top;
+        this.fireDirection = Math.atan2(
+            this.pointerData.y - this.position.y,
+            this.pointerData.x - this.position.x
+        );
+
+
         var laser = pool.recycle('lasers'),
             pos = {
                 x: this.position.x,
-                y: this.position.y - this.size - 10
+                y: this.position.y,
+                direction: this.fireDirection
             };
 
         if ( !laser ) {

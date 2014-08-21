@@ -31,7 +31,7 @@ define('util', function(){
     }
 
 
-    function circle(ctx, x, y, radius, fillStyle, opts) {
+    function circle( ctx, x, y, radius, fillStyle, opts ) {
         var key;
 
         ctx.beginPath();
@@ -49,7 +49,7 @@ define('util', function(){
     }
 
 
-    function rect(ctx, x, y, width, height, fillStyle, opts) {
+    function rect( ctx, x, y, width, height, fillStyle, opts ) {
         var key;
 
         ctx.beginPath();
@@ -64,6 +64,40 @@ define('util', function(){
     }
 
 
+    function line( ctx, x1, y1, x2, y2, opts ) {
+        var key;
+
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        if ( opts !== undefined ) {
+            for ( key in opts ) {
+                ctx[key] = opts[key];
+            }
+        }
+        ctx.stroke();
+    }
+
+
+    function lineRotate( ctx, x1, y1, x2, y2, rotate, opts ) {
+        var key;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.translate(x1, y1);
+        ctx.rotate(-rotate);
+        ctx.moveTo(0, 0);
+        ctx.lineTo( x2 - x1, y2 - y1 );
+        if ( opts !== undefined ) {
+            for ( key in opts ) {
+                ctx[key] = opts[key];
+            }
+        }
+        ctx.stroke();
+        ctx.restore();
+    }
+
+
     return {
         getById: document.getElementById.bind(document),
         approach: approach,
@@ -71,7 +105,9 @@ define('util', function(){
         randomColor: randomColor,
         random: random,
         circle: circle,
-        rect: rect
+        rect: rect,
+        line: line,
+        lineRotate: lineRotate
     };
 
 });

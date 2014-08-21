@@ -23,6 +23,14 @@ function( Sprite, util, vent ){
             x: 100,
             y: 100
         };
+        this.displayProps = {
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowBlur: 40,
+            shadowColor: "rgba(241, 241, 241, 0.9)",
+            lineWidth: 2,
+            strokeStyle: '#444'
+        };
     }
 
     proto = Laser.prototype = Object.create(Sprite.prototype);
@@ -40,14 +48,9 @@ function( Sprite, util, vent ){
             return;
         }
         var pos = this.position;
-        util.circle(this.ctx, pos.x, pos.y, this.size, util.randomColor(), {
-            shadowOffsetX: 0,
-            shadowOffsetY: 0,
-            shadowBlur: 40,
-            shadowColor: "rgba(241, 241, 241, 0.9)",
-            lineWidth: 2,
-            strokeStyle: '#444'
-        });
+        util.circle(this.ctx, pos.x, pos.y, this.size, util.randomColor(),
+            this.displayProps
+        );
     };
 
 
@@ -62,7 +65,8 @@ function( Sprite, util, vent ){
         if ( this.position.y + this.physics.velocity < 0 - this.size ) {
             this.destroy();
         } else {
-            this.position.y = this.position.y + this.physics.velocity;
+            this.position.x -= Math.cos(this.position.direction) * (this.physics.velocity);
+            this.position.y -= Math.sin(this.position.direction) * (this.physics.velocity);
         }
     };
 

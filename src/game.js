@@ -55,6 +55,12 @@ function( Canvas, Player, vent, util ){
         vent.emit('create', game);
         vent.emit('start', game);
     });
+    util.getById('game-container').addEventListener('mousemove', function( ev ){
+        vent.emit('mousemove', ev, canvas.elem);
+    });
+    document.addEventListener('click', function( ev ){
+        vent.emit('click', ev);
+    });
 
     // Expose the interface
     window.game = game;
