@@ -50,7 +50,7 @@ function( Sprite, vent, Laser, util, pool ){
         vent.on('keyup', this.stop.bind(this));
         vent.on('keydown', function( ev ){
             if ( ev.keyCode === 32 ) {
-                this.fire();
+                this.fire( ev );
             }
         }.bind(this));
         Sprite.prototype.create.call(this);
@@ -59,9 +59,9 @@ function( Sprite, vent, Laser, util, pool ){
 
     proto.bindEvents = function(){
         Sprite.prototype.bindEvents.call(this);
-        vent.on('click', function( ev ){
-            this.fire(ev);
-        }.bind(this));
+        // vent.on('click', function( ev ){
+        //     this.fire(ev);
+        // }.bind(this));
     };
 
 
@@ -110,26 +110,25 @@ function( Sprite, vent, Laser, util, pool ){
     };
 
 
-    proto.fire = function( ev ){
+    proto.fire = function(){
         if ( this.lastFired > new Date().getTime() - 200 ) {
             return;
         }
 
-        var rect;
-        rect = this.canvas.elem.getBoundingClientRect();
-        this.pointerData.x = ev.clientX - rect.left;
-        this.pointerData.y = ev.clientY - rect.top;
-        this.fireDirection = Math.atan2(
-            this.pointerData.y - this.position.y,
-            this.pointerData.x - this.position.x
-        );
+        // var rect;
+        // rect = this.canvas.elem.getBoundingClientRect();
+        // this.pointerData.x = ev.clientX - rect.left;
+        // this.pointerData.y = ev.clientY - rect.top;
+        // this.fireDirection = Math.atan2(
+        //     this.pointerData.y - this.position.y,
+        //     this.pointerData.x - this.position.x
+        // );
 
 
         var laser = pool.recycle('lasers'),
             pos = {
                 x: this.position.x,
-                y: this.position.y,
-                direction: this.fireDirection
+                y: this.position.y
             };
 
         if ( !laser ) {
