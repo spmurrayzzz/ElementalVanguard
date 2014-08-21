@@ -102,27 +102,27 @@ function( vent, util ){
         earthEmblem: function( ctx ){
             var c = cfg.earthEmblem;
             util.polygon(ctx, c.x, c.y, c.size, 7,
-                c.fillStyle[0], c.displayProps, c.angle
+                c.fillStyle[0]
             );
-            util.circle(ctx, c.x, c.y, c.size, c.fillStyle[0]);
-            util.polygon(ctx, c.x, c.y, c.size*0.8, 5,
-                c.fillStyle[1], {}, c.angle
-            );
-            util.polygon(ctx, c.x, c.y, c.size*0.3, 4,
-                c.fillStyle[2], {}, c.angle
-            );
+            // util.circle(ctx, c.x, c.y, c.size, c.fillStyle[0]);
+            // util.polygon(ctx, c.x, c.y, c.size*0.8, 5,
+            //     c.fillStyle[1], {}, c.angle
+            // );
+            // util.polygon(ctx, c.x, c.y, c.size*0.3, 4,
+            //     c.fillStyle[2], {}, c.angle
+            // );
         },
         waterEmblem: function( ctx ){
             var c = cfg.waterEmblem;
-            util.circle(ctx, c.x, c.y, c.size, c.fillStyle[0]);
+            util.polygon(ctx, c.x, c.y, c.size, 7, c.fillStyle[0]);
         },
         airEmblem: function( ctx ){
             var c = cfg.airEmblem;
-            util.circle(ctx, c.x, c.y, c.size, c.fillStyle[0]);
+            util.polygon(ctx, c.x, c.y, c.size, 7, c.fillStyle[0]);
         },
         fireEmblem: function( ctx ){
             var c = cfg.fireEmblem;
-            util.circle(ctx, c.x, c.y, c.size, c.fillStyle[0]);
+            util.polygon(ctx, c.x, c.y, c.size, 7, c.fillStyle[0]);
         }
     };
 
