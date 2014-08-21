@@ -1,8 +1,8 @@
 define('particleEffects',
 
-['vent', 'util', 'Particle'],
+['vent', 'util', 'Particle', 'spritePool'],
 
-function( vent, util, Particle ){
+function( vent, util, Particle, pool ){
 
     var explosion,
         init,
@@ -45,6 +45,7 @@ function( vent, util, Particle ){
             particle.update();
             if ( particle.life <= 0 ) {
                 particles.splice(i, 1);
+                particle.destroyed = true;
             }
         }
     };
@@ -64,8 +65,15 @@ function( vent, util, Particle ){
             particle;
 
         for (var i = 0; i < particleAmt; i++) {
-            particle = new Particle(canvas);
-            particle.position = { x: x, y: y };
+            particle = pool.recycle('particles');
+            if ( !particle ) {
+                particle = new Particle(canvas);
+                pool.register('particles', particle);
+            } else {
+                Particle.call(particle, canvas);
+            }
+            particle.position.x = x;
+            particle.position.y = y;
             particles.push(particle.create());
         }
 

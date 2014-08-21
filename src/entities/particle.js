@@ -41,20 +41,11 @@ function( Sprite, util ){
 
 
     proto.create = function(){
-        this.bindEvents();
         return this;
     };
 
 
     proto.bindEvents = function(){};
-
-
-    proto.restart = function(){
-        this.position = {
-            x: Math.random() * this.canvas.width,
-            y: -10
-        };
-    };
 
 
     proto.update = function(){
@@ -74,6 +65,12 @@ function( Sprite, util ){
             this.position.x, this.position.y, this.size, this.fillStyle
         );
     };
+
+
+    proto.recycle = function(){
+        this.destroyed = false;
+    };
+
 
     return Particle;
 
