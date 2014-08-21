@@ -8,7 +8,6 @@ define('audio', ['jsfxr', 'vent'], function( jsfxr, vent ){
         var arrayBuffer = jsfxr(sound);
 
         ctx.decodeAudioData(arrayBuffer, function( buffer ){
-            console.log( buffer );
             vent.on(namespace, function(){
                 var src = ctx.createBufferSource();
                 src.buffer = buffer;
