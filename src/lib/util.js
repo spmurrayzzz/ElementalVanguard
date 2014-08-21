@@ -95,6 +95,41 @@ define('util', function(){
         }
         ctx.stroke();
         ctx.restore();
+        ctx.stroke();
+    }
+
+
+    function polygon( ctx, x, y, radius, sides, fillStyle, opts, startAngle, anticlockwise ) {
+        var key,
+            a;
+
+        if (sides < 3) {
+            return;
+        }
+
+        if ( opts !== undefined ) {
+            for ( key in opts ) {
+                ctx[key] = opts[key];
+            }
+        }
+        
+        a = (Math.PI * 2)/sides;
+        a = anticlockwise?-a:a;
+        ctx.beginPath();
+        ctx.save();
+        ctx.translate(x,y);
+        ctx.rotate(startAngle);
+        ctx.moveTo(radius,0);
+        for (var i = 1; i < sides; i++) {
+            ctx.lineTo(radius*Math.cos(a*i),radius*Math.sin(a*i));
+        }
+        ctx.closePath();
+        ctx.restore();
+        ctx.strokeStyle = fillStyle;
+        ctx.stroke();
+        ctx.fillStyle = fillStyle;
+
+        ctx.fill();
     }
 
 
@@ -107,7 +142,8 @@ define('util', function(){
         circle: circle,
         rect: rect,
         line: line,
-        lineRotate: lineRotate
+        lineRotate: lineRotate,
+        polygon: polygon
     };
 
 });

@@ -30,6 +30,7 @@ function( Sprite, vent, util ){
             shadowBlur: 40,
             shadowColor: this.fillStyle
         };
+        this.angle = Math.cos(Math.random());
     }
 
     proto = Asteroid.prototype = Object.create(Sprite.prototype);
@@ -55,9 +56,8 @@ function( Sprite, vent, util ){
 
 
     proto.render = function(){
-        util.circle(this.ctx,
-            this.position.x, this.position.y, this.size, this.fillStyle,
-            this.displayProps
+        util.polygon(this.ctx, this.position.x, this.position.y, this.size, 5,
+            this.fillStyle, this.displayProps, this.angle
         );
     };
 
