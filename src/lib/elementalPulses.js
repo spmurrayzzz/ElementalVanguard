@@ -30,7 +30,7 @@ function( vent, Asteroid ){
             new Asteroid(canvas).create(currX);
             currX += x;
         }
-
+        vent.emit('activate-elemental');
     };
 
 
