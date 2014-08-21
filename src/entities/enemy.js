@@ -40,6 +40,7 @@ function( Sprite, vent, util ){
             shadowBlur: 40,
             shadowColor: 'rgba(221,113,8,1.0)'
         };
+        this.orbiterDisplayProps = { shadowBlur: 0 };
     }
 
     proto = Enemy.prototype = Object.create(Sprite.prototype);
@@ -80,7 +81,7 @@ function( Sprite, vent, util ){
         util.circle(this.ctx,
           this.position.x + (this.size + 5) * Math.cos(this.orbitAt),
           this.position.y + (this.size + 5) * Math.sin(this.orbitAt),
-          5, 'rgba(221,113,8,1.0)', { shadowBlur: 0 }
+          5, 'rgba(221,113,8,1.0)', this.orbiterDisplayProps
         );
 
         // Render trail
