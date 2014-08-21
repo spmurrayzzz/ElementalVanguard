@@ -56,7 +56,7 @@ function( Sprite, vent, util ){
 
 
     proto.render = function(){
-        util.polygon(this.ctx, this.position.x, this.position.y, this.size, 5,
+        util.polygon(this.ctx, this.position.x, this.position.y, this.size, 7,
             this.fillStyle, this.displayProps, this.angle
         );
     };
