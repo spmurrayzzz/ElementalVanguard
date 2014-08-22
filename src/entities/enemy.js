@@ -23,7 +23,7 @@ function( Sprite, vent, util ){
             physics: {
                 friction: 2,
                 velocity: 1,
-                velocityGoal: util.random(1, 2)
+                velocityGoal: 1
             },
             current: {
                 x: 0,
@@ -89,6 +89,7 @@ function( Sprite, vent, util ){
 
 
         // Render orbiter
+        this.orbitAt = this.orbitAt > 13 ? 0 : this.orbitAt;
         this.orbitAt += this.inc*1.2;
 
         util.circle(this.ctx,
@@ -143,7 +144,7 @@ function( Sprite, vent, util ){
             x: Math.random() * this.canvas.width,
             y: 0 - this.size
         };
-        this.physics.velocityGoal = Math.random() * (2 - 1) + 1;
+        this.physics.velocityGoal = util.random(1, 2);
         this.destroyed = false;
         this.fillStyle = util.randomColor();
     };

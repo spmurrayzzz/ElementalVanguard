@@ -7,6 +7,8 @@ function( vent, Asteroid ){
     var bindEvents,
         canvas,
         water,
+        checkWater,
+        refCache = {},
         earth;
 
 
@@ -43,7 +45,20 @@ function( vent, Asteroid ){
 
 
     water = function(){
+        var started = new Date().getTime();
         vent.emit('activate elemental-water-on',  'water');
+        refCache.checkWater = checkWater.bind(null, started);
+        vent.on('update', refCache.checkWater);
+    };
+
+
+    checkWater = function checkWater( startTime ){
+        var now = new Date().getTime();
+        if ( now - startTime > 3000 ) {
+            console.log('off');
+            vent.off('update', refCache.checkWater);
+            vent.emit('deactivate elemental-water-off');
+        }
     };
 
 
