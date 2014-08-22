@@ -6,14 +6,12 @@ function( vent, Asteroid ){
 
     var bindEvents,
         canvas,
-        water,
-        checkWater,
-        refCache,
-        air,
-        checkAir,
-        fire,
-        checkFire,
         earth,
+        keyHandler,
+        check = {},
+        refCache,
+        deactivateTimedEffect,
+        activateTimedEffect,
         effectActive = false;
 
 
@@ -25,31 +23,56 @@ function( vent, Asteroid ){
 
 
     bindEvents = function(){
-        vent.on('keydown', function( ev ){
-            switch ( ev.keyCode ) {
-                case 49:
-                    earth();
-                    break;
-
-                case 50:
-                    water();
-                    break;
-
-                case 51:
-                    air();
-                    break;
-
-                case 52:
-                    fire();
-                    break;
-
-                default:
-                    break;
-            }
-        });
         vent.on('start', function( game ){
             canvas = game.canvas;
+            vent.on('keydown', keyHandler);
         });
+    };
+
+
+    keyHandler = function( ev ){
+        if ( effectActive ) {
+            return;
+        }
+        switch ( ev.keyCode ) {
+            case 49:
+                earth();
+                break;
+            case 50:
+                activateTimedEffect('elemental-water', 'checkWater');
+                break;
+            case 51:
+                activateTimedEffect('elemental-air', 'checkAir');
+                break;
+            case 52:
+                activateTimedEffect('elemental-fire', 'checkFire');
+                break;
+            default:
+                break;
+        }
+    };
+
+
+    deactivateTimedEffect = function( name, checkFuncName ) {
+        vent.off('update', refCache[checkFuncName]);
+        vent.emit('deactivate ' + name + '-off');
+        refCache[checkFuncName] = null;
+        effectActive = false;
+        console.log(refCache);
+    };
+
+
+    activateTimedEffect = function( name, checkFuncName ){
+        if ( effectActive ) {
+            return;
+        }
+        var started = new Date().getTime(),
+            shortName = name.split('-')[1];
+
+        vent.emit('activate ' + name + '-on', shortName);
+        refCache[checkFuncName] = check[shortName].bind(null, started);
+        vent.on('update', refCache[checkFuncName]);
+        effectActive = true;
     };
 
 
@@ -66,71 +89,26 @@ function( vent, Asteroid ){
     };
 
 
-    water = function(){
-        if ( effectActive ) {
-            return;
-        }
-        var started = new Date().getTime();
-        vent.emit('activate elemental-water-on',  'water');
-        refCache.checkWater = checkWater.bind(null, started);
-        vent.on('update', refCache.checkWater);
-        effectActive = true;
-    };
-
-
-    checkWater = function( startTime ){
+    check.water = function( startTime ){
         var now = new Date().getTime();
         if ( now - startTime > 6e3 ) {
-            vent.off('update', refCache.checkWater);
-            vent.emit('deactivate elemental-water-off');
-            refCache.checkWater = null;
-            effectActive = false;
+            deactivateTimedEffect('elemental-water', 'checkWater');
         }
     };
 
 
-    air = function(){
-        if ( effectActive ) {
-            return;
-        }
-        var started = new Date().getTime();
-        vent.emit('activate elemental-air-on',  'air');
-        refCache.checkAir = checkAir.bind(null, started);
-        vent.on('update', refCache.checkAir);
-        effectActive = true;
-    };
-
-
-    checkAir = function( startTime ){
+    check.air = function( startTime ){
         var now = new Date().getTime();
         if ( now - startTime > 10e3 ) {
-            vent.off('update', refCache.checkAir);
-            vent.emit('deactivate elemental-air-off');
-            refCache.checkAir = null;
-            effectActive = false;
+            deactivateTimedEffect('elemental-air', 'checkAir');
         }
     };
 
 
-    fire = function(){
-        if ( effectActive ) {
-            return;
-        }
-        var started = new Date().getTime();
-        vent.emit('activate elemental-fire-on',  'fire');
-        refCache.checkFire = checkFire.bind(null, started);
-        vent.on('update', refCache.checkFire);
-        effectActive = true;
-    };
-
-
-    checkFire = function( startTime ){
+    check.fire = function( startTime ){
         var now = new Date().getTime();
         if ( now - startTime > 10e3 ) {
-            vent.off('update', refCache.checkFire);
-            vent.emit('deactivate elemental-fire-off');
-            refCache.checkFire = null;
-            effectActive = false;
+            deactivateTimedEffect('elemental-fire', 'checkFire');
         }
     };
 
