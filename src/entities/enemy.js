@@ -123,7 +123,6 @@ function( Sprite, vent, util ){
 
         if ( this.position.y + this.physics.velocity >
           this.canvas.height + this.size ) {
-              console.log(this);
             this.destroy();
         } else {
             this.position.y = this.position.y + this.physics.velocity;
