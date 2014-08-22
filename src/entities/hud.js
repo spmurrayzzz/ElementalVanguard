@@ -15,6 +15,8 @@ function( vent, util ){
         drawItems,
         score,
         draw,
+        cooldownTimer,
+        checkCooldown,
         cfg;
 
 
@@ -72,6 +74,11 @@ function( vent, util ){
                 shadowOffsetX: 0,
                 shadowOffsetY: 0
             }
+        },
+        cooldownTimer: {
+            fillStyle: '#f1f1f1',
+            font: '20px Courier',
+            textAlign: 'right'
         }
     };
 
@@ -104,13 +111,6 @@ function( vent, util ){
             util.polygon(ctx, c.x, c.y, c.size, 7,
                 c.fillStyle[0]
             );
-            // util.circle(ctx, c.x, c.y, c.size, c.fillStyle[0]);
-            // util.polygon(ctx, c.x, c.y, c.size*0.8, 5,
-            //     c.fillStyle[1], {}, c.angle
-            // );
-            // util.polygon(ctx, c.x, c.y, c.size*0.3, 4,
-            //     c.fillStyle[2], {}, c.angle
-            // );
         },
         waterEmblem: function( ctx ){
             var c = cfg.waterEmblem;
@@ -123,6 +123,12 @@ function( vent, util ){
         fireEmblem: function( ctx ){
             var c = cfg.fireEmblem;
             util.polygon(ctx, c.x, c.y, c.size, 7, c.fillStyle[0]);
+        },
+        cooldownTimer: function( ctx ){
+            var c = cfg.cooldownTimer;
+            util.text(ctx, cooldownTimer.current || 'Ready',
+                220, ctx.canvas.height - 20, c.fillStyle
+            );
         }
     };
 
@@ -141,9 +147,18 @@ function( vent, util ){
         };
 
         score = 0;
+        cooldownTimer = {
+            current: 10,
+            lastChecked: new Date().getTime()
+        };
 
         vent.on('update', update);
         vent.on('render', render);
+        vent.on('deactivate', function(){
+            cooldownTimer.current = 20;
+            cooldownTimer.lastChecked = new Date().getTime();
+        });
+
     };
 
 
@@ -157,8 +172,25 @@ function( vent, util ){
     };
 
 
-    update = function(){
+    checkCooldown = function(){
+        if ( cooldownTimer.current - 1 < 0 ) {
+            return;
+        }
 
+        var now = new Date().getTime(),
+            diff = now - cooldownTimer.lastChecked;
+
+        if ( diff >= 1000 ) {
+            cooldownTimer.current--;
+            cooldownTimer.lastChecked = now;
+        }
+
+        // if
+    };
+
+
+    update = function(){
+        checkCooldown();
     };
 
 
@@ -170,6 +202,7 @@ function( vent, util ){
         draw('waterEmblem');
         draw('airEmblem');
         draw('fireEmblem');
+        draw('cooldownTimer');
     };
 
 

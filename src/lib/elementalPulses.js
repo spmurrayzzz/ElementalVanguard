@@ -11,12 +11,16 @@ function( vent, Asteroid ){
         refCache,
         air,
         checkAir,
-        earth;
+        fire,
+        checkFire,
+        earth,
+        effectActive = false;
 
 
     refCache = {
         checkAir: null,
-        checkWater: null
+        checkWater: null,
+        checkFire: null
     };
 
 
@@ -34,6 +38,11 @@ function( vent, Asteroid ){
         vent.on('keydown', function( ev ){
             if ( ev.keyCode === 51) {
                 air();
+            }
+        });
+        vent.on('keydown', function( ev ){
+            if ( ev.keyCode === 52) {
+                fire();
             }
         });
         vent.on('start', function( game ){
@@ -56,10 +65,14 @@ function( vent, Asteroid ){
 
 
     water = function(){
+        if ( effectActive ) {
+            return;
+        }
         var started = new Date().getTime();
         vent.emit('activate elemental-water-on',  'water');
         refCache.checkWater = checkWater.bind(null, started);
         vent.on('update', refCache.checkWater);
+        effectActive = true;
     };
 
 
@@ -69,18 +82,20 @@ function( vent, Asteroid ){
             vent.off('update', refCache.checkWater);
             vent.emit('deactivate elemental-water-off');
             refCache.checkWater = null;
+            effectActive = false;
         }
     };
 
 
     air = function(){
-        if ( refCache.checkAir ) {
+        if ( effectActive ) {
             return;
         }
         var started = new Date().getTime();
         vent.emit('activate elemental-air-on',  'air');
         refCache.checkAir = checkAir.bind(null, started);
         vent.on('update', refCache.checkAir);
+        effectActive = true;
     };
 
 
@@ -90,6 +105,30 @@ function( vent, Asteroid ){
             vent.off('update', refCache.checkAir);
             vent.emit('deactivate elemental-air-off');
             refCache.checkAir = null;
+            effectActive = false;
+        }
+    };
+
+
+    fire = function(){
+        if ( effectActive ) {
+            return;
+        }
+        var started = new Date().getTime();
+        vent.emit('activate elemental-fire-on',  'fire');
+        refCache.checkFire = checkFire.bind(null, started);
+        vent.on('update', refCache.checkFire);
+        effectActive = true;
+    };
+
+
+    checkFire = function( startTime ){
+        var now = new Date().getTime();
+        if ( now - startTime > 1000 ) {
+            vent.off('update', refCache.checkFire);
+            vent.emit('deactivate elemental-fire-off');
+            refCache.checkFire = null;
+            effectActive = false;
         }
     };
 

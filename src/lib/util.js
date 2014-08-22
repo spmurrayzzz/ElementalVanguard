@@ -133,6 +133,19 @@ define('util', function(){
     }
 
 
+    function text( ctx, txt, x, y, fillStyle, opts ) {
+        var key;
+
+        ctx.fillStyle = fillStyle;
+        if ( opts !== undefined ) {
+            for ( key in opts ) {
+                ctx[key] = opts[key];
+            }
+        }
+        ctx.fillText(txt, x, y);
+    }
+
+
     return {
         getById: document.getElementById.bind(document),
         approach: approach,
@@ -143,7 +156,8 @@ define('util', function(){
         rect: rect,
         line: line,
         lineRotate: lineRotate,
-        polygon: polygon
+        polygon: polygon,
+        text: text
     };
 
 });
