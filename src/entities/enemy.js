@@ -43,7 +43,8 @@ function( Sprite, vent, util ){
         };
         this.gradients = {
             default: ['#800008', "#c3000b"],
-            water: ['#255989', '#56b8ff']
+            water: ['#255989', '#56b8ff'],
+            air: ['#333', '#f1f1f1']
         };
         this.currentGradient = this.gradients.default;
         this.orbiterDisplayProps = { shadowBlur: 0 };
@@ -62,7 +63,8 @@ function( Sprite, vent, util ){
     proto.bindEvents = function(){
         Sprite.prototype.bindEvents.call(this);
         vent.on('elemental-water-on', this.waterEffect.bind(this, true));
-        vent.on('elemental-water-off', this.deactivateAllEffects.bind(this));
+        vent.on('elemental-air-on', this.airEffect.bind(this, true));
+        vent.on('deactivate', this.deactivateAllEffects.bind(this));
     };
 
 
@@ -150,6 +152,7 @@ function( Sprite, vent, util ){
         this.physics.velocityGoal = util.random(1, 2);
         this.destroyed = false;
         this.fillStyle = util.randomColor();
+        this.deactivateAllEffects();
     };
 
 
@@ -177,8 +180,20 @@ function( Sprite, vent, util ){
     };
 
 
+    proto.airEffect = function( activate ){
+        if ( activate ) {
+            this.currentGradient = this.gradients.air;
+            this.physics.velocityGoal = 0;
+        } else {
+            this.currentGradient = this.gradients.default;
+            this.physics.velocityGoal = util.random(1, 2);
+        }
+    };
+
+
     proto.deactivateAllEffects = function(){
         this.waterEffect(false);
+        this.airEffect(false);
     };
 
 
