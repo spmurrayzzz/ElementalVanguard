@@ -31,6 +31,7 @@ function( Sprite, vent, util ){
             }
         };
         this.orbitAt = 0;
+        this.orbitSpeed = 3;
         this.inc = 0.2;
         this.position = {
             x: Math.random() * this.canvas.width,
@@ -70,8 +71,8 @@ function( Sprite, vent, util ){
         }
 
         var inc = 0.02,
-            // curr = inc*0.5,
-            // alpha = 0.9,
+            curr = inc*0.5,
+            alpha = 0.9,
             grd;
 
 
@@ -89,7 +90,7 @@ function( Sprite, vent, util ){
 
         // Render orbiter
         this.orbitAt = this.orbitAt >= 2 ? 0 : this.orbitAt;
-        this.orbitAt += inc;
+        this.orbitAt += inc * this.orbitSpeed;
 
         util.circle(this.ctx,
           this.position.x + (this.size + 5) * Math.cos(this.orbitAt * Math.PI),
@@ -97,16 +98,16 @@ function( Sprite, vent, util ){
           5, 'rgba(221,113,8,1.0)', this.orbiterDisplayProps
         );
 
-        // // Render trail
-        // for (var i = 20; i > 0; i--) {
-        //     util.circle(this.ctx,
-        //       this.position.x + (this.size + i/4) * Math.cos(this.orbitAt-curr),
-        //       this.position.y + (this.size + i/4) * Math.sin(this.orbitAt-curr),
-        //       i/4, 'rgba(221, 113, 8, ' + alpha + ')'
-        //     );
-        //     curr += inc * 0.5;
-        //     alpha -= inc * 0.3;
-        // }
+        // Render trail
+        for (var i = 20; i > 0; i--) {
+            util.circle(this.ctx,
+              this.position.x + (this.size + i/4) * Math.cos((this.orbitAt-curr) * Math.PI),
+              this.position.y + (this.size + i/4) * Math.sin((this.orbitAt-curr) * Math.PI),
+              i/4, 'rgba(221, 113, 8, ' + alpha + ')'
+            );
+            curr += inc * 0.5;
+            alpha -= inc * 0.3;
+        }
     };
 
 
