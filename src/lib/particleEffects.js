@@ -22,7 +22,6 @@ function( vent, util, Particle, pool ){
             height: cvs.height,
             ctx: ctx
         };
-        vent.emit('effects-canvas-added', canvas);
     };
 
     bindEvents = function(){
