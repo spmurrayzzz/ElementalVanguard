@@ -37,7 +37,8 @@ function( Sprite, util, vent ){
 
 
     proto.create = function( opts ){
-        this.position = opts;
+        this.position.x = opts.x;
+        this.position.y = opts.y;
         vent.emit('laser-added', this);
         return this;
     };
