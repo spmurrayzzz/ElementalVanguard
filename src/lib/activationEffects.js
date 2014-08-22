@@ -13,7 +13,7 @@ function( vent, util ){
         activateObj = {
             opacity: 0,
             fillStyle: 'rgba(184,240,240,%a)',
-            decrement: 0.01,
+            decrement: 0.02,
             inProgress: false
         },
         updateActivate,
@@ -36,7 +36,7 @@ function( vent, util ){
     bindEvents = function(){
         vent.on('start', function( game ){
             init(game);
-            vent.on('render', render);
+            vent.on('effects-render', render);
             vent.on('update', update);
             vent.on('activate', activate);
         });
@@ -64,6 +64,10 @@ function( vent, util ){
             return;
         }
         activateObj.opacity -= activateObj.decrement;
+        if ( activateObj.opacity < 0 ) {
+            activateObj.inProgress = false;
+            activateObj.opacity = 0;
+        }
     };
 
 

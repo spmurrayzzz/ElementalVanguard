@@ -28,7 +28,7 @@ function( vent, util, Particle, pool ){
     bindEvents = function(){
         vent.on('start', function( game ){
             init(game);
-            vent.on('render', render);
+            vent.on('effects-render', render);
             vent.on('update', update);
         });
         vent.on('kaboom!', explosion);
@@ -48,7 +48,6 @@ function( vent, util, Particle, pool ){
 
 
     render = function(){
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         for (var i = 0; i < particles.length; i++) {
             var particle = particles[i];
             particle.render();
