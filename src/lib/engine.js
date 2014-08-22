@@ -11,6 +11,7 @@ function( vent, Enemy, pool, Laser ){
         checkLaserCollisions,
         colliders,
         enemyCache,
+        currentEffect,
         lastCreated = new Date().getTime();
 
 
@@ -30,6 +31,9 @@ function( vent, Enemy, pool, Laser ){
         vent.on('laser-cache-updated', function( laserCache ){
             colliders = laserCache;
         });
+        vent.on('activate', function( effect ) {
+            currentEffect = effect;
+        });
     };
 
     createEnemy = function(){
@@ -45,8 +49,9 @@ function( vent, Enemy, pool, Laser ){
             enemy = new Enemy(canvas);
             pool.register('enemies', enemy);
             enemyCache.push(enemy);
-            enemy.create();
         }
+
+        enemy.create(currentEffect || null);
 
         lastCreated = new Date().getTime();
     };

@@ -6,6 +6,7 @@ function( vent, Asteroid ){
 
     var bindEvents,
         canvas,
+        water,
         earth;
 
 
@@ -15,6 +16,13 @@ function( vent, Asteroid ){
                 earth();
             }
         });
+
+        vent.on('keydown', function( ev ){
+            if ( ev.keyCode === 50) {
+                water();
+            }
+        });
+
         vent.on('start', function( game ){
             canvas = game.canvas;
         });
@@ -30,7 +38,12 @@ function( vent, Asteroid ){
             new Asteroid(canvas).create(currX);
             currX += x;
         }
-        vent.emit('activate-elemental');
+        vent.emit('activate elemental-earth', 'earth');
+    };
+
+
+    water = function(){
+        vent.emit('activate elemental-water-on',  'water');
     };
 
 

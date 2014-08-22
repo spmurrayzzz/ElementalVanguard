@@ -17,13 +17,13 @@ function( Sprite, vent, util ){
             speed: 2,
             friction: 2,
             velocity: 0,
-            velocityGoal: Math.random() * (2 - 1) + 1
+            velocityGoal: util.random(1, 2)
         };
         this.orbiter = {
             physics: {
                 friction: 2,
                 velocity: 1,
-                velocityGoal: Math.random() * (2 - 1) + 1
+                velocityGoal: util.random(1, 2)
             },
             current: {
                 x: 0,
@@ -40,15 +40,28 @@ function( Sprite, vent, util ){
             shadowBlur: 40,
             shadowColor: 'rgba(221,113,8,1.0)'
         };
+        this.gradients = {
+            default: ['#800008', "#c3000b"],
+            water: ['#255989', '#56b8ff']
+        };
+        this.currentGradient = this.gradients.default;
         this.orbiterDisplayProps = { shadowBlur: 0 };
     }
 
     proto = Enemy.prototype = Object.create(Sprite.prototype);
 
 
-    proto.create = function(){
+    proto.create = function( effect ){
         Sprite.prototype.create.call(this);
+        this.setEffect(effect || null);
+        vent.emit('entity-added', this);
         return this;
+    };
+
+
+    proto.bindEvents = function(){
+        Sprite.prototype.bindEvents.call(this);
+        vent.on('elemental-water-on', this.waterEffect.bind(this, true));
     };
 
 
@@ -68,8 +81,8 @@ function( Sprite, vent, util ){
             this.position.x, this.position.y, this.size*1.5,
             this.position.x + 20, this.position.y + 20, this.size/2
         );
-        grd.addColorStop(0,"#800008");
-        grd.addColorStop(1,"#c3000b");
+        grd.addColorStop(0, this.currentGradient[0]);
+        grd.addColorStop(1, this.currentGradient[1]);
         util.circle(this.ctx,
             this.position.x, this.position.y, this.size, grd, this.displayProps
         );
@@ -120,6 +133,7 @@ function( Sprite, vent, util ){
     proto.destroy = function(){
         this.position = { x: 0, y: 0 };
         this.destroyed = true;
+        this.deactivateAllEffects();
         vent.emit('entity-destroyed', this);
     };
 
@@ -132,8 +146,37 @@ function( Sprite, vent, util ){
         this.physics.velocityGoal = Math.random() * (2 - 1) + 1;
         this.destroyed = false;
         this.fillStyle = util.randomColor();
-        vent.emit('entity-added', this);
     };
+
+
+    proto.setEffect = function( effect ){
+        if ( effect ) {
+            switch (effect) {
+                case 'water':
+                    this.waterEffect(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+
+    proto.waterEffect = function( activate ){
+        if ( activate ) {
+            this.currentGradient = this.gradients.water;
+            this.physics.velocityGoal = this.physics.velocityGoal * 0.3;
+        } else {
+            this.currentGradient = this.gradients.default;
+            this.physics.velocityGoal = util.random(1, 2);
+        }
+    };
+
+
+    proto.deactivateAllEffects = function(){
+        this.waterEffect(false);
+    };
+
 
     return Enemy;
 
