@@ -26,23 +26,25 @@ function( vent, Asteroid ){
 
     bindEvents = function(){
         vent.on('keydown', function( ev ){
-            if ( ev.keyCode === 49) {
-                earth();
-            }
-        });
-        vent.on('keydown', function( ev ){
-            if ( ev.keyCode === 50) {
-                water();
-            }
-        });
-        vent.on('keydown', function( ev ){
-            if ( ev.keyCode === 51) {
-                air();
-            }
-        });
-        vent.on('keydown', function( ev ){
-            if ( ev.keyCode === 52) {
-                fire();
+            switch ( ev.keyCode ) {
+                case 49:
+                    earth();
+                    break;
+
+                case 50:
+                    water();
+                    break;
+
+                case 51:
+                    air();
+                    break;
+
+                case 52:
+                    fire();
+                    break;
+
+                default:
+                    break;
             }
         });
         vent.on('start', function( game ){
