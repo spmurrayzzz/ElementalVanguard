@@ -35,6 +35,7 @@ function( Sprite, vent, Laser, util, pool ){
             x: 0,
             y: 0
         };
+        this.laserPosition = { x: 0, y: 0 };
     }
 
     proto = Player.prototype = Object.create(Sprite.prototype);
@@ -116,10 +117,10 @@ function( Sprite, vent, Laser, util, pool ){
         }
 
         var laser = pool.recycle('lasers'),
-            pos = {
-                x: this.position.x,
-                y: this.position.y - this.size
-            };
+            pos = this.laserPosition;
+
+        this.laserPosition.x = this.position.x;
+        this.laserPosition.y = this.position.y - this.size;
 
         if ( !laser ) {
             laser = new Laser(this.canvas);
