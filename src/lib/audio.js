@@ -5,15 +5,13 @@ define('audio', ['jsfxr', 'vent'], function( jsfxr, vent ){
     var ctx = new window.AudioContext();
 
     function register( namespace, sound ){
-        var arrayBuffer = jsfxr(sound);
+        var buffer = jsfxr(sound, ctx);
 
-        ctx.decodeAudioData(arrayBuffer, function( buffer ){
-            vent.on(namespace, function(){
-                var src = ctx.createBufferSource();
-                src.buffer = buffer;
-                src.connect(ctx.destination);
-                src.start(0);
-            });
+        vent.on(namespace, function(){
+            var src = ctx.createBufferSource();
+            src.buffer = buffer;
+            src.connect(ctx.destination);
+            src.start(0);
         });
     }
 
