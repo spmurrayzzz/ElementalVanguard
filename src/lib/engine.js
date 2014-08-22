@@ -73,7 +73,7 @@ function( vent, Enemy, pool, Laser ){
 
                 if ( distance < enemy.size + collider.size) {
                     vent.emit('kaboom!', enemy.position.x, enemy.position.y);
-                    if ( collider instanceof Laser) {
+                    if ( collider instanceof Laser && !enemy.effected ) {
                         vent.emit('enemy-down');
                     }
                     enemy.destroy();

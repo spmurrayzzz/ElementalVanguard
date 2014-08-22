@@ -48,6 +48,7 @@ function( Sprite, vent, util ){
         };
         this.currentGradient = this.gradients.default;
         this.orbiterDisplayProps = { shadowBlur: 0 };
+        this.effected = false;
     }
 
     proto = Enemy.prototype = Object.create(Sprite.prototype);
@@ -152,7 +153,6 @@ function( Sprite, vent, util ){
         this.physics.velocityGoal = util.random(1, 2);
         this.destroyed = false;
         this.fillStyle = util.randomColor();
-        this.deactivateAllEffects();
     };
 
 
@@ -163,6 +163,7 @@ function( Sprite, vent, util ){
                     this.waterEffect(true);
                     break;
                 default:
+                    this.deactivateAllEffects();
                     break;
             }
         }
@@ -170,6 +171,7 @@ function( Sprite, vent, util ){
 
 
     proto.waterEffect = function( activate ){
+        this.effected = activate;
         if ( activate ) {
             this.currentGradient = this.gradients.water;
             this.physics.velocityGoal = this.physics.velocityGoal * 0.3;
@@ -181,6 +183,7 @@ function( Sprite, vent, util ){
 
 
     proto.airEffect = function( activate ){
+        this.effected = activate;
         if ( activate ) {
             this.currentGradient = this.gradients.air;
             this.physics.velocityGoal = 0;
