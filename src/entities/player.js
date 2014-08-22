@@ -22,7 +22,11 @@ function( Sprite, vent, Laser, util, pool ){
         this.keyPressed = false;
         this.laserPool = [];
         this.lastFired = new Date().getTime();
-        this.fillStyle = 'rgba(120, 220, 0, 1)';
+        this.fillStyle = {
+            default: 'rgba(120, 220, 0, 1)',
+            fire: 'rgba(200, 0, 0, 1)'
+        };
+        this.currentFillStyle = this.fillStyle.default;
         this.displayProps = {
             shadowOffsetX: 0,
             shadowOffsetY: 0,
@@ -60,9 +64,12 @@ function( Sprite, vent, Laser, util, pool ){
 
     proto.bindEvents = function(){
         Sprite.prototype.bindEvents.call(this);
-        // vent.on('click', function( ev ){
-        //     this.fire(ev);
-        // }.bind(this));
+        vent.on('elemental-fire-on', function(){
+            this.currentFillStyle = this.fillStyle.fire;
+        }.bind(this));
+        vent.on('elemental-fire-off', function(){
+            this.currentFillStyle = this.fillStyle.default;
+        }.bind(this));
     };
 
 
@@ -73,7 +80,7 @@ function( Sprite, vent, Laser, util, pool ){
 
         util.circle(
             this.ctx, this.position.x, this.position.y, this.size,
-            this.fillStyle, this.displayProps
+            this.currentFillStyle, this.displayProps
         );
 
         this.ctx.restore();
