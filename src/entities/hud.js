@@ -159,7 +159,7 @@ function( vent, util ){
 
 
     bindEvents = function(){
-        vent.on('effects-canvas-added', function( obj ){
+        vent.on('start', function( obj ){
             init(obj);
         });
         vent.on('enemy-down', function(){
