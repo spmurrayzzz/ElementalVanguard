@@ -29,7 +29,6 @@ function( vent, util ){
             height: cvs.height,
             ctx: ctx
         };
-        vent.emit('effects-canvas-added', canvas);
     };
 
 
