@@ -124,7 +124,7 @@ function( vent, Asteroid ){
 
     checkFire = function( startTime ){
         var now = new Date().getTime();
-        if ( now - startTime > 1000 ) {
+        if ( now - startTime > 10e3 ) {
             vent.off('update', refCache.checkFire);
             vent.emit('deactivate elemental-fire-off');
             refCache.checkFire = null;
