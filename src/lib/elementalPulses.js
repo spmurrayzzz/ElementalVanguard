@@ -54,7 +54,7 @@ function( vent, Asteroid ){
 
     checkWater = function checkWater( startTime ){
         var now = new Date().getTime();
-        if ( now - startTime > 3000 ) {
+        if ( now - startTime > 6000 ) {
             console.log('off');
             vent.off('update', refCache.checkWater);
             vent.emit('deactivate elemental-water-off');

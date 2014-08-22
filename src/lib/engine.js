@@ -34,6 +34,9 @@ function( vent, Enemy, pool, Laser ){
         vent.on('activate', function( effect ) {
             currentEffect = effect;
         });
+        vent.on('deactivate', function(){
+            currentEffect = null;
+        });
     };
 
     createEnemy = function(){

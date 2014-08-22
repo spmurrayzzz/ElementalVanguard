@@ -62,6 +62,7 @@ function( Sprite, vent, util ){
     proto.bindEvents = function(){
         Sprite.prototype.bindEvents.call(this);
         vent.on('elemental-water-on', this.waterEffect.bind(this, true));
+        vent.on('elemental-water-off', this.deactivateAllEffects.bind(this));
     };
 
 
