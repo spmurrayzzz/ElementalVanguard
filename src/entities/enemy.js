@@ -124,8 +124,10 @@ function( Sprite, vent, util ){
         );
 
         if ( this.position.y + this.physics.velocity >
-          this.canvas.height + this.size ) {
+            this.canvas.height + this.size ) {
+
             this.destroy();
+
         } else {
             this.position.y = this.position.y + this.physics.velocity;
         }
