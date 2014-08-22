@@ -3,6 +3,7 @@ module.exports = function( grunt ){
     grunt.registerTask('compress', function(){
         var done = this.async(),
             fs = require('fs'),
+            exec = require('child_process').exec,
             ready = 0;
 
         function writeCompressed( indexContent ){
@@ -10,6 +11,7 @@ module.exports = function( grunt ){
                 if ( err ) {
                     throw err;
                 }
+                exec('zip -9 js13k-2014.zip index-compressed.html');
                 grunt.log.write('Compressed index built.' + '\n').ok();
                 done(true);
             });

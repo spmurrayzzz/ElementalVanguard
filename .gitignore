@@ -5,3 +5,4 @@ index-compressed.html
 venv/
 fabConfig.json
 *.pyc
+*.zip
