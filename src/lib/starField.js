@@ -31,7 +31,7 @@ function( Star, SpeedLine, vent, util ){
 
     bindEvents = function(){
         vent.on('start', function( ){
-            init(util.getById('bg-canvas'));
+            init(util.getById('bg'));
             create();
         });
         vent.on('update', update);

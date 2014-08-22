@@ -14,13 +14,9 @@ function( vent, util, Particle, pool ){
         bindEvents
         ;
 
-    init = function( game ){
-        var cvs = document.createElement('canvas');
+    init = function(){
+        var cvs = util.getById('effects');
         ctx = cvs.getContext('2d');
-        cvs.width = game.canvas.width;
-        cvs.height = game.canvas.height;
-        cvs.id = 'effects-canvas';
-        util.getById('game-container').appendChild(cvs);
         canvas = {
             width: cvs.width,
             height: cvs.height,

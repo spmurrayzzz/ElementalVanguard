@@ -16,19 +16,10 @@ function( Canvas, Player, vent, util ){
 
     var canvas,
         player,
-        bgCanvas,
         game;
 
-    // Create the background canvas used for the starfield effect
-    //   -- this is mostly being utlized for a performance boost
-    bgCanvas = document.createElement('canvas');
-    bgCanvas.id = 'bg-canvas';
-    bgCanvas.height = 600;
-    bgCanvas.width = 800;
-    util.getById('game-container').appendChild(bgCanvas);
-
     // Create the canvas stage that we'll be using for primary game entities
-    canvas = new Canvas('game-container', {
+    canvas = new Canvas('main', {
         width: 800,
         height: 600,
         bgColor: "#000"

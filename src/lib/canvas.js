@@ -7,13 +7,7 @@ function( util, vent ){
     'use strict';
 
     function Canvas( targetId, opts ){
-        this.parent = util.getById(targetId);
-        if ( this.parent === null ) {
-            throw new Error('Need a valid canvas container target');
-        }
-        this.elem = document.createElement('canvas');
-        this.elem.id = 'game-canvas';
-        this.parent.appendChild(this.elem);
+        this.elem = util.getById(targetId);
         this.ctx = this.elem.getContext('2d');
 
         this.offscreen = document.createElement('canvas');

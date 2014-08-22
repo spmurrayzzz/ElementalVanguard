@@ -133,13 +133,9 @@ function( vent, util ){
     };
 
 
-    init = function( obj ){
-        var cvs = document.createElement('canvas');
+    init = function(){
+        var cvs = util.getById('hud');
         ctx = cvs.getContext('2d');
-        cvs.width = obj.width;
-        cvs.height = obj.height;
-        cvs.id = 'hud-canvas';
-        util.getById('game-container').appendChild(cvs);
         canvas = {
             width: cvs.width,
             height: cvs.height,
