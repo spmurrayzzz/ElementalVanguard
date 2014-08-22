@@ -32,7 +32,8 @@ function( Canvas, Player, vent, util ){
     // (modules shouldn't be touch this object)
     game = {
         canvas: canvas,
-        player: player
+        player: player,
+        vent: vent
     };
 
     // Couple DOM events to our custom event emitter
@@ -55,6 +56,10 @@ function( Canvas, Player, vent, util ){
 
     // Expose the interface
     window.game = game;
+
+    vent.on('publicize', function( namespace, obj ){
+        window.game[namespace] = obj;
+    });
 
     return game;
 
