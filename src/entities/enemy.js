@@ -54,7 +54,6 @@ function( Sprite, vent, util ){
     proto.create = function( effect ){
         Sprite.prototype.create.call(this);
         this.setEffect(effect || null);
-        vent.emit('entity-added', this);
         return this;
     };
 
@@ -70,9 +69,9 @@ function( Sprite, vent, util ){
             return;
         }
 
-        var inc = 0.3,
-            curr = inc*0.5,
-            alpha = 0.9,
+        var inc = 0.02,
+            // curr = inc*0.5,
+            // alpha = 0.9,
             grd;
 
 
@@ -89,25 +88,25 @@ function( Sprite, vent, util ){
 
 
         // Render orbiter
-        this.orbitAt = this.orbitAt > 13 ? 0 : this.orbitAt;
-        this.orbitAt += this.inc*1.2;
+        this.orbitAt = this.orbitAt >= 2 ? 0 : this.orbitAt;
+        this.orbitAt += inc;
 
         util.circle(this.ctx,
-          this.position.x + (this.size + 5) * Math.cos(this.orbitAt),
-          this.position.y + (this.size + 5) * Math.sin(this.orbitAt),
+          this.position.x + (this.size + 5) * Math.cos(this.orbitAt * Math.PI),
+          this.position.y + (this.size + 5) * Math.sin(this.orbitAt * Math.PI),
           5, 'rgba(221,113,8,1.0)', this.orbiterDisplayProps
         );
 
-        // Render trail
-        for (var i = 20; i > 0; i--) {
-            util.circle(this.ctx,
-              this.position.x + (this.size + i/4) * Math.cos(this.orbitAt-curr),
-              this.position.y + (this.size + i/4) * Math.sin(this.orbitAt-curr),
-              i/4, 'rgba(221, 113, 8, ' + alpha + ')'
-            );
-            curr += inc * 0.5;
-            alpha -= inc * 0.3;
-        }
+        // // Render trail
+        // for (var i = 20; i > 0; i--) {
+        //     util.circle(this.ctx,
+        //       this.position.x + (this.size + i/4) * Math.cos(this.orbitAt-curr),
+        //       this.position.y + (this.size + i/4) * Math.sin(this.orbitAt-curr),
+        //       i/4, 'rgba(221, 113, 8, ' + alpha + ')'
+        //     );
+        //     curr += inc * 0.5;
+        //     alpha -= inc * 0.3;
+        // }
     };
 
 
@@ -124,6 +123,7 @@ function( Sprite, vent, util ){
 
         if ( this.position.y + this.physics.velocity >
           this.canvas.height + this.size ) {
+              console.log(this);
             this.destroy();
         } else {
             this.position.y = this.position.y + this.physics.velocity;
