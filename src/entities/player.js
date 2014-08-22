@@ -24,17 +24,28 @@ function( Sprite, vent, Laser, util, pool ){
         this.lastFired = new Date().getTime();
         this.fillStyle = {
             default: 'rgba(120, 220, 0, 1)',
-            fire: 'rgba(200, 0, 0, 1)'
+            fire: '#df4400'
         };
         this.currentFillStyle = this.fillStyle.default;
         this.displayProps = {
-            shadowOffsetX: 0,
-            shadowOffsetY: 0,
-            shadowBlur: 40,
-            shadowColor: 'rgba(0, 220, 0, 0.6)',
-            lineWidth: 10,
-            strokeStyle: 'rgba(0, 100, 0, 0.7)'
+            default: {
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                shadowBlur: 40,
+                shadowColor: 'rgba(0, 220, 0, 0.6)',
+                lineWidth: 10,
+                strokeStyle: 'rgba(0, 100, 0, 0.7)'
+            },
+            fire: {
+                shadowOffsetX: 0,
+                shadowOffsetY: 0,
+                shadowBlur: 40,
+                shadowColor: '#df4400',
+                lineWidth: 10,
+                strokeStyle: '#df4400'
+            }
         };
+        this.currentDisplayProps = this.displayProps.default;
         this.pointerData = {
             x: 0,
             y: 0
@@ -66,9 +77,11 @@ function( Sprite, vent, Laser, util, pool ){
         Sprite.prototype.bindEvents.call(this);
         vent.on('elemental-fire-on', function(){
             this.currentFillStyle = this.fillStyle.fire;
+            this.currentDisplayProps = this.displayProps.fire;
         }.bind(this));
         vent.on('elemental-fire-off', function(){
             this.currentFillStyle = this.fillStyle.default;
+            this.currentDisplayProps = this.displayProps.default;
         }.bind(this));
     };
 
@@ -80,7 +93,7 @@ function( Sprite, vent, Laser, util, pool ){
 
         util.circle(
             this.ctx, this.position.x, this.position.y, this.size,
-            this.currentFillStyle, this.displayProps
+            this.currentFillStyle, this.currentDisplayProps
         );
 
         this.ctx.restore();
