@@ -51,13 +51,13 @@ function( vent, Asteroid, util ){
                 earth();
                 break;
             case 50:
-                activateTimedEffect('elemental-water', 'checkWater');
+                activateTimedEffect('water', 'checkWater');
                 break;
             case 51:
-                activateTimedEffect('elemental-air', 'checkAir');
+                activateTimedEffect('air', 'checkAir');
                 break;
             case 52:
-                activateTimedEffect('elemental-fire', 'checkFire');
+                activateTimedEffect('fire', 'checkFire');
                 break;
             default:
                 break;
@@ -94,11 +94,9 @@ function( vent, Asteroid, util ){
         if ( effectActive ) {
             return;
         }
-        var started = new Date().getTime(),
-            shortName = name.split('-')[1];
-
-        vent.emit('activate ' + name + '-on', shortName);
-        refCache[checkFuncName] = check[shortName].bind(null, started);
+        var started = new Date().getTime();
+        vent.emit('activate elemental-' + name + '-on', name);
+        refCache[checkFuncName] = check[name].bind(null, started);
         vent.on('update', refCache[checkFuncName]);
         effectActive = true;
     };
