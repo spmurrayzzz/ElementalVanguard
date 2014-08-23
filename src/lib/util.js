@@ -146,6 +146,11 @@ define('util', function(){
     }
 
 
+    function capitalize ( str ){
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+
     return {
         getById: document.getElementById.bind(document),
         approach: approach,
@@ -157,7 +162,8 @@ define('util', function(){
         line: line,
         lineRotate: lineRotate,
         polygon: polygon,
-        text: text
+        text: text,
+        capitalize: capitalize
     };
 
 });

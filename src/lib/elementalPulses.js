@@ -1,8 +1,8 @@
 define('elementalPulse',
 
-['vent', 'Asteroid'],
+['vent', 'Asteroid', 'util'],
 
-function( vent, Asteroid ){
+function( vent, Asteroid, util ){
 
     var bindEvents,
         canvas,
@@ -12,6 +12,7 @@ function( vent, Asteroid ){
         refCache,
         deactivateTimedEffect,
         activateTimedEffect,
+        checkCreator,
         effectActive = false;
 
 
@@ -22,6 +23,10 @@ function( vent, Asteroid ){
     };
 
 
+    /**
+     * Bind event handlers for this module
+     * @return {void}
+     */
     bindEvents = function(){
         vent.on('start', function( game ){
             canvas = game.canvas;
@@ -30,6 +35,11 @@ function( vent, Asteroid ){
     };
 
 
+    /**
+     * Handler function for `keydown` events
+     * @param {Event} ev
+     * @return {void}
+     */
     keyHandler = function( ev ){
         if ( effectActive ) {
             return;
@@ -53,15 +63,31 @@ function( vent, Asteroid ){
     };
 
 
+    /**
+     * Deactivate the named elemental pulse, this unbinds the correlating
+     * check function from the `update` event and dispatches deactivation
+     * events.
+     *
+     * @param {String} name
+     * @param {String} checkFuncName
+     * @return {void}
+     */
     deactivateTimedEffect = function( name, checkFuncName ) {
         vent.off('update', refCache[checkFuncName]);
         vent.emit('deactivate ' + name + '-off');
         refCache[checkFuncName] = null;
         effectActive = false;
-        console.log(refCache);
     };
 
 
+    /**
+     * Activate the named elemental pulse, which should bind a check function
+     * to the `update` event and dispatch activation signals.
+     *
+     * @param {String} name
+     * @param {Function} checkFuncName
+     * @return {void}
+     */
     activateTimedEffect = function( name, checkFuncName ){
         if ( effectActive ) {
             return;
@@ -76,6 +102,12 @@ function( vent, Asteroid ){
     };
 
 
+    /**
+     * Kick off the earth elemental pulse. Flings randomly sized asteroids
+     * towards the field of enemies.
+     *
+     * @return {void}
+     */
     earth = function(){
         var objCount = 5,
             x = canvas.width/objCount,
@@ -89,28 +121,31 @@ function( vent, Asteroid ){
     };
 
 
-    check.water = function( startTime ){
-        var now = new Date().getTime();
-        if ( now - startTime > 6e3 ) {
-            deactivateTimedEffect('elemental-water', 'checkWater');
-        }
+    /**
+     * Builds and returns a check function used to test whether to deactivate
+     * a given elemental pulse effect.
+     *
+     * @param {String} name
+     * @param {Integer} time  in milliseconds
+     */
+    checkCreator = function( name, time ){
+        var capName = util.capitalize(name);
+        return function( startTime ){
+            var now = new Date().getTime();
+            if ( now - startTime > time ) {
+                deactivateTimedEffect('elemental-' + name, 'check' + capName);
+            }
+        };
     };
 
 
-    check.air = function( startTime ){
-        var now = new Date().getTime();
-        if ( now - startTime > 10e3 ) {
-            deactivateTimedEffect('elemental-air', 'checkAir');
-        }
-    };
+    /**
+     * Check function binding
+     */
 
-
-    check.fire = function( startTime ){
-        var now = new Date().getTime();
-        if ( now - startTime > 10e3 ) {
-            deactivateTimedEffect('elemental-fire', 'checkFire');
-        }
-    };
+    check.water = checkCreator('water', 6e3);
+    check.air = checkCreator('water', 10e3);
+    check.fire = checkCreator('fire', 10e3);
 
 
     bindEvents();
