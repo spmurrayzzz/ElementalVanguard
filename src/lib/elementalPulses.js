@@ -127,6 +127,7 @@ function( vent, Asteroid, util ){
      *
      * @param {String} name
      * @param {Integer} time  in milliseconds
+     * @return {Function}
      */
     checkCreator = function( name, time ){
         var capName = util.capitalize(name);
