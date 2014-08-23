@@ -4,6 +4,8 @@ define('activationEffects',
 
 function( vent, util ){
 
+    'use strict';
+
     var init,
         canvas,
         ctx,

@@ -1,5 +1,7 @@
 define('spritePool', function(){
 
+    'use strict';
+
     var registry = {},
         register,
         recycle

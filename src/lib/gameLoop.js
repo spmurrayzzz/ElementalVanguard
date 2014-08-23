@@ -4,6 +4,8 @@ define('gameLoop',
 
 function( vent ){
 
+    'use strict';
+
     var raf = window.requestAnimationFrame,
         paused = false;
 

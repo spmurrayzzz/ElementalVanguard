@@ -1,5 +1,7 @@
 define('effectsCanvas', ['vent', 'util'], function( vent, util ){
 
+    'use strict';
+
     var ctx = util.getById('effects').getContext('2d');
 
     vent.on('render', function(){

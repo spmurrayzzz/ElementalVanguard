@@ -4,6 +4,8 @@ define('elementalPulse',
 
 function( vent, Asteroid, util ){
 
+    'use strict';
+
     var bindEvents,
         canvas,
         earth,

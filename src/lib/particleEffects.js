@@ -4,6 +4,8 @@ define('particleEffects',
 
 function( vent, util, Particle, pool ){
 
+    'use strict';
+
     var explosion,
         init,
         canvas,

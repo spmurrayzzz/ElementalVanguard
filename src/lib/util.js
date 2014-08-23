@@ -1,5 +1,7 @@
 define('util', function(){
 
+    'use strict';
+
     function approach( targetX, currentX, deltaT ) {
         var diff = targetX - currentX;
 

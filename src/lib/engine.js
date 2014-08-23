@@ -4,6 +4,8 @@ define('engine',
 
 function( vent, Enemy, pool, Laser ){
 
+    'use strict';
+
     var init,
         bindEvents,
         createEnemy,
