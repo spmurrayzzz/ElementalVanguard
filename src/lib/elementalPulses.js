@@ -144,7 +144,7 @@ function( vent, Asteroid, util ){
      */
 
     check.water = checkCreator('water', 6e3);
-    check.air = checkCreator('water', 10e3);
+    check.air = checkCreator('air', 10e3);
     check.fire = checkCreator('fire', 10e3);
 
 
