@@ -28,20 +28,20 @@ function( vent, util, Particle, pool ){
         };
         fireCfg = [
             {
-                fill: '#f37d00',
+                fill: 'rgba(243,125,0,%a)',
+                life: 30
+            },
+            {
+                fill: 'rgba(243,96,38,%a)',
+                life: 25
+            },
+            {
+                fill: 'rgba(242,148,78,%a)',
                 life: 20
             },
             {
-                fill: '#f36026',
+                fill: 'rgb(241,241,241,%a)',
                 life: 15
-            },
-            {
-                fill: '#f2944e',
-                life: 10
-            },
-            {
-                fill: '#f1f1f1',
-                life: 10
             }
         ];
     };
@@ -111,9 +111,7 @@ function( vent, util, Particle, pool ){
             }
             particle.life = fire.life;
             particle.size = util.random(1, 3);
-            particle.fillStyle = fire.fill;
-            // particle.fillStyle = 'rgba('+ parseInt(util.random(100, 244)) + ',0,8,' +
-            //     Math.random() * ((1 - 0.5) + 0.5) + ')';
+            particle.fillStyle = fire.fill.replace(/%a/,util.random(0, 1));
             particle.position.x = x;
             particle.position.y = y;
             particles.push(particle.create());
