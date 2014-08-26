@@ -21,11 +21,11 @@ function( util, vent ){
         elem = util.getById('messenging');
         header = elem.querySelector('h1');
         subheader = elem.querySelector('h4');
-        setTimeout(function(){
-            headerText('Elemental Vanguard');
-            subheaderText('Press Enter to Start');
-            show();
-        }, 2000);
+        // setTimeout(function(){
+        //     headerText('Elemental Vanguard');
+        //     subheaderText('Press Enter to Start');
+        //     show();
+        // }, 2000);
     };
 
 

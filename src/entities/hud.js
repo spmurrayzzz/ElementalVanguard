@@ -106,6 +106,7 @@ function( vent, util ){
         vent.on('start-game', function(){
             pauseCheck = false;
             cooldownTimer.timerStarted = new Date().getTime();
+            util.getById('title-screen').style.display = 'none';
         });
         vent.on('activate', function( element ){
             for (var i = 0; i < icons.length; i++) {

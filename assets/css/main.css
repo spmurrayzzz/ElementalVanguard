@@ -42,6 +42,50 @@ canvas {
     font-size: 20px;
 }
 
+#title-screen {
+    position: absolute;
+    width: 600;
+    padding: 10px 30px;
+    text-align: center;
+    color: #e5e5e5;
+}
+
+#title-screen h1 {
+    font-size: 20px;
+}
+
+#title-screen h1 + p {
+    text-align: center;
+}
+
+#title-screen p {
+    text-align: justify;
+}
+
+#title-screen table {
+    font-size: 13px;
+    width: 100%;
+    border: 1px #999 solid;
+    border-bottom: none;
+}
+
+#title-screen th {
+    padding: 10px;
+    margin: 0;
+    border-bottom: 1px #999 solid;
+}
+
+#title-screen td {
+    padding: 10px;
+    margin: 0;
+    border-bottom: 1px #999 solid;
+    border-left: 1px #999 solid;
+}
+
+#title-screen td:first-child {
+    border-left: none;
+}
+
 #messenging {
     position: absolute;
     width: 800px;
