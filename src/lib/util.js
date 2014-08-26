@@ -66,10 +66,11 @@ define('util', function(){
     }
 
 
-    function line( ctx, x1, y1, x2, y2, opts ) {
+    function line( ctx, x1, y1, x2, y2, strokeStyle, opts ) {
         var key;
 
         ctx.beginPath();
+        ctx.strokeStyle = strokeStyle;
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
         if ( opts !== undefined ) {

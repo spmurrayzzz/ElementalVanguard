@@ -15,6 +15,7 @@ function( vent, Asteroid, util ){
         deactivateTimedEffect,
         activateTimedEffect,
         checkCreator,
+        ready,
         effectActive = false;
 
 
@@ -32,7 +33,11 @@ function( vent, Asteroid, util ){
     bindEvents = function(){
         vent.on('start', function( game ){
             canvas = game.canvas;
+            ready = false;
             vent.on('keydown', keyHandler);
+            vent.on('cooldown-end', function(){
+                ready = true;
+            });
         });
     };
 
@@ -43,9 +48,10 @@ function( vent, Asteroid, util ){
      * @return {void}
      */
     keyHandler = function( ev ){
-        if ( effectActive ) {
+        if ( effectActive || !ready ) {
             return;
         }
+
         switch ( ev.keyCode ) {
             case 49:
                 earth();
@@ -62,6 +68,7 @@ function( vent, Asteroid, util ){
             default:
                 break;
         }
+        ready = false;
     };
 
 
@@ -133,6 +140,7 @@ function( vent, Asteroid, util ){
         var capName = util.capitalize(name);
         return function( startTime ){
             var now = new Date().getTime();
+            vent.emit('elemental-progress', (now - startTime) / time);
             if ( now - startTime > time ) {
                 deactivateTimedEffect('elemental-' + name, 'check' + capName);
             }
@@ -144,7 +152,7 @@ function( vent, Asteroid, util ){
      * Check function binding
      */
 
-    check.water = checkCreator('water', 6e3);
+    check.water = checkCreator('water', 10e3);
     check.air = checkCreator('air', 10e3);
     check.fire = checkCreator('fire', 10e3);
 
