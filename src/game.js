@@ -8,9 +8,9 @@
 
 define('game',
 
-['Canvas', 'Player', 'vent', 'util'],
+['Canvas', 'Player', 'vent'],
 
-function( Canvas, Player, vent, util ){
+function( Canvas, Player, vent ){
 
     'use strict';
 
@@ -36,36 +36,31 @@ function( Canvas, Player, vent, util ){
         vent: vent
     };
 
-    // Couple DOM events to our custom event emitter
     document.addEventListener('keydown', function( ev ){
         vent.emit('keydown', ev);
     });
     document.addEventListener('keyup', function( ev ){
         vent.emit('keyup', ev);
     });
+
+    // Couple DOM events to our custom event emitter
     document.addEventListener('DOMContentLoaded', function(){
+        vent.on('publicize', function( namespace, obj ){
+            window.game[namespace] = obj;
+        });
+
+        vent.on('keydown', function( ev ){
+            if ( ev.keyCode === 13 ) {
+                vent.emit('start-game');
+            }
+        });
+
         vent.emit('create', game);
         vent.emit('start', game);
-    });
-    util.getById('game-container').addEventListener('mousemove', function( ev ){
-        vent.emit('mousemove', ev, canvas.elem);
-    });
-    document.addEventListener('click', function( ev ){
-        vent.emit('click', ev);
     });
 
     // Expose the interface
     window.game = game;
-
-    vent.on('publicize', function( namespace, obj ){
-        window.game[namespace] = obj;
-    });
-
-    vent.on('keydown', function( ev ){
-        if ( ev.keyCode === 13 ) {
-            vent.emit('start-game');
-        }
-    });
 
     return game;
 
