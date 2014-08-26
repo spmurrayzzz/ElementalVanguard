@@ -1,8 +1,8 @@
 define('Star',
 
-['Sprite', 'vent', 'util'],
+['Sprite', 'util', 'vent'],
 
-function( Sprite ){
+function( Sprite, util ){
 
     'use strict';
 
@@ -10,16 +10,16 @@ function( Sprite ){
 
     function Star(){
         Sprite.apply(this, arguments);
-        this.size = Math.random() * (1.4 - 0.3) + 0.3;
+        this.size = util.random(0.3, 2);
         this.isCreated = false;
         this.physics = {
             speed: 2,
             friction: 2,
             velocity: 0,
-            velocityGoal: Math.random() * (6 - 1) + 1
+            velocityGoal: util.random(1, 6)
         };
         this.fillStyle = 'rgba(241,241,241,' +
-            Math.random() * ((0.4 - 0.1) + 0.1) + ')';
+            util.random(0.1, 0.4) + ')';
         this.position = {
             x: Math.random() * this.canvas.width,
             y: Math.random() * this.canvas.height - this.size

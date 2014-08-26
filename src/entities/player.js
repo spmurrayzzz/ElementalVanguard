@@ -97,10 +97,10 @@ function( Sprite, vent, Laser, util, pool ){
         if ( !this.isCreated ) {
             return false;
         }
+        this.ctx.shadowBlur = 0;
         this.ctx.drawImage(util.getById('player-img'),
             this.position.x, this.position.y, this.dims.width, this.dims.height
         );
-        this.ctx.restore();
     };
 
 
