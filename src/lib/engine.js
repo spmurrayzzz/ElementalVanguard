@@ -39,7 +39,9 @@ function( vent, Enemy, pool, Laser, util ){
         });
         vent.on('start', function( game ){
             init(game);
-            vent.on('update', createEnemy);
+            vent.on('start-game', function(){
+                vent.on('update', createEnemy);
+            });
             vent.on('update', checkLaserCollisions);
             vent.on('update', checkPlayerCollisions);
             vent.on('laser-cache-updated', function( laserCache ){

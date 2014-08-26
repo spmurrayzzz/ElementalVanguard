@@ -90,7 +90,7 @@ function( vent, util ){
             timerStarted: new Date().getTime(),
             elem: util.getById('cooldown-timer')
         };
-        pauseCheck = false;
+        pauseCheck = true;
 
         vent.on('update', update);
         vent.on('render', render);
@@ -98,6 +98,9 @@ function( vent, util ){
         vent.on('activate', activateCooldown);
         vent.on('elemental-progress', function( percent ){
             cfg.cooldownTimer.percent = percent;
+        });
+        vent.on('start-game', function(){
+            pauseCheck = false;
         });
 
     };
