@@ -26,8 +26,6 @@ function( Sprite, util, vent ){
         this.displayProps = {
             shadowOffsetX: 0,
             shadowOffsetY: 0,
-            shadowBlur: 40,
-            shadowColor: "rgba(241, 241, 241, 0.9)",
             lineWidth: 2,
             strokeStyle: '#444'
         };

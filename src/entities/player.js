@@ -12,6 +12,7 @@ function( Sprite, vent, Laser, util, pool ){
         Sprite.apply(this, arguments);
         this.ctx.fillStyle = "rgb(200,0,0)";
         this.size = 40;
+        this.width = 64;
         this.isCreated = false;
         this.physics = {
             speed: 2,
@@ -59,7 +60,7 @@ function( Sprite, vent, Laser, util, pool ){
     proto.create = function(){
         this.position = {
             x: this.canvas.width/2,
-            y: this.canvas.height - 52
+            y: this.canvas.height - 75
         };
         this.isCreated = true;
         vent.on('keydown', this.move.bind(this));
@@ -91,9 +92,12 @@ function( Sprite, vent, Laser, util, pool ){
             return false;
         }
 
-        util.circle(
-            this.ctx, this.position.x, this.position.y, this.size,
-            this.currentFillStyle, this.currentDisplayProps
+        // util.circle(
+        //     this.ctx, this.position.x, this.position.y, this.size,
+        //     this.currentFillStyle, this.currentDisplayProps
+        // );
+        this.ctx.drawImage(util.getById('player-img'),
+            this.position.x, this.position.y, 64, 64
         );
 
         this.ctx.restore();
@@ -139,8 +143,8 @@ function( Sprite, vent, Laser, util, pool ){
         var laser = pool.recycle('lasers'),
             pos = this.laserPosition;
 
-        this.laserPosition.x = this.position.x;
-        this.laserPosition.y = this.position.y - this.size;
+        this.laserPosition.x = this.position.x + 32;
+        this.laserPosition.y = this.position.y - 15;
 
         if ( !laser ) {
             laser = new Laser(this.canvas);
@@ -161,10 +165,10 @@ function( Sprite, vent, Laser, util, pool ){
         );
 
         if ( this.position.x + this.physics.velocity >=
-          this.canvas.width - this.size ) {
-            this.position.x = this.canvas.width - this.size;
-        } else if ( this.position.x + this.physics.velocity <= 0 + this.size ) {
-            this.position.x = 0 + this.size;
+          this.canvas.width - this.width ) {
+            this.position.x = this.canvas.width - this.width;
+        } else if ( this.position.x + this.physics.velocity <= 0 ) {
+            this.position.x = 0;
         } else {
             this.position.x = this.position.x + this.physics.velocity;
         }
