@@ -21,6 +21,8 @@ function( vent, util ){
         resetCooldown,
         checkCooldown,
         pauseCheck,
+        activeIcon,
+        icons,
         cfg;
 
 
@@ -80,6 +82,9 @@ function( vent, util ){
             ctx: ctx
         };
 
+        activeIcon = null;
+        icons = util.QSA('.ico');
+
         score = 0;
         scoreElem = util.getById('score');
 
@@ -102,6 +107,18 @@ function( vent, util ){
         vent.on('start-game', function(){
             pauseCheck = false;
             cooldownTimer.timerStarted = new Date().getTime();
+        });
+        vent.on('activate', function( element ){
+            for (var i = 0; i < icons.length; i++) {
+                icons[i].classList.remove('on');
+            }
+            activeIcon = util.getById(element);
+            activeIcon.classList.add('on');
+        });
+        vent.on('cooldown-end', function(){
+            for (var i = 0; i < icons.length; i++) {
+                icons[i].classList.add('on');
+            }
         });
 
     };
@@ -128,6 +145,7 @@ function( vent, util ){
 
 
     resetCooldown = function(){
+        activeIcon.classList.remove('on');
         cooldownTimer.current = 20e3;
         cooldownTimer.display = 20;
         cooldownTimer.lastChecked = new Date().getTime();

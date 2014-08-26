@@ -92,6 +92,14 @@ canvas {
     width: 8%;
 }
 
+.hud a {
+    color: #f1f1f1;
+}
+
+.hud .ico.on {
+    opacity: 1;
+}
+
 
 /*
     Attack Elements

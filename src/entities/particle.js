@@ -19,12 +19,12 @@ function( Sprite, util ){
             velocityGoal: Math.random()*3 + 2
         };
 
-        var direction = this.direction = Math.random()*2*Math.PI;
+        this.direction = Math.random()*2*Math.PI;
         this.xInc = function(){
-            return Math.cos(direction) * this.physics.velocity;
+            return Math.cos(this.direction) * this.physics.velocity;
         };
         this.yInc = function(){
-            return Math.sin(direction) * this.physics.velocity;
+            return Math.sin(this.direction) * this.physics.velocity;
         };
 
         if ( !override ) {

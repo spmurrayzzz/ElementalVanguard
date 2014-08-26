@@ -110,10 +110,11 @@ function( vent, util, Particle, pool ){
                 Particle.call(particle, canvas, true);
             }
             particle.life = fire.life;
+            particle.direction = -(Math.random()*Math.PI);
             particle.size = util.random(1, 3);
             particle.fillStyle = fire.fill.replace(/%a/,util.random(0, 1));
             particle.position.x = x;
-            particle.position.y = y;
+            particle.position.y = y + 25;
             particles.push(particle.create());
         }
     };
