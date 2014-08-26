@@ -94,15 +94,9 @@ function( Sprite, vent, Laser, util, pool ){
         if ( !this.isCreated ) {
             return false;
         }
-
-        // util.circle(
-        //     this.ctx, this.position.x, this.position.y, this.size,
-        //     this.currentFillStyle, this.currentDisplayProps
-        // );
         this.ctx.drawImage(util.getById('player-img'),
             this.position.x, this.position.y, this.dims.width, this.dims.height
         );
-
         this.ctx.restore();
     };
 
