@@ -12,7 +12,10 @@ function( Sprite, vent, Laser, util, pool ){
         Sprite.apply(this, arguments);
         this.ctx.fillStyle = "rgb(200,0,0)";
         this.size = 40;
-        this.width = 64;
+        this.dims = {
+            width: 60,
+            height: 60
+        };
         this.isCreated = false;
         this.physics = {
             speed: 2,
@@ -59,7 +62,7 @@ function( Sprite, vent, Laser, util, pool ){
 
     proto.create = function(){
         this.position = {
-            x: this.canvas.width/2,
+            x: this.canvas.width/2 - this.dims.width/2,
             y: this.canvas.height - 75
         };
         this.isCreated = true;
@@ -97,7 +100,7 @@ function( Sprite, vent, Laser, util, pool ){
         //     this.currentFillStyle, this.currentDisplayProps
         // );
         this.ctx.drawImage(util.getById('player-img'),
-            this.position.x, this.position.y, 64, 64
+            this.position.x, this.position.y, this.dims.width, this.dims.height
         );
 
         this.ctx.restore();
@@ -165,8 +168,8 @@ function( Sprite, vent, Laser, util, pool ){
         );
 
         if ( this.position.x + this.physics.velocity >=
-          this.canvas.width - this.width ) {
-            this.position.x = this.canvas.width - this.width;
+          this.canvas.width - this.dims.width ) {
+            this.position.x = this.canvas.width - this.dims.width;
         } else if ( this.position.x + this.physics.velocity <= 0 ) {
             this.position.x = 0;
         } else {
