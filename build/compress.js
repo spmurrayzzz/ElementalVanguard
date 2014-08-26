@@ -11,9 +11,11 @@ module.exports = function( grunt ){
                 if ( err ) {
                     throw err;
                 }
-                exec('zip -9 js13k-2014.zip index-compressed.html');
-                grunt.log.write('Compressed index built.' + '\n').ok();
-                done(true);
+
+                exec('zip -q9 js13k-2014.zip index-compressed.html |  ls -lrt | grep *.zip | awk \'{print $5}\'', function( err, stdout ){
+                    grunt.log.write('Compressed file size: ' + stdout + '\n').ok();
+                    done(true);
+                });
             });
         }
 
