@@ -13,7 +13,7 @@ function( Sprite, util ){
         this.size = 2;
         this.isCreated = false;
         this.physics = {
-            speed: 2,
+            speed: 0.5,
             friction: 2,
             velocity: 0,
             velocityGoal: Math.random()*3 + 2
