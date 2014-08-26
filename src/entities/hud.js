@@ -60,7 +60,6 @@ function( vent, util ){
         },
         cooldownTimer: function( ctx ){
             var c = cfg.cooldownTimer;
-            cooldownTimer.elem.innerHTML = cooldownTimer.display || 'Ready';
             util.line(ctx, ctx.canvas.width - 25, ctx.canvas.height - 100,
                 ctx.canvas.width - 25, (ctx.canvas.height - 100) - c.height,
                 '#333', c.opts.bg
