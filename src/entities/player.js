@@ -143,7 +143,7 @@ function( Sprite, vent, Laser, util, pool ){
             pos = this.laserPosition;
 
         this.laserPosition.x = this.position.x + 32;
-        this.laserPosition.y = this.position.y - 15;
+        this.laserPosition.y = this.position.y;
 
         if ( !laser ) {
             laser = new Laser(this.canvas);
