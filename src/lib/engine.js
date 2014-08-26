@@ -1,8 +1,8 @@
 define('engine',
 
-['vent', 'Enemy', 'spritePool', 'Laser'],
+['vent', 'Enemy', 'spritePool', 'Laser', 'util'],
 
-function( vent, Enemy, pool, Laser ){
+function( vent, Enemy, pool, Laser, util ){
 
     'use strict';
 
@@ -14,13 +14,20 @@ function( vent, Enemy, pool, Laser ){
         colliders,
         enemyCache,
         currentEffect,
-        lastCreated = new Date().getTime();
+        waveCount,
+        getSquadron,
+        getWave,
+        currentWave,
+        lastCreated;
 
 
     init = function( game ){
         enemyCache = [];
         colliders = [];
+        waveCount = 0;
         canvas = game.canvas;
+        lastCreated = new Date().getTime();
+        currentWave = getWave();
     };
 
 
@@ -42,21 +49,26 @@ function( vent, Enemy, pool, Laser ){
     };
 
     createEnemy = function(){
-        var enemy;
+        var enemy,
+            squadron;
 
         if ( lastCreated > new Date().getTime() - 3000 ) {
             return;
         }
 
-        enemy = pool.recycle('enemies');
+        squadron = getSquadron(currentWave);
 
-        if ( !enemy ) {
-            enemy = new Enemy(canvas);
-            pool.register('enemies', enemy);
-            enemyCache.push(enemy);
+        for (var i = 0; i < squadron; i++) {
+            enemy = pool.recycle('enemies');
+
+            if ( !enemy ) {
+                enemy = new Enemy(canvas);
+                pool.register('enemies', enemy);
+                enemyCache.push(enemy);
+            }
+
+            enemy.create(currentEffect || null);
         }
-
-        enemy.create(currentEffect || null);
 
         lastCreated = new Date().getTime();
     };
@@ -83,6 +95,26 @@ function( vent, Enemy, pool, Laser ){
                 }
             });
         });
+    };
+
+
+    getSquadron = (function(){
+        var count = 0;
+        return function( wave ){
+            return wave[++count];
+        };
+    })();
+
+
+    getWave = function(){
+        var wave = [],
+            count = 30;
+
+        for (var i = 0; i < count; i++) {
+            wave.push(util.random(0, 2));
+        }
+
+        return wave;
     };
 
 
