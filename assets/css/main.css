@@ -63,19 +63,13 @@ canvas {
 }
 
 #messenging.visible {
-    /* visibility: visible; */
     opacity: 1;
     transform: scale(1, 1);
     -webkit-transform: scale(1, 1);
 }
 
 .hud {
-    background: #333; /* Old browsers */
-/*    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7d7e7d), color-stop(100%,#0e0e0e));
-    background: -webkit-linear-gradient(top,  #7d7e7d 0%,#0e0e0e 100%);
-    background: -o-linear-gradient(top,  #7d7e7d 0%,#0e0e0e 100%);
-    background: -ms-linear-gradient(top,  #7d7e7d 0%,#0e0e0e 100%);
-    background: linear-gradient(to bottom,  #7d7e7d 0%,#0e0e0e 100%); */
+    background: #333;
     border-top: 1px solid #666;
     color: #fff;
     list-style: none;
