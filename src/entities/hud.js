@@ -145,7 +145,9 @@ function( vent, util ){
 
 
     resetCooldown = function(){
-        activeIcon.classList.remove('on');
+        if ( activeIcon ) {
+            activeIcon.classList.remove('on');
+        }
         cooldownTimer.current = 20e3;
         cooldownTimer.display = 20;
         cooldownTimer.lastChecked = new Date().getTime();
