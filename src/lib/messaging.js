@@ -16,7 +16,6 @@ define('messenging', ['util', 'vent'], function( util, vent ){
     init = function(){
         elem = util.getById('messenging');
         header = elem.querySelector('h1');
-        console.log(header);
         subheader = elem.querySelector('h4');
         setTimeout(function(){
             headerText();
