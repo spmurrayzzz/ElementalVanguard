@@ -36,6 +36,14 @@ function( util, vent ){
         vent.on('start-game', function(){
             hide();
         });
+        vent.on('message', function( msg, timeout ){
+            headerText(msg);
+            subheaderText('');
+            show();
+            if ( timeout ) {
+                setTimeout(hide, 1000);
+            }
+        });
     };
 
 

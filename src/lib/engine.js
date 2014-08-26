@@ -1,6 +1,6 @@
 define('engine',
 
-['vent', 'Enemy', 'spritePool', 'Laser', 'util', 'game'],
+['vent', 'Enemy', 'spritePool', 'Laser', 'util'],
 
 function( vent, Enemy, pool, Laser, util ){
 
@@ -20,6 +20,8 @@ function( vent, Enemy, pool, Laser, util ){
         getWave,
         player,
         currentWave,
+        reportWave,
+        msg,
         lastCreated;
 
 
@@ -30,6 +32,7 @@ function( vent, Enemy, pool, Laser, util ){
         canvas = game.canvas;
         lastCreated = new Date().getTime();
         currentWave = getWave();
+        msg = vent.emit.bind(vent, 'message');
     };
 
 
@@ -53,6 +56,7 @@ function( vent, Enemy, pool, Laser, util ){
             vent.on('deactivate', function(){
                 currentEffect = null;
             });
+            vent.on('start-game', reportWave);
         });
     };
 
@@ -125,8 +129,13 @@ function( vent, Enemy, pool, Laser, util ){
 
              if (distX <= (player.dims.width/2) ||
                  distY <= (player.dims.height/2)) {
-                 player.destroy();
-                 vent.off('update', checkPlayerCollisions);
+                 if ( !player.fireActive ) {
+                     player.destroy();
+                     vent.off('update', checkPlayerCollisions);
+                 } else {
+                     vent.emit('kaboom!', enemy.position.x, enemy.position.y);
+                     enemy.destroy();
+                 }
              }
         });
     };
@@ -149,6 +158,11 @@ function( vent, Enemy, pool, Laser, util ){
         }
 
         return wave;
+    };
+
+
+    reportWave = function(){
+        msg('Wave 1', 1000);
     };
 
 
