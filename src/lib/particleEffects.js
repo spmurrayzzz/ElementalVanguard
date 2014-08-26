@@ -104,10 +104,10 @@ function( vent, util, Particle, pool ){
             fire = fireCfg[Math.round(util.random(0, 3))];
             particle = pool.recycle('particles');
             if ( !particle ) {
-                particle = new Particle(canvas);
+                particle = new Particle(canvas, true);
                 pool.register('particles', particle);
             } else {
-                Particle.call(particle, canvas);
+                Particle.call(particle, canvas, true);
             }
             particle.life = fire.life;
             particle.size = util.random(1, 3);

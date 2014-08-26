@@ -8,7 +8,7 @@ function( Sprite, util ){
 
     var proto;
 
-    function Particle(){
+    function Particle( canvas, override ){
         Sprite.apply(this, arguments);
         this.size = 2;
         this.isCreated = false;
@@ -27,13 +27,15 @@ function( Sprite, util ){
             return Math.sin(direction) * this.physics.velocity;
         };
 
-        this.life = util.random(30, 50);
-        this.fillStyle = 'rgba(244,0,8,' +
-            Math.random() * ((1 - 0.5) + 0.5) + ')';
-        this.position = {
-            x: Math.random() * this.canvas.width,
-            y: Math.random() * this.canvas.height - this.size
-        };
+        if ( !override ) {
+            this.life = util.random(30, 50);
+            this.fillStyle = 'rgba(244,0,8,' +
+                Math.random() * ((1 - 0.5) + 0.5) + ')';
+            this.position = {
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height - this.size
+            };
+        }
         this.bindRefs = {};
     }
 
