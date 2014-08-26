@@ -82,10 +82,12 @@ function( Sprite, vent, Laser, util, pool ){
         vent.on('elemental-fire-on', function(){
             this.currentFillStyle = this.fillStyle.fire;
             this.currentDisplayProps = this.displayProps.fire;
+            this.fireActive = true;
         }.bind(this));
         vent.on('elemental-fire-off', function(){
             this.currentFillStyle = this.fillStyle.default;
             this.currentDisplayProps = this.displayProps.default;
+            this.fireActive = false;
         }.bind(this));
     };
 
@@ -168,6 +170,12 @@ function( Sprite, vent, Laser, util, pool ){
             this.position.x = 0;
         } else {
             this.position.x = this.position.x + this.physics.velocity;
+        }
+        if ( this.fireActive ) {
+            vent.emit('emit-fire',
+                this.position.x + this.dims.width/2,
+                this.position.y + this.dims.height/2
+            );
         }
     };
 

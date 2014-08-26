@@ -13,7 +13,9 @@ function( vent, util, Particle, pool ){
         render,
         update,
         particles = [],
-        bindEvents
+        emitFire,
+        bindEvents,
+        fireCfg
         ;
 
     init = function(){
@@ -24,6 +26,24 @@ function( vent, util, Particle, pool ){
             height: cvs.height,
             ctx: ctx
         };
+        fireCfg = [
+            {
+                fill: '#f37d00',
+                life: 20
+            },
+            {
+                fill: '#f36026',
+                life: 15
+            },
+            {
+                fill: '#f2944e',
+                life: 10
+            },
+            {
+                fill: '#f1f1f1',
+                life: 10
+            }
+        ];
     };
 
     bindEvents = function(){
@@ -32,6 +52,7 @@ function( vent, util, Particle, pool ){
             vent.on('effects-render', render);
             vent.on('update', update);
             vent.on('kaboom!', explosion);
+            vent.on('emit-fire', emitFire);
         });
     };
 
@@ -73,6 +94,30 @@ function( vent, util, Particle, pool ){
             particles.push(particle.create());
         }
 
+    };
+
+
+    emitFire = function( x, y ){
+        var particle,
+            fire;
+        for (var i = 0; i < 20; i++) {
+            fire = fireCfg[Math.round(util.random(0, 3))];
+            particle = pool.recycle('particles');
+            if ( !particle ) {
+                particle = new Particle(canvas);
+                pool.register('particles', particle);
+            } else {
+                Particle.call(particle, canvas);
+            }
+            particle.life = fire.life;
+            particle.size = util.random(1, 3);
+            particle.fillStyle = fire.fill;
+            // particle.fillStyle = 'rgba('+ parseInt(util.random(100, 244)) + ',0,8,' +
+            //     Math.random() * ((1 - 0.5) + 0.5) + ')';
+            particle.position.x = x;
+            particle.position.y = y;
+            particles.push(particle.create());
+        }
     };
 
 
