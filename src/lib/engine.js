@@ -36,15 +36,15 @@ function( vent, Enemy, pool, Laser, util ){
             init(game);
             vent.on('update', createEnemy);
             vent.on('update', checkLaserCollisions);
-        });
-        vent.on('laser-cache-updated', function( laserCache ){
-            colliders = laserCache;
-        });
-        vent.on('activate', function( effect ) {
-            currentEffect = effect;
-        });
-        vent.on('deactivate', function(){
-            currentEffect = null;
+            vent.on('laser-cache-updated', function( laserCache ){
+                colliders = laserCache;
+            });
+            vent.on('activate', function( effect ) {
+                currentEffect = effect;
+            });
+            vent.on('deactivate', function(){
+                currentEffect = null;
+            });
         });
     };
 

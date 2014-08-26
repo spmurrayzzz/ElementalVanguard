@@ -7,6 +7,7 @@ body {
     background-color: #111;
     margin:0;
     padding: 0;
+    font-family: "Courier New";
 }
 
 img {
@@ -35,6 +36,10 @@ canvas {
     margin-left: -410px;
     border: 2px solid #222;
     position: absolute;
+}
+
+#score {
+    font-size: 20px;
 }
 
 .hud {

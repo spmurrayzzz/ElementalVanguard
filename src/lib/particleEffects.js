@@ -31,8 +31,8 @@ function( vent, util, Particle, pool ){
             init(game);
             vent.on('effects-render', render);
             vent.on('update', update);
+            vent.on('kaboom!', explosion);
         });
-        vent.on('kaboom!', explosion);
     };
 
 

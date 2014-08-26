@@ -33,8 +33,8 @@ function( Star, SpeedLine, vent, util ){
         vent.on('start', function( ){
             init(util.getById('bg'));
             create();
+            vent.on('update', update);
         });
-        vent.on('update', update);
     };
 
 
