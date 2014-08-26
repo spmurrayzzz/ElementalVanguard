@@ -9,11 +9,36 @@
     <style>{{ css }}</style>
 </head>
 <body>
-    <div id="game-container" style="">
-        <canvas id="bg" width="800" height="600"></canvas>
-        <canvas id="main" width="800" height="600"></canvas>
-        <canvas id="effects" width="800" height="600"></canvas>
-        <canvas id="hud" width="800" height="600"></canvas>
+    <div id="viewport">
+        <div id="game-container" style="">
+            <canvas id="bg" width="800" height="600"></canvas>
+            <canvas id="main" width="800" height="600"></canvas>
+            <canvas id="effects" width="800" height="600"></canvas>
+            <canvas id="hud-canvas" width="800" height="600"></canvas>
+        </div>
+        <ul id="hud">
+                <li class="ico">
+                    <button type="button" class="s-attack" id="attack-e"></button>
+                    &nbsp;
+                </li>
+                <li class="ico">
+                    <button type="button" class="s-attack" id="attack-w"></button>
+                    &nbsp;
+                </li>
+                <li class="ico">
+                    <button type="button" class="s-attack" id="attack-a"></button>
+                    &nbsp;
+                </li>
+                <li class="ico">
+                    <button type="button" class="s-attack" id="attack-f"></button>
+                    &nbsp;
+                </li>
+                <li id="cooldown-timer">timer
+                </li>
+                <li id="score">
+                    Score: 99999
+                </li>
+            </ul>
     </div>
 <script type="text/javascript">{{ javascript }}</script>
 </body>
