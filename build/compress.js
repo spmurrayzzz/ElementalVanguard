@@ -26,7 +26,7 @@ module.exports = function( grunt ){
                 throw err;
             }
 
-            fs.readFile('./assets/css/main.css', function( err, data ){
+            fs.readFile('./assets/css/main.min.css', function( err, data ){
                 if ( err ) {
                     throw err;
                 }

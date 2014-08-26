@@ -10,6 +10,7 @@ module.exports = function( grunt ) {
         concat_sourcemap: require('./concat_sourcemap'),
         uglify: require('./uglify'),
         jshint: require('./jshint'),
-        watch: require('./watch')
+        watch: require('./watch'),
+        cssmin: require('./cssmin')
     }
 };

@@ -1,6 +1,7 @@
 .DS_Store
 node_modules/
 assets/js/js13k*
+assets/css/*min*
 index-compressed.html
 venv/
 fabConfig.json
