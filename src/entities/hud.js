@@ -58,12 +58,12 @@ function( vent, util ){
         cooldownTimer: function( ctx ){
             var c = cfg.cooldownTimer;
             cooldownTimer.elem.innerHTML = cooldownTimer.display || 'Ready';
-            util.line(ctx, ctx.canvas.width - 25, ctx.canvas.height - 125,
-                ctx.canvas.width - 25, (ctx.canvas.height - 125) - c.height,
+            util.line(ctx, ctx.canvas.width - 25, ctx.canvas.height - 100,
+                ctx.canvas.width - 25, (ctx.canvas.height - 100) - c.height,
                 '#333', c.opts.bg
             );
-            util.line(ctx, ctx.canvas.width - 25, ctx.canvas.height - 125,
-                ctx.canvas.width - 25, (ctx.canvas.height - 125) - c.height * c.percent,
+            util.line(ctx, ctx.canvas.width - 25, ctx.canvas.height - 100,
+                ctx.canvas.width - 25, (ctx.canvas.height - 100) - c.height * c.percent,
                 c.fillStyle.current, c.opts.fg
             );
         }
@@ -112,9 +112,12 @@ function( vent, util ){
 
 
     activateCooldown = function( element ){
-        cooldownTimer.current = element === 'earth' ? 20 : 10;
+        cooldownTimer.current = 10e3;
         cooldownTimer.lastChecked = new Date().getTime();
         cfg.cooldownTimer.fillStyle.current = cfg.cooldownTimer.fillStyle[element];
+        if ( element === 'earth' ) {
+            resetCooldown();
+        }
     };
 
 
