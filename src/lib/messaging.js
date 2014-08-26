@@ -1,4 +1,8 @@
-define('messenging', ['util', 'vent'], function( util, vent ){
+define('messenging',
+
+['util', 'vent'],
+
+function( util, vent ){
 
     'use strict';
 
@@ -18,8 +22,8 @@ define('messenging', ['util', 'vent'], function( util, vent ){
         header = elem.querySelector('h1');
         subheader = elem.querySelector('h4');
         setTimeout(function(){
-            headerText();
-            subheaderText();
+            headerText('Elemental Vanguard');
+            subheaderText('Press Enter to Start');
             show();
         }, 2000);
     };
@@ -37,7 +41,6 @@ define('messenging', ['util', 'vent'], function( util, vent ){
 
     show = function(){
         elem.classList.add('visible');
-        elem.classList.add('visible');
         return elem;
     };
 
@@ -48,16 +51,24 @@ define('messenging', ['util', 'vent'], function( util, vent ){
     };
 
 
-    headerText = function(){
-        header.innerHTML = 'Elemental Vanguard';
+    headerText = function( msg ){
+        header.innerHTML = msg;
     };
 
 
-    subheaderText = function(){
-        subheader.innerHTML = 'Press Enter to Start';
+    subheaderText = function( msg ){
+        subheader.innerHTML = msg;
     };
 
 
     bindEvents();
+
+
+    return {
+        show: show,
+        hide: hide,
+        header: headerText,
+        subheader: subheaderText
+    };
 
 });
