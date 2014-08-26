@@ -2,7 +2,8 @@ define('audio', ['jsfxr', 'vent'], function( jsfxr, vent ){
 
     'use strict';
 
-    var ctx = new window.AudioContext();
+    var AC =  window.webkitAudioContext || window.AudioContext,
+        ctx = new AC();
 
     function register( namespace, sound ){
         var buffer = jsfxr(sound, ctx);
