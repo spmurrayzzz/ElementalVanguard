@@ -68,7 +68,6 @@ function( vent, Asteroid, util ){
             default:
                 break;
         }
-        ready = false;
     };
 
 
@@ -106,6 +105,7 @@ function( vent, Asteroid, util ){
         refCache[checkFuncName] = check[name].bind(null, started);
         vent.on('update', refCache[checkFuncName]);
         effectActive = true;
+        ready = false;
     };
 
 
@@ -125,6 +125,7 @@ function( vent, Asteroid, util ){
             currX += x;
         }
         vent.emit('activate elemental-earth', 'earth');
+        ready = false;
     };
 
 
