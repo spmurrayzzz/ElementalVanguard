@@ -74,6 +74,7 @@ function( Sprite, vent, Laser, util, pool ){
             }
         }.bind(this));
         Sprite.prototype.create.call(this);
+        vent.emit('player-added', this);
     };
 
 
@@ -177,6 +178,13 @@ function( Sprite, vent, Laser, util, pool ){
                 this.position.y + this.dims.height/2
             );
         }
+    };
+
+
+    proto.destroy = function(){
+        this.destroyed = true;
+        vent.emit('entity-destroyed', this);
+        vent.emit('kaboom!', this.position.x, this.position.y);
     };
 
 

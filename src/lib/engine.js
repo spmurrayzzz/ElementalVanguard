@@ -1,6 +1,6 @@
 define('engine',
 
-['vent', 'Enemy', 'spritePool', 'Laser', 'util'],
+['vent', 'Enemy', 'spritePool', 'Laser', 'util', 'game'],
 
 function( vent, Enemy, pool, Laser, util ){
 
@@ -11,12 +11,14 @@ function( vent, Enemy, pool, Laser, util ){
         createEnemy,
         canvas,
         checkLaserCollisions,
+        checkPlayerCollisions,
         colliders,
         enemyCache,
         currentEffect,
         waveCount,
         getSquadron,
         getWave,
+        player,
         currentWave,
         lastCreated;
 
@@ -32,10 +34,14 @@ function( vent, Enemy, pool, Laser, util ){
 
 
     bindEvents = function(){
+        vent.on('player-added', function( obj ){
+            player = obj;
+        });
         vent.on('start', function( game ){
             init(game);
             vent.on('update', createEnemy);
             vent.on('update', checkLaserCollisions);
+            vent.on('update', checkPlayerCollisions);
             vent.on('laser-cache-updated', function( laserCache ){
                 colliders = laserCache;
             });
@@ -94,6 +100,32 @@ function( vent, Enemy, pool, Laser, util ){
                     collider.destroy();
                 }
             });
+        });
+    };
+
+
+    checkPlayerCollisions = function(){
+        if ( !player ) {
+            return;
+        }
+        enemyCache.forEach(function( enemy ){
+            var distX = Math.abs(
+                    enemy.position.x - player.position.x-player.dims.width/2
+                ),
+                distY = Math.abs(
+                    enemy.position.y - player.position.y-player.dims.height/2
+                );
+
+            if ( distX > (player.dims.width/2 + enemy.size) ||
+                distY > (player.dims.height/2 + enemy.size) ) {
+                return false;
+            }
+
+             if (distX <= (player.dims.width/2) ||
+                 distY <= (player.dims.height/2)) {
+                 player.destroy();
+                 vent.off('update', checkPlayerCollisions);
+             }
         });
     };
 
