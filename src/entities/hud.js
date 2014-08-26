@@ -20,6 +20,7 @@ function( vent, util ){
         activateCooldown,
         resetCooldown,
         checkCooldown,
+        pauseCheck,
         cfg;
 
 
@@ -89,6 +90,7 @@ function( vent, util ){
             timerStarted: new Date().getTime(),
             elem: util.getById('cooldown-timer')
         };
+        pauseCheck = false;
 
         vent.on('update', update);
         vent.on('render', render);
@@ -128,13 +130,19 @@ function( vent, util ){
         cfg.cooldownTimer.fillStyle.current = cfg.cooldownTimer.fillStyle.default;
         cfg.cooldownTimer.percent = 0;
         cooldownTimer.timerStarted = new Date().getTime();
+        pauseCheck = false;
     };
 
 
     checkCooldown = function(){
+        if ( pauseCheck ) {
+            return;
+        }
         if ( cooldownTimer.display <= 0 ) {
             vent.emit('cooldown-end');
+            cfg.cooldownTimer.fillStyle.current = 'rgba(120, 220, 0, 1)';
             cfg.cooldownTimer.percent = 1;
+            pauseCheck = true;
             return;
         }
 
