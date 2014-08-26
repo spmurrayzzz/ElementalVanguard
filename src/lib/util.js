@@ -156,6 +156,7 @@ define('util', function(){
 
     return {
         getById: document.getElementById.bind(document),
+        QS: document.querySelector.bind(document),
         approach: approach,
         guid: guid,
         randomColor: randomColor,

@@ -87,7 +87,7 @@ function( vent, util ){
             current: 20,
             lastChecked: new Date().getTime(),
             max: 20,
-            timerStarted: new Date().getTime(),
+            timerStarted: null,
             elem: util.getById('cooldown-timer')
         };
         pauseCheck = true;
@@ -101,6 +101,7 @@ function( vent, util ){
         });
         vent.on('start-game', function(){
             pauseCheck = false;
+            cooldownTimer.timerStarted = new Date().getTime();
         });
 
     };

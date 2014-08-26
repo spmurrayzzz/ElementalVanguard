@@ -6,13 +6,21 @@ define('messenging', ['util', 'vent'], function( util, vent ){
         bindEvents,
         show,
         hide,
-        elem;
+        headerText,
+        subheaderText,
+        elem,
+        header,
+        subheader;
 
 
     init = function(){
         elem = util.getById('messenging');
-        elem.innerHTML = 'Elemental Vanguard';
+        header = elem.querySelector('h1');
+        console.log(header);
+        subheader = elem.querySelector('h4');
         setTimeout(function(){
+            headerText();
+            subheaderText();
             show();
         }, 2000);
     };
@@ -22,10 +30,14 @@ define('messenging', ['util', 'vent'], function( util, vent ){
         vent.on('start', function(){
             init();
         });
+        vent.on('start-game', function(){
+            hide();
+        });
     };
 
 
     show = function(){
+        elem.classList.add('visible');
         elem.classList.add('visible');
         return elem;
     };
@@ -34,6 +46,16 @@ define('messenging', ['util', 'vent'], function( util, vent ){
     hide = function(){
         elem.classList.remove('visible');
         return elem;
+    };
+
+
+    headerText = function(){
+        header.innerHTML = 'Elemental Vanguard';
+    };
+
+
+    subheaderText = function(){
+        subheader.innerHTML = 'Press Enter to Start';
     };
 
 
