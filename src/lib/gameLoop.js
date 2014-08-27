@@ -19,11 +19,6 @@ function( vent ){
     }
 
     vent.on('start', step);
-    vent.on('keydown', function( ev ){
-        if ( ev.keyCode === 80 ) {
-            paused = !paused;
-        }
-    });
     vent.on('pause', function(){
         paused = !paused;
     });
