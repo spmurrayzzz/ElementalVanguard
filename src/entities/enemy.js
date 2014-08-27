@@ -12,7 +12,6 @@ function( Sprite, vent, util ){
         Sprite.apply(this, arguments);
         this.fillStyle = util.randomColor();
         this.size = 30;
-        this.isCreated = false;
         this.physics = {
             speed: 2,
             friction: 2,

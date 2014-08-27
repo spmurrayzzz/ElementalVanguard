@@ -15,7 +15,8 @@ function( vent, util, Particle, pool ){
         particles = [],
         emitFire,
         bindEvents,
-        fireCfg
+        fireCfg,
+        groupName = 'particles'
         ;
 
     init = function(){
@@ -82,10 +83,10 @@ function( vent, util, Particle, pool ){
             particle;
 
         for (var i = 0; i < particleAmt; i++) {
-            particle = pool.recycle('particles');
+            particle = pool.recycle(groupName);
             if ( !particle ) {
                 particle = new Particle(canvas);
-                pool.register('particles', particle);
+                pool.register(groupName, particle);
             } else {
                 Particle.call(particle, canvas);
             }
@@ -102,10 +103,10 @@ function( vent, util, Particle, pool ){
             fire;
         for (var i = 0; i < 20; i++) {
             fire = fireCfg[Math.round(util.random(0, 3))];
-            particle = pool.recycle('particles');
+            particle = pool.recycle(groupName);
             if ( !particle ) {
                 particle = new Particle(canvas, true);
-                pool.register('particles', particle);
+                pool.register(groupName, particle);
             } else {
                 Particle.call(particle, canvas, true);
             }

@@ -14,7 +14,6 @@ function( Sprite ){
             width: 1,
             height: 20
         };
-        this.isCreated = false;
         this.physics = {
             speed: 2,
             friction: 2,

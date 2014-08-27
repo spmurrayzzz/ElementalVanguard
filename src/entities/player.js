@@ -11,12 +11,10 @@ function( Sprite, vent, Laser, util, pool ){
     function Player(){
         Sprite.apply(this, arguments);
         this.ctx.fillStyle = "rgb(200,0,0)";
-        this.size = 40;
         this.dims = {
             width: 60,
             height: 60
         };
-        this.isCreated = false;
         this.physics = {
             speed: 2,
             friction: 0.98,
@@ -24,7 +22,6 @@ function( Sprite, vent, Laser, util, pool ){
             velocityGoal: 0
         };
         this.keyPressed = false;
-        this.laserPool = [];
         this.lastFired = new Date().getTime();
         this.fillStyle = {
             default: 'rgba(120, 220, 0, 1)',
@@ -50,10 +47,6 @@ function( Sprite, vent, Laser, util, pool ){
             }
         };
         this.currentDisplayProps = this.displayProps.default;
-        this.pointerData = {
-            x: 0,
-            y: 0
-        };
         this.laserPosition = { x: 0, y: 0 };
     }
 

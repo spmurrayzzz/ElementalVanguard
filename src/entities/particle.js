@@ -11,7 +11,6 @@ function( Sprite, util ){
     function Particle( canvas, override ){
         Sprite.apply(this, arguments);
         this.size = 2;
-        this.isCreated = false;
         this.physics = {
             speed: 0.5,
             friction: 2,

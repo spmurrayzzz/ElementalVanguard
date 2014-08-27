@@ -64,8 +64,6 @@ function( Sprite, util, vent ){
         if ( this.position.y + this.physics.velocity < 0 - this.size ) {
             this.destroy();
         } else {
-            // this.position.x -= Math.cos(this.position.direction) * (this.physics.velocity);
-            // this.position.y -= Math.sin(this.position.direction) * (this.physics.velocity);
             this.position.y += this.physics.velocity;
         }
     };

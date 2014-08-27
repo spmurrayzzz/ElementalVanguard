@@ -45,16 +45,6 @@ function( Canvas, Player, vent ){
 
     // Couple DOM events to our custom event emitter
     document.addEventListener('DOMContentLoaded', function(){
-        vent.on('publicize', function( namespace, obj ){
-            window.game[namespace] = obj;
-        });
-
-        vent.on('keydown', function( ev ){
-            if ( ev.keyCode === 13 ) {
-                // vent.emit('start-game');
-            }
-        });
-
         vent.emit('create', game);
         vent.emit('start', game);
     });

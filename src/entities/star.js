@@ -11,7 +11,6 @@ function( Sprite, util ){
     function Star(){
         Sprite.apply(this, arguments);
         this.size = util.random(0.3, 2);
-        this.isCreated = false;
         this.physics = {
             speed: 2,
             friction: 2,

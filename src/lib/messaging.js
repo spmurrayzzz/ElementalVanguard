@@ -25,12 +25,8 @@ function( util, vent ){
 
 
     bindEvents = function(){
-        vent.on('start', function(){
-            init();
-        });
-        vent.on('start-game', function(){
-            hide();
-        });
+        vent.on('start', init);
+        vent.on('start-game', hide);
         vent.on('message', function( msg, submsg, timeout ){
             if ( typeof submsg === 'number' ) {
                 timeout = submsg;
