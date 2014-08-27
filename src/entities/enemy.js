@@ -65,7 +65,7 @@ function( Sprite, vent, util ){
         vent.on('elemental-water-on', this.waterEffect.bind(this, true));
         vent.on('elemental-air-on', this.airEffect.bind(this, true));
         vent.on('deactivate', this.deactivateAllEffects.bind(this));
-        vent.on('elemental-fire-on', this.destroy.bind(this, true));
+        vent.on('elemental-fire-on', this.destroy.bind(this));
     };
 
 
