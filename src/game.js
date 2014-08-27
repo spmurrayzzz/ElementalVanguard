@@ -51,7 +51,7 @@ function( Canvas, Player, vent ){
 
         vent.on('keydown', function( ev ){
             if ( ev.keyCode === 13 ) {
-                vent.emit('start-game');
+                // vent.emit('start-game');
             }
         });
 

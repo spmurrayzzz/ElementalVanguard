@@ -50,12 +50,20 @@ canvas {
     color: #e5e5e5;
 }
 
-#title-screen h1 {
-    font-size: 20px;
+#title-screen .title {
+    display: none;
 }
 
-#title-screen h1 + p {
+#title-screen .title.on {
+    display: block;
+}
+
+#title-screen .title p {
     text-align: center;
+}
+
+#title-screen .title p.justify {
+    text-align: justify;
 }
 
 #title-screen p {
