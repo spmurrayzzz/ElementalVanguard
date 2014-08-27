@@ -47,7 +47,7 @@ define('titleScreen', ['util', 'vent'], function( util, vent ){
             screens[currentIndex-1].classList.remove('on');
             elem.style.display = 'none';
             vent.emit('start-game');
-            vent.off('update', handler);
+            vent.off('keydown', handler);
             return;
         }
 
