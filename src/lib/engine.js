@@ -24,6 +24,7 @@ function( vent, Enemy, pool, Laser, util ){
         currentWave,
         reportWave,
         msg,
+        gameOver,
         lastCreated;
 
 
@@ -61,6 +62,7 @@ function( vent, Enemy, pool, Laser, util ){
             });
             vent.on('start-game', reportWave);
             vent.on('enemy-passed', passedEnemy);
+            vent.on('game-over', gameOver);
         });
     };
 
@@ -184,8 +186,16 @@ function( vent, Enemy, pool, Laser, util ){
     passedEnemy = function(){
         enemiesPassed++;
         if ( enemiesPassed === 10) {
-            vent.emit('game-over', 'Mission failure.');
+            vent.emit('game-over', 'Valiant effort, but you were overrun.');
         }
+    };
+
+
+    gameOver = function(){
+        enemyCache.forEach(function( enemy ){
+            enemy.destroy();
+        });
+        vent.off('update', createEnemy);
     };
 
 

@@ -60,7 +60,7 @@ function( Canvas, Player, vent ){
     });
 
     vent.on('game-over', function( submsg ){
-        vent.emit('pause message', 'Game Over', submsg);
+        vent.emit('message', 'Game Over', submsg);
     });
 
     // Expose the interface
