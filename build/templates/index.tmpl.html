@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>The Elemental Vanguard</title>
+    <title></title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <style>{{ css }}</style>
 </head>
@@ -27,8 +28,8 @@
                         <li><b>Keep your hero alive.</b> Colliding with enemy vessels will result in death.</li>
                         <li><b>Keep enemies way from your planet.</b> Letting 10 enemy vessels get by you will result in mission failure.</li>
                     </ul>
-                    <p>Make no mistake, you will die on this mission as a member of the Vanguard. How long will you last?</p>
-                    <p>You can disptach enemies with your laser or one of four elemental weapons. These weapons have a 20 second cooldown after their effects have taken place. Enemies affected by elemental weaponry do not award points.</p>
+                    <p>Make no mistake, you will die on this mission as a member of the Vanguard. The question is how long will you last?</p>
+                    <p>You can disptach enemies with your laser or one of four elemental weapons. All elemental weapons have a 20 second cooldown after their effects have taken place. Enemies affected by elemental weaponry do not award points.</p>
                     <br><br><br>
                     <p><em>(Press Enter to continue)</em></p>
                 </div>
@@ -46,6 +47,9 @@
                         <tr>
                             <td>Spacebar</td>
                             <td>Fire laser</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Elemental Weapons (20 second cooldown)</th>
                         </tr>
                         <tr>
                             <td>1</td>
@@ -69,14 +73,28 @@
                 </div>
             </div>
         </div>
-        <ul id="hud" class="hud"><li class="ico"><a href="#!" class="s-attack" id="attack-e">1</a></li>
-                <li class="ico"><a href="#!" class="s-attack" id="attack-w">2</a></li>
-                <li class="ico"><a href="#!" class="s-attack" id="attack-a">3</a></li>
-                <li class="ico"><a href="#!" class="s-attack" id="attack-f">4</a></li>
-                <li id="enemies-passed"></li>
-                <li id="score"></li></ul>
+        <ul id="hud" class="hud">
+                <li id="earth" class="ico">
+                    <a href="#!" class="s-attack" id="attack-e">1</a>
+                </li>
+                <li id="water" class="ico">
+                    <a href="#!" class="s-attack" id="attack-w">2</a>
+                </li>
+                <li id="air" class="ico">
+                    <a href="#!" class="s-attack" id="attack-a">3</a>
+                </li>
+                <li id="fire" class="ico">
+                    <a href="#!" class="s-attack" id="attack-f">4</a>
+                </li>
+                <li id="enemies-passed">
+                    Enemies let by: 0
+                </li>
+                <li id="score">
+                    Score: 99999
+                </li>
+            </ul>
     </div>
     <img alt="" id="player-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAIAAAAmKNuZAAAABnRSTlMA/wD/AP83WBt9AAAEn0lEQVR4Aa1UC0xTVxi+jCxkLNkSEnxsU5zQjZeFa8ujK4XKykKh3LVUiDbYBShNCnTiaGlpeFRairzkoasMBEGMGURnDOJjLLBolhhBo0LGxqBgGEwe4piQbAy4+xibYalZybITQv7zn+985/u//78l6P91bYru6YO+odZT/4Xu95WlzuGGwenejckz+dllyQm2/nv2MAd0jf251SueiruuM4uT2M7Oznb23KhsaWy5ekVVqO+937cRdugO8Xh+/N/oPu+vPTK6JftOyLNff8b2XOvZE0V5jXV1lzouZ8sOFORkDQz2I395qD7d9mryBf+5hVkH3hV9G35pvAxB+/m2nvNndfceslLTjEeLeG0XTQWG4/nmpaXfcJrVy7DN3XfcisHx218+bLaNjZQcySq3jbnT9PZQTrO5mKTp1691qWUH6hs/fTT9Xc9Q68zcpGO68ZGfao/VfxDM0tbWhNG0y90BMiCgqOQYYuepeW+KEgQy05IyOy92P5l+6phubGxU/bGa/eY2YWXV2zTt1NfPJklleQVi5+EfQcf18gwg99R9dmpq6rFjOpQJOp+dO94XS5yMZiJLw+LtS1coXE0liN/hhbMZDCaTWVV9fGJiYlN0ijTFWx47hRERMi4XZmVkqkFnOJT0UWwsRVHePu/6+vlaSoo3RTds+0GpSnVzc5NIJGWlpU2nTxcWFkIvhqamqkqlUuElf6av2WLaFB0caWlt2u3lIRaLTSYTGOVy+fMYwnEUnyj+5vYtBx8ZdOHvl2fzgL7H4yQmJhiNRqlMQsp37c3cHnkwXKfTKZVKSIN8wADGVL+AbnV19YuO9hSlHH8HkxIjBXyRSJScnCyiROxEv6h25/ibBFvrTu2Pg9JoYTTsC4vgxEmjo+ME1oZaXP8H3bWuK/ACOCiSSqVBQUFRUVGIwUV9RRhWCe08oX5CQCNO0Q2SJAFGAKRCmdLQYv2LbmVl5Vxbs9VqzchMl8lkEMXjhWEOuFwuYihKGyUyHhEpDwjtIrGv3hVJLBaLFRISEhMTg3bhVW2OJr8od3l5mSirNutytQaDIS8vT6/XczihgIIO6mA/1MVchTpw/alOsQvJdfkQCEa4qdFo0B9ULUuVEnAaHmFvsVjQO4BAhwWNEIvHQxP2QhRKRqVoKFqBl8i/F64Um81A8vn8HZ7bCGq/EOKxhzTMFHQBhMcRII+JW+8sqkZn1zHPuYDBFpXhOszx2eNFCGJ4eC1WJESZmACMO0DrUJCilvKKio1zB7/QVpwCiQD/0WJKvOb4Gl0wLxCTUX2ysrSy+Oub3Q1n6vAAvvBgTgjWukCUAwloF3ihAqcgYnGY+BXAFVzErICE4e9BIIum0BsWet3Vc13wYfQb3gwJRaEc+AV/USma6EMGII8rC4sLG28Zi/PW6JjB3tl6NW23WptOuLk4ezEDwvmRr2zxc3l5K35XIBkBj+1njzcc1azR+ZC7Mw4r7Y8bagvaFS/h82R4btWJiJwUpzB3AuYejnRSRb1mj4emNTphPP+F6kZHvh8oF0zNTE5OjHeruR3awBsnLcjfqoi/XlNgj9cXfgLT/wCRKf7YWQn2iwAAAABJRU5ErkJggg==" />
-<script type="text/javascript">{{ javascript }}</script>
+<script>{{ javascript }}</script>
 </body>
 </html>
