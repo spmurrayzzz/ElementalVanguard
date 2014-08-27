@@ -81,6 +81,7 @@ canvas {
     padding: 10px;
     margin: 0;
     border-bottom: 1px #999 solid;
+    background-color: #666;
 }
 
 #title-screen td {
