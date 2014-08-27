@@ -8,6 +8,9 @@ function( Sprite, util ){
 
     var proto;
 
+    /**
+     * Star constructor (extends Sprite)
+     */
     function Star(){
         Sprite.apply(this, arguments);
         this.size = util.random(0.3, 2);
@@ -28,12 +31,24 @@ function( Sprite, util ){
     proto = Star.prototype = Object.create(Sprite.prototype);
 
 
+    /**
+     * No-op to override Sprite#create
+     * @return {self}
+     */
     proto.create = function(){ return this; };
 
 
+    /**
+     * No-op to override Sprite#bindEvents
+     * @return {void}
+     */
     proto.bindEvents = function(){};
 
 
+    /**
+     * Resets the Star object's position in coordinate space
+     * @return {void} 
+     */
     proto.restart = function(){
         this.position.x = Math.random() * this.canvas.width;
         this.position.y = -10;

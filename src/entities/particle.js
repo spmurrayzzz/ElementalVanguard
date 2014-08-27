@@ -8,6 +8,11 @@ function( Sprite, util ){
 
     var proto;
 
+    /**
+     * Particle constructor (extends Sprite)
+     * @param {Canvas} canvas
+     * @param {Boolean} override - flag to set if props will be overridden
+     */
     function Particle( canvas, override ){
         Sprite.apply(this, arguments);
         this.size = 2;
@@ -41,14 +46,26 @@ function( Sprite, util ){
     proto = Particle.prototype = Object.create(Sprite.prototype);
 
 
+    /**
+     * Creates the Particle
+     * @return {self}
+     */
     proto.create = function(){
         return this;
     };
 
 
+    /**
+     * No-op to ensure the Sprite method doesn't get invoked
+     */
     proto.bindEvents = function(){};
 
 
+    /**
+     * Method invoked during `update` events. Updates positional coordinates
+     * and decreases life total incrementally.
+     * @return {void}
+     */
     proto.update = function(){
         this.physics.velocity = util.approach(
             this.physics.velocityGoal,
@@ -61,6 +78,10 @@ function( Sprite, util ){
     };
 
 
+    /**
+     * Draws the Particle during `render` events
+     * @return {void}
+     */
     proto.render = function(){
         util.circle(this.ctx,
             this.position.x, this.position.y, this.size, this.fillStyle
@@ -68,6 +89,10 @@ function( Sprite, util ){
     };
 
 
+    /**
+     * Method invoked when recycling this item from a spritePool instance
+     * @return {void}
+     */
     proto.recycle = function(){
         this.destroyed = false;
     };

@@ -8,6 +8,9 @@ function( Sprite, vent, Laser, util, pool ){
 
     var proto;
 
+    /**
+     * Player constructor (extends Sprite)
+     */
     function Player(){
         Sprite.apply(this, arguments);
         this.ctx.fillStyle = "rgb(200,0,0)";
@@ -53,6 +56,11 @@ function( Sprite, vent, Laser, util, pool ){
     proto = Player.prototype = Object.create(Sprite.prototype);
 
 
+    /**
+     * Creates the player in entity space, and binds the events needed for
+     * movement
+     * @return {void}
+     */
     proto.create = function(){
         this.position = {
             x: this.canvas.width/2 - this.dims.width/2,
@@ -71,6 +79,10 @@ function( Sprite, vent, Laser, util, pool ){
     };
 
 
+    /**
+     * Binds all other effects not related to movement of player
+     * @return {void}
+     */
     proto.bindEvents = function(){
         Sprite.prototype.bindEvents.call(this);
         vent.on('elemental-fire-on', function(){
@@ -86,6 +98,10 @@ function( Sprite, vent, Laser, util, pool ){
     };
 
 
+    /**
+     * Draws the player to canvas during `render` events
+     * @return {void}
+     */
     proto.render = function(){
         if ( !this.isCreated ) {
             return false;
@@ -97,6 +113,12 @@ function( Sprite, vent, Laser, util, pool ){
     };
 
 
+    /**
+     * Event handler for key presses, intent is to move the player. Result is a
+     * change in the x velocityGoal value for the player.
+     * @param  {Event} ev
+     * @return {void}
+     */
     proto.move = function( ev ){
         if ( this.keyPressed ) {
             return;
@@ -111,10 +133,14 @@ function( Sprite, vent, Laser, util, pool ){
 
         this.physics.velocityGoal = key === 37 ? -8 : 8;
         this.keyPressed = true;
-
     };
 
 
+    /**
+     * Stops all player movement, reduces velocityGoal to zero.
+     * @param  {Event} ev
+     * @return {void}
+     */
     proto.stop = function( ev ){
         var regex = /^(37|39)/g,
             key = ev.keyCode;
@@ -128,6 +154,10 @@ function( Sprite, vent, Laser, util, pool ){
     };
 
 
+    /**
+     * Fires a Laser projectile from the front of the vessel
+     * @return {void}
+     */
     proto.fire = function(){
         if ( this.lastFired > new Date().getTime() - 200 ) {
             return;
@@ -152,6 +182,11 @@ function( Sprite, vent, Laser, util, pool ){
     };
 
 
+    /**
+     * Method invokved during `update` events to update player positional
+     * coordinates, velocity, and whether to emit the elemental fire effect.
+     * @return {void}
+     */
     proto.update = function(){
         this.physics.velocity = util.approach(
           this.physics.velocityGoal, this.physics.velocity, 0.8
@@ -174,6 +209,10 @@ function( Sprite, vent, Laser, util, pool ){
     };
 
 
+    /**
+     * Destroys the player and ends the game.
+     * @return {void} 
+     */
     proto.destroy = function(){
         this.destroyed = true;
         vent.emit('entity-destroyed', this);

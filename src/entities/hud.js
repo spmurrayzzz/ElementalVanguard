@@ -28,6 +28,10 @@ function( vent, util ){
         cfg;
 
 
+    /**
+     * Object to store configuration details
+     * @type {Object}
+     */
     cfg = {
         cooldownTimer: {
             fillStyle: {
@@ -56,6 +60,10 @@ function( vent, util ){
     };
 
 
+    /**
+     * Object that stores render functions for the HUD
+     * @type {Object}
+     */
     drawItems = {
         score: function(  ) {
             scoreElem.innerHTML = 'Score: ' + score;
@@ -78,6 +86,10 @@ function( vent, util ){
     };
 
 
+    /**
+     * Initialize the HUD module
+     * @return {void}
+     */
     init = function(){
         var cvs = util.getById('hud-canvas');
         ctx = cvs.getContext('2d');
@@ -136,6 +148,10 @@ function( vent, util ){
     };
 
 
+    /**
+     * Bind all global events relevant to the HUD module
+     * @return {void}
+     */
     bindEvents = function(){
         vent.on('start', function( obj ){
             init(obj);
@@ -146,6 +162,11 @@ function( vent, util ){
     };
 
 
+    /**
+     * Activates the effect-specific cooldown timer for a given elemental effect
+     * @param {String} element
+     * @return {void}
+     */
     activateCooldown = function( element ){
         cooldownTimer.current = 10e3;
         cooldownTimer.lastChecked = new Date().getTime();
@@ -156,6 +177,10 @@ function( vent, util ){
     };
 
 
+    /**
+     * Resets the primary 20 second global cooldown for all elemental effects
+     * @return {void}
+     */
     resetCooldown = function(){
         if ( activeIcon ) {
             activeIcon.classList.remove('on');
@@ -170,6 +195,11 @@ function( vent, util ){
     };
 
 
+    /**
+     * This method gets involved on `update` events to recalculate cooldown
+     * values and fire events when needed.
+     * @return {void}
+     */
     checkCooldown = function(){
         if ( pauseCheck ) {
             return;
@@ -192,11 +222,19 @@ function( vent, util ){
     };
 
 
+    /**
+     * Parent method to invoke on `update` events
+     * @return {void}
+     */
     update = function(){
         checkCooldown();
     };
 
 
+    /**
+     * Parent method to invole on `render` events
+     * @return {void} [description]
+     */
     render = function(){
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         draw('score');
@@ -205,6 +243,11 @@ function( vent, util ){
     };
 
 
+    /**
+     * Convenience method to draw a given HUD item
+     * @param  {String} name
+     * @return {void}
+     */
     draw = function( name ){
         drawItems[name](ctx);
     };

@@ -8,6 +8,9 @@ function( Sprite, util, vent ){
 
     var proto;
 
+    /**
+     * Laser constructor (extends Sprite)
+     */
     function Laser(){
         Sprite.apply(this, arguments);
         this.ctx = this.canvas.ctx;
@@ -34,6 +37,13 @@ function( Sprite, util, vent ){
     proto = Laser.prototype = Object.create(Sprite.prototype);
 
 
+    /**
+     * Creates the Laser object in entity space and fires an event which the
+     * canvas and game engine can subscribe to for collision detection,
+     * rendering, etc.
+     * @param  {obkect} opts
+     * @return {self}
+     */
     proto.create = function( opts ){
         this.position.x = opts.x;
         this.position.y = opts.y;
@@ -42,6 +52,10 @@ function( Sprite, util, vent ){
     };
 
 
+    /**
+     * Method invoked for `render` events, draws the Laser object
+     * @return {void}
+     */
     proto.render = function(){
         if ( this.destroyed ) {
             return;
@@ -53,6 +67,10 @@ function( Sprite, util, vent ){
     };
 
 
+    /**
+     * Method invoked for `update` events, updates positional coordinates
+     * @return {void}
+     */
     proto.update = function(){
         if ( this.destroyed ) {
             return;
@@ -69,6 +87,10 @@ function( Sprite, util, vent ){
     };
 
 
+    /**
+     * Destroys the Laser object and emits events for engine and canvas
+     * @return {void}
+     */
     proto.destroy = function(){
         this.position.x = 0;
         this.position.y = 0;

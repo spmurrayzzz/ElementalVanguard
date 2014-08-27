@@ -8,6 +8,9 @@ function( Sprite ){
 
     var proto;
 
+    /**
+     * Speedline constructor (extends Sprite)
+     */
     function SpeedLine(){
         Sprite.apply(this, arguments);
         this.size = {
@@ -30,12 +33,23 @@ function( Sprite ){
     proto = SpeedLine.prototype = Object.create(Sprite.prototype);
 
 
+    /**
+     * No-op to override Sprite#bindEvents
+     */
     proto.bindEvents = function(){};
 
 
+    /**
+     * No-op to override Sprite#create
+     * @return {self}
+     */
     proto.create = function(){ return this; };
 
 
+    /**
+     * Resets the SpeedLine object's position in the coordinate space
+     * @return {void}
+     */
     proto.restart = function(){
         this.position.x = Math.random() * this.canvas.width;
         this.position.y = -10;

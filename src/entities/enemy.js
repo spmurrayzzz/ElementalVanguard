@@ -8,6 +8,9 @@ function( Sprite, vent, util ){
 
     var proto;
 
+    /**
+     * Enemy constructor (extends Sprite)
+     */
     function Enemy(){
         Sprite.apply(this, arguments);
         this.fillStyle = util.randomColor();
@@ -53,6 +56,12 @@ function( Sprite, vent, util ){
     proto = Enemy.prototype = Object.create(Sprite.prototype);
 
 
+    /**
+     * Creates the Enemy object in coordinate space, emits canvas event, and
+     * sets any approprate elemental effects that may be active.
+     * @param  {String} effect - "water"
+     * @return {self}
+     */
     proto.create = function( effect ){
         Sprite.prototype.create.call(this);
         this.setEffect(effect || null);
@@ -60,6 +69,10 @@ function( Sprite, vent, util ){
     };
 
 
+    /**
+     * Binds all appropriate events to the Enemy, mostly how to react to
+     * elemental effects.
+     */
     proto.bindEvents = function(){
         Sprite.prototype.bindEvents.call(this);
         vent.on('elemental-water-on', this.waterEffect.bind(this, true));
@@ -69,6 +82,10 @@ function( Sprite, vent, util ){
     };
 
 
+    /**
+     * Draw the Enemy object
+     * @return {void}
+     */
     proto.render = function(){
         if ( this.destroyed ) {
             return;
@@ -115,6 +132,10 @@ function( Sprite, vent, util ){
     };
 
 
+    /**
+     * Updates the positional coordinates of the object before render
+     * @return {void}
+     */
     proto.update = function(){
         if ( this.destroyed ) {
             return;
@@ -138,6 +159,12 @@ function( Sprite, vent, util ){
     };
 
 
+    /**
+     * Destroys the Enemy object, allowing for explosion effect to occur. Emits
+     * event to let canvas know not to render the object.
+     * @param  {Boolean} shouldExplode
+     * @return {void}
+     */
     proto.destroy = function( shouldExplode ){
         if ( shouldExplode === true ) {
             vent.emit('kaboom!', this.position.x, this.position.y);
@@ -149,6 +176,12 @@ function( Sprite, vent, util ){
     };
 
 
+    /**
+     * This method is invoked when the object is being picked out of the sprite
+     * pool, the purpose of which is to move the item out of a destroyed state
+     * so that it can be reused in the canvas space.
+     * @return {void}
+     */
     proto.recycle = function(){
         this.position = {
             x: Math.random() * this.canvas.width,
@@ -160,6 +193,16 @@ function( Sprite, vent, util ){
     };
 
 
+    /**
+     * Sets the appropriate elemental effect on the enemy, or in the absence of
+     * a parameter, will unset all effects.
+     *
+     * Note: since water is the only effect that works on new enemies and this
+     * is invoked during Enemy#create, this can only set water effects.
+     *
+     * @param {String} effect
+     * @return {void}
+     */
     proto.setEffect = function( effect ){
         if ( effect ) {
             switch (effect) {
@@ -174,6 +217,11 @@ function( Sprite, vent, util ){
     };
 
 
+    /**
+     * Activates or deactivates the water elemental effect.
+     * @param {Boolean} activate
+     * @return {void}
+     */
     proto.waterEffect = function( activate ){
         this.effected = activate;
         if ( activate ) {
@@ -186,6 +234,11 @@ function( Sprite, vent, util ){
     };
 
 
+    /**
+     * Activates or deactivates the air elemental effect
+     * @param {Boolean} activate
+     * @return {void}
+     */
     proto.airEffect = function( activate ){
         this.effected = activate;
         if ( activate ) {
@@ -198,6 +251,10 @@ function( Sprite, vent, util ){
     };
 
 
+    /**
+     * Deactivates all elemental effects on the Enemy
+     * @return {void}
+     */
     proto.deactivateAllEffects = function(){
         this.waterEffect(false);
         this.airEffect(false);

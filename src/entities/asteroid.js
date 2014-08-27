@@ -8,6 +8,10 @@ function( Sprite, vent, util ){
 
     var proto;
 
+
+    /**
+     * Asteroid constructor (extends Sprite)
+     */
     function Asteroid(){
         Sprite.apply(this, arguments);
         this.ctx = this.canvas.ctx;
@@ -40,6 +44,12 @@ function( Sprite, vent, util ){
     proto = Asteroid.prototype = Object.create(Sprite.prototype);
 
 
+    /**
+     * Creates object in entity space at x: xPos, fires event to let canvas know
+     * that it has been added.
+     * @param  {Number} xPos  x-coordinate position
+     * @return {self}
+     */
     proto.create = function( xPos ){
         this.position.x = xPos;
         vent.emit('laser-added', this);
@@ -47,6 +57,11 @@ function( Sprite, vent, util ){
     };
 
 
+    /**
+     * Method which gets invoked during `update` events, changes positional
+     * coordinates of the object.
+     * @return {void}
+     */
     proto.update = function(){
         this.physics.velocity = util.approach(
           this.physics.velocityGoal, this.physics.velocity, this.physics.friction
@@ -59,6 +74,10 @@ function( Sprite, vent, util ){
     };
 
 
+    /**
+     * Draws the asteroid to the canvas
+     * @return {void}
+     */
     proto.render = function(){
         util.polygon(this.ctx, this.position.x, this.position.y, this.size, 7,
             this.fillStyle[0], this.displayProps, this.angle
@@ -72,6 +91,11 @@ function( Sprite, vent, util ){
     };
 
 
+    /**
+     * Destroys the asteroid, emits event so the canvas knows not to render the
+     * object
+     * @return {void}
+     */
     proto.destroy = function(){
         this.position.x = 0;
         this.position.y = 0;
