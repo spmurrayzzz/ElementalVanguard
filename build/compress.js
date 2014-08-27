@@ -12,7 +12,7 @@ module.exports = function( grunt ){
                     throw err;
                 }
 
-                exec('zip -q9 js13k-2014.zip index-compressed.html |  ls -lrt | grep *.zip | awk \'{print $5}\'', function( err, stdout ){
+                exec('zip -q9 js13k-2014.zip index-compressed.html |  ls -lrt | grep .zip | awk \'{print $5}\'', function( err, stdout ){
                     grunt.log.write('Compressed file size: ' + stdout + '\n').ok();
                     done(true);
                 });

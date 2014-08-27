@@ -2,6 +2,7 @@ module.exports = {
     options: {
         banner: '<%= banner %>',
         sourceMap: true,
+        wrap: 'foo'
         // sourceMapIn: 'assets/js/js13k.js.map',
     },
     dist: {
