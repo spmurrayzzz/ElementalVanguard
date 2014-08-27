@@ -54,6 +54,10 @@ canvas {
     display: none;
 }
 
+#title-screen .title li {
+    text-align: left;
+}
+
 #title-screen .title.on {
     display: block;
 }
