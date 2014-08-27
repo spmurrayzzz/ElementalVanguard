@@ -23,7 +23,8 @@ In addition to the standard, unlimited laser projectile, the player also has
 access to elemental weaponry that can only be used every 20 seconds. These
 weapons accrue no points when they destroy, or contribute to the destruction of,
 enemies. The purpose of these weapons is crowd control to buy you time to
-survive.
+survive. The cooldown timer on the right-hand side of the HUD will let you know
+both progress of the global cooldown as well as the timed effect durations.
 
 - Earth
   - Hurls 5 large asteroids at the wave of oncoming enemies.
