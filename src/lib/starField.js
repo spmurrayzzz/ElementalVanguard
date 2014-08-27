@@ -18,7 +18,7 @@ function( Star, SpeedLine, vent, util ){
 
 
     cfg = {
-        starCount: 500,
+        starCount: 200,
         lineCount: 8
     };
 

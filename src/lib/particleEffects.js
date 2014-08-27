@@ -101,7 +101,7 @@ function( vent, util, Particle, pool ){
     emitFire = function( x, y ){
         var particle,
             fire;
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < 10; i++) {
             fire = fireCfg[Math.round(util.random(0, 3))];
             particle = pool.recycle(groupName);
             if ( !particle ) {

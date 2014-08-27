@@ -131,7 +131,7 @@ function( Sprite, vent, Laser, util, pool ){
             return;
         }
 
-        this.physics.velocityGoal = key === 37 ? -8 : 8;
+        this.physics.velocityGoal = key === 37 ? -10 : 10;
         this.keyPressed = true;
     };
 
@@ -211,7 +211,7 @@ function( Sprite, vent, Laser, util, pool ){
 
     /**
      * Destroys the player and ends the game.
-     * @return {void} 
+     * @return {void}
      */
     proto.destroy = function(){
         this.destroyed = true;
