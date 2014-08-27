@@ -23,6 +23,8 @@ function( vent, util ){
         pauseCheck,
         activeIcon,
         icons,
+        enemyElem,
+        enemyCount,
         cfg;
 
 
@@ -68,7 +70,11 @@ function( vent, util ){
                 ctx.canvas.width - 25, (ctx.canvas.height - 100) - c.height * c.percent,
                 c.fillStyle.current, c.opts.fg
             );
+        },
+        enemyCount: function(){
+            enemyElem.innerHTML = 'Enemies let by: ' + enemyCount;
         }
+
     };
 
 
@@ -86,6 +92,9 @@ function( vent, util ){
 
         score = 0;
         scoreElem = util.getById('score');
+
+        enemyElem = util.getById('enemies-passed');
+        enemyCount = 0;
 
         cooldownTimer = {
             current: 20,
@@ -119,6 +128,9 @@ function( vent, util ){
             for (var i = 0; i < icons.length; i++) {
                 icons[i].classList.add('on');
             }
+        });
+        vent.on('enemy-passed', function(){
+            enemyCount++;
         });
 
     };
@@ -189,6 +201,7 @@ function( vent, util ){
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         draw('score');
         draw('cooldownTimer');
+        draw('enemyCount');
     };
 
 

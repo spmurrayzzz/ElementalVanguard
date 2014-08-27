@@ -24,5 +24,8 @@ function( vent ){
             paused = !paused;
         }
     });
+    vent.on('pause', function(){
+        paused = !paused;
+    });
 
 });

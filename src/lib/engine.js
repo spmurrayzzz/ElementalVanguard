@@ -18,6 +18,8 @@ function( vent, Enemy, pool, Laser, util ){
         waveCount,
         getSquadron,
         getWave,
+        enemiesPassed,
+        passedEnemy,
         player,
         currentWave,
         reportWave,
@@ -26,6 +28,7 @@ function( vent, Enemy, pool, Laser, util ){
 
 
     init = function( game ){
+        enemiesPassed = 0;
         enemyCache = [];
         colliders = [];
         waveCount = 0;
@@ -57,6 +60,7 @@ function( vent, Enemy, pool, Laser, util ){
                 currentEffect = null;
             });
             vent.on('start-game', reportWave);
+            vent.on('enemy-passed', passedEnemy);
         });
     };
 
@@ -139,6 +143,7 @@ function( vent, Enemy, pool, Laser, util ){
                  if ( !player.fireActive ) {
                      player.destroy();
                      vent.off('update', checkPlayerCollisions);
+                     vent.emit('game-over', 'Your hero is dead.');
                  } else {
                      vent.emit('kaboom!', enemy.position.x, enemy.position.y);
                      enemy.destroy();
@@ -173,6 +178,14 @@ function( vent, Enemy, pool, Laser, util ){
 
     reportWave = function(){
         msg('Wave 1', 2000);
+    };
+
+
+    passedEnemy = function(){
+        enemiesPassed++;
+        if ( enemiesPassed === 10) {
+            vent.emit('game-over', 'Mission failure.');
+        }
     };
 
 

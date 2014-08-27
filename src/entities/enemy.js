@@ -131,6 +131,7 @@ function( Sprite, vent, util ){
             this.canvas.height + this.size ) {
 
             this.destroy();
+            vent.emit('enemy-passed');
 
         } else {
             this.position.y = this.position.y + this.physics.velocity;

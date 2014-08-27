@@ -38,8 +38,8 @@ canvas {
     position: absolute;
 }
 
-#score {
-    font-size: 20px;
+#score, #enemies-passed {
+    font-size: 18px;
 }
 
 #title-screen {
@@ -101,9 +101,7 @@ canvas {
     height: 600px;
     color: #c4c4c4;
     text-align: center;
-    /* font-size: 25px; */
     padding-top: 200px;
-    /* visibility: hidden; */
     opacity: 0;
     overflow: hidden;
     transform: scale(0, 0);

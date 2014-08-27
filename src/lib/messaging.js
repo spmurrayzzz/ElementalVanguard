@@ -36,9 +36,13 @@ function( util, vent ){
         vent.on('start-game', function(){
             hide();
         });
-        vent.on('message', function( msg, timeout ){
+        vent.on('message', function( msg, submsg, timeout ){
+            if ( typeof submsg === 'number' ) {
+                timeout = submsg;
+                submsg = '';
+            }
             headerText(msg);
-            subheaderText('');
+            subheaderText(submsg);
             show();
             if ( timeout ) {
                 setTimeout(hide, timeout);
