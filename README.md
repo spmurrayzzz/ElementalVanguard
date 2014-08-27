@@ -44,3 +44,10 @@ sudo npm install -g grunt-cli
 npm install
 open index.html
 ```
+
+## Credits
+
+HUD and Ship assets provided by [Scott O'Hara](https://github.com/scottaohara)
+
+WebAudio patch for [jsfxr](https://github.com/mneubrand/jsfxr) provided by
+[Kevin Ennis](https://github.com/kevincennis)
