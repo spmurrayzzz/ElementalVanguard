@@ -41,7 +41,7 @@ function( util, vent ){
             subheaderText('');
             show();
             if ( timeout ) {
-                setTimeout(hide, 1000);
+                setTimeout(hide, timeout);
             }
         });
     };

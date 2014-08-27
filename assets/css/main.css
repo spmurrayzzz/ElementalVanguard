@@ -107,8 +107,8 @@ canvas {
     opacity: 0;
     overflow: hidden;
     transform: scale(0, 0);
-    transition: opacity 0.5s linear, transform 0.5s linear;
-    -webkit-transition: opacity 0.5s linear, transform 0.5s linear;
+    transition: opacity 1s linear, transform 1s linear;
+    -webkit-transition: opacity 1s linear, transform 1s linear;
 }
 
 #messaging h1, #messaging h4 {

@@ -69,6 +69,13 @@ function( vent, Enemy, pool, Laser, util ){
         }
 
         squadron = getSquadron(currentWave);
+        if ( !squadron ) {
+            waveCount++;
+            currentWave = getWave();
+            squadron = getSquadron(currentWave);
+            vent.emit('new-wave');
+            vent.emit('message', 'Wave ' + parseInt(waveCount + 1), 2000);
+        }
 
         for (var i = 0; i < squadron; i++) {
             enemy = pool.recycle('enemies');
@@ -143,6 +150,7 @@ function( vent, Enemy, pool, Laser, util ){
 
     getSquadron = (function(){
         var count = 0;
+        vent.on('new-wave', function(){ count = 0; });
         return function( wave ){
             return wave[++count];
         };
@@ -154,7 +162,9 @@ function( vent, Enemy, pool, Laser, util ){
             count = 30;
 
         for (var i = 0; i < count; i++) {
-            wave.push(util.random(0, 2));
+            wave.push(parseInt(Math.round(
+                util.random(1 + waveCount, 2 + waveCount)
+            )));
         }
 
         return wave;
@@ -162,7 +172,7 @@ function( vent, Enemy, pool, Laser, util ){
 
 
     reportWave = function(){
-        msg('Wave 1', 1000);
+        msg('Wave 1', 2000);
     };
 
 
