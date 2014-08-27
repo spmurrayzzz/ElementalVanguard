@@ -5,6 +5,7 @@ define('titleScreen', ['util', 'vent'], function( util, vent ){
         screens,
         elem,
         next,
+        handler,
         currentIndex,
         cacheElements;
 
@@ -28,11 +29,14 @@ define('titleScreen', ['util', 'vent'], function( util, vent ){
 
 
     bindEvents = function(){
-        vent.on('keydown', function( ev ){
-            if ( ev.keyCode === 13 ){
-                next();
-            }
-        });
+        vent.on('keydown', handler);
+    };
+
+
+    handler = function( ev ){
+        if ( ev.keyCode === 13 ){
+            next();
+        }
     };
 
 
@@ -43,6 +47,7 @@ define('titleScreen', ['util', 'vent'], function( util, vent ){
             screens[currentIndex-1].classList.remove('on');
             elem.style.display = 'none';
             vent.emit('start-game');
+            vent.off('update', handler);
             return;
         }
 
