@@ -2,7 +2,7 @@
 
 js13k 2014 submission
 
-Recommended browsers: Chrome, Safari
+Recommended browser: Chrome
 
 ## Description/Lore
 
