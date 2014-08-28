@@ -34,7 +34,7 @@ function( vent, Enemy, pool, Laser, util ){
         colliders = [];
         waveCount = 0;
         canvas = game.canvas;
-        lastCreated = new Date().getTime();
+        lastCreated = Date.now();
         currentWave = getWave();
         msg = vent.emit.bind(vent, 'message');
     };
@@ -70,7 +70,7 @@ function( vent, Enemy, pool, Laser, util ){
         var enemy,
             squadron;
 
-        if ( lastCreated > new Date().getTime() - 3000 ) {
+        if ( lastCreated > Date.now() - 3000 ) {
             return;
         }
 
@@ -97,7 +97,7 @@ function( vent, Enemy, pool, Laser, util ){
             }
         }
 
-        lastCreated = new Date().getTime();
+        lastCreated = Date.now();
     };
 
 

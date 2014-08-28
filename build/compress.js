@@ -21,7 +21,7 @@ module.exports = function( grunt ){
 
         fs.readFile('./build/templates/index.tmpl.html', function( err, data ) {
             var indexContent = new String(data),
-                currTime = new Date().getTime(),
+                currTime = Date.now(),
                 msg;
 
             if ( err ) {

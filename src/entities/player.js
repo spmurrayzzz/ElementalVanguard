@@ -25,7 +25,7 @@ function( Sprite, vent, Laser, util, pool ){
             velocityGoal: 0
         };
         this.keyPressed = false;
-        this.lastFired = new Date().getTime();
+        this.lastFired = Date.now();
         this.laserPosition = { x: 0, y: 0 };
         this.img = util.getById('player-img');
     }
@@ -129,7 +129,7 @@ function( Sprite, vent, Laser, util, pool ){
      * @return {void}
      */
     proto.fire = function(){
-        if ( this.lastFired > new Date().getTime() - 200 ) {
+        if ( this.lastFired > Date.now() - 200 ) {
             return;
         }
 
@@ -147,7 +147,7 @@ function( Sprite, vent, Laser, util, pool ){
         }
 
         laser.create(pos);
-        this.lastFired = new Date().getTime();
+        this.lastFired = Date.now();
         vent.emit('shoot');
     };
 

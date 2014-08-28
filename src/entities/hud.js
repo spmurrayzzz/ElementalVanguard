@@ -111,7 +111,7 @@ function( vent, util ){
 
         cooldownTimer = {
             current: 20,
-            lastChecked: new Date().getTime(),
+            lastChecked: Date.now(),
             max: 20,
             timerStarted: null,
             elem: util.getById('cooldown-timer')
@@ -129,7 +129,7 @@ function( vent, util ){
         });
         vent.on('start-game', function(){
             pauseCheck = false;
-            cooldownTimer.timerStarted = new Date().getTime();
+            cooldownTimer.timerStarted = Date.now();
             util.getById('title-screen').style.display = 'none';
         });
         vent.on('activate', function( element ){
@@ -181,7 +181,7 @@ function( vent, util ){
      */
     activateCooldown = function( element ){
         cooldownTimer.current = 10e3;
-        cooldownTimer.lastChecked = new Date().getTime();
+        cooldownTimer.lastChecked = Date.now();
         cfg.cooldownTimer.fillStyle.current = cfg.cooldownTimer.fillStyle[element];
         if ( element === 'earth' ) {
             resetCooldown();
@@ -199,10 +199,10 @@ function( vent, util ){
         }
         cooldownTimer.current = 20e3;
         cooldownTimer.display = 20;
-        cooldownTimer.lastChecked = new Date().getTime();
+        cooldownTimer.lastChecked = Date.now();
         cfg.cooldownTimer.fillStyle.current = cfg.cooldownTimer.fillStyle.default;
         cfg.cooldownTimer.percent = 0;
-        cooldownTimer.timerStarted = new Date().getTime();
+        cooldownTimer.timerStarted = Date.now();
         pauseCheck = false;
     };
 
@@ -224,7 +224,7 @@ function( vent, util ){
             return;
         }
 
-        var now = new Date().getTime(),
+        var now = Date.now(),
             diff = now - cooldownTimer.timerStarted;
 
         cooldownTimer.current = diff;

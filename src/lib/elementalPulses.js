@@ -100,7 +100,7 @@ function( vent, Asteroid, util ){
         if ( effectActive ) {
             return;
         }
-        var started = new Date().getTime();
+        var started = Date.now();
         vent.emit('activate elemental-' + name + '-on', name);
         refCache[checkFuncName] = check[name].bind(null, started);
         vent.on('update', refCache[checkFuncName]);
@@ -140,7 +140,7 @@ function( vent, Asteroid, util ){
     checkCreator = function( name, time ){
         var capName = util.capitalize(name);
         return function( startTime ){
-            var now = new Date().getTime();
+            var now = Date.now();
             vent.emit('elemental-progress', (now - startTime) / time);
             if ( now - startTime > time ) {
                 deactivateTimedEffect('elemental-' + name, 'check' + capName);
