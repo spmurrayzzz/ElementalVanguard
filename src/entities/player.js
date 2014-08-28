@@ -13,6 +13,7 @@ function( Sprite, vent, Laser, util, pool ){
      */
     function Player(){
         Sprite.apply(this, arguments);
+        this.ctx = this.canvas.ctx[this.canvas.ctx.length-1];
         this.dims = {
             width: 60,
             height: 60
