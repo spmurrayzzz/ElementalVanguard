@@ -14,9 +14,7 @@ function( vent, util ){
         }
         this.canvas = canvas;
         if ( canvas.ctx && canvas.ctx.length ) {
-            this.ctx = canvas.ctx[Math.round(
-                util.random(0, canvas.ctx.length-1)
-            )];
+            this.ctx = canvas.getNextContext();
         }
         this.position = { x: 0, y: 0 };
         this.size = { width: 50, height: 50 };

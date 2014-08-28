@@ -18,14 +18,19 @@ function( util, vent ){
         this.laserCache = [];
         this.hudCache = [];
         this.bgCache = [];
+        this.canvasCounter = 0;
         this.bindEvents();
     }
 
     var proto = Canvas.prototype;
 
 
-    proto.get = function( attr ){
-        return this.elem.getAttribute(attr);
+    proto.getNextContext = function(){
+        var canvas = this.ctx[++this.canvasCounter];
+        if ( this.canvasCounter >= this.ctx.length - 1 ) {
+            this.canvasCounter = 0;
+        }
+        return canvas;
     };
 
 

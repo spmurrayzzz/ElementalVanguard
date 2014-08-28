@@ -31,7 +31,6 @@ function( Sprite, util, vent ){
             lineWidth: 2,
             strokeStyle: '#444'
         };
-        console.log(this.ctx);
     }
 
     proto = Laser.prototype = Object.create(Sprite.prototype);
