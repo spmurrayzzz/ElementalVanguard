@@ -6,7 +6,8 @@ function( Sprite, util, vent ){
 
     'use strict';
 
-    var proto;
+    var proto,
+        fireActive = false;
 
     /**
      * Laser constructor (extends Sprite)
@@ -59,8 +60,12 @@ function( Sprite, util, vent ){
         if ( this.destroyed ) {
             return;
         }
-        var pos = this.position;
-        util.circle(this.ctx, pos.x, pos.y, this.size, util.randomColor(),
+        var pos = this.position,
+            size = this.size;
+        if ( fireActive ) {
+            size += 10;
+        }
+        util.circle(this.ctx, pos.x, pos.y, size, util.randomColor(),
             this.displayProps
         );
     };
@@ -96,6 +101,10 @@ function( Sprite, util, vent ){
         this.destroyed = true;
         vent.emit('laser-destroyed', this);
     };
+
+
+    vent.on('elemental-fire-on', function(){ fireActive = true; });
+    vent.on('elemental-fire-off', function(){ fireActive = false; });
 
     return Laser;
 

@@ -30,11 +30,11 @@ function( vent, util, Particle, pool ){
         fireCfg = [
             {
                 fill: 'rgba(243,125,0,%a)',
-                life: 45
+                life: 25
             },
             {
                 fill: 'rgba(243,96,38,%a)',
-                life: 30
+                life: 20
             },
             {
                 fill: 'rgba(242,148,78,%a)',
