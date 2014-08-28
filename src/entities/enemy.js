@@ -202,7 +202,7 @@ function( Sprite, vent, util ){
         this.effected = !!activate;
         if ( activate ) {
             this.currentGradient = this.gradients.water;
-            this.physics.velocityGoal = this.physics.velocity * 0.3;
+            this.physics.velocity = this.physics.velocity * 0.3;
         } else {
             this.currentGradient = this.gradients.default;
             this.physics.velocityGoal = util.random(0.5, 1);
@@ -219,10 +219,10 @@ function( Sprite, vent, util ){
         this.effected = activate;
         if ( activate ) {
             this.currentGradient = this.gradients.air;
-            this.physics.velocityGoal = 0;
+            this.physics.velocity = 0;
         } else {
             this.currentGradient = this.gradients.default;
-            this.physics.velocityGoal = util.random(0.5, 1);
+            this.physics.velocity = util.random(0.5, 1);
         }
     };
 
