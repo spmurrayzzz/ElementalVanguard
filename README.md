@@ -33,7 +33,7 @@ both progress of the global cooldown as well as the timed effect durations.
 - Water
   - Slows all enemies for 10 seconds.
 - Air
-  - Freezes on-screen enemies in place for 10 seconds.
+  - Freezes on-screen enemies in place and prevents new enemy creation for 10 seconds.
 - Fire
   - Destroys all on-screen enemies and makes the player invincible for 10
   seconds.

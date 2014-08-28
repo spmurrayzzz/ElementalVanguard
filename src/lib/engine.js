@@ -84,15 +84,17 @@ function( vent, Enemy, pool, Laser, util ){
         }
 
         for (var i = 0; i < squadron; i++) {
-            enemy = pool.recycle('enemies');
+            if ( currentEffect !== 'air' ) {
+                enemy = pool.recycle('enemies');
 
-            if ( !enemy ) {
-                enemy = new Enemy(canvas);
-                pool.register('enemies', enemy);
-                enemyCache.push(enemy);
+                if ( !enemy ) {
+                    enemy = new Enemy(canvas);
+                    pool.register('enemies', enemy);
+                    enemyCache.push(enemy);
+                }
+
+                enemy.create(currentEffect || null);
             }
-
-            enemy.create(currentEffect || null);
         }
 
         lastCreated = new Date().getTime();
