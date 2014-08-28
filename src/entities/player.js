@@ -51,6 +51,7 @@ function( Sprite, vent, Laser, util, pool ){
         };
         this.currentDisplayProps = this.displayProps.default;
         this.laserPosition = { x: 0, y: 0 };
+        this.img = util.getById('player-img');
     }
 
     proto = Player.prototype = Object.create(Sprite.prototype);
@@ -107,7 +108,7 @@ function( Sprite, vent, Laser, util, pool ){
             return false;
         }
         this.ctx.shadowBlur = 0;
-        this.ctx.drawImage(util.getById('player-img'),
+        this.ctx.drawImage(this.img,
             this.position.x, this.position.y, this.dims.width, this.dims.height
         );
     };
