@@ -60,12 +60,8 @@ function( Sprite, util, vent ){
         if ( this.destroyed ) {
             return;
         }
-        var pos = this.position,
-            size = this.size;
-        if ( fireActive ) {
-            size += 10;
-        }
-        util.circle(this.ctx, pos.x, pos.y, size, util.randomColor(),
+        var pos = this.position;
+        util.circle(this.ctx, pos.x, pos.y, this.size, util.randomColor(),
             this.displayProps
         );
     };
@@ -78,6 +74,12 @@ function( Sprite, util, vent ){
     proto.update = function(){
         if ( this.destroyed ) {
             return;
+        }
+
+        if ( fireActive ) {
+            this.size = 15;
+        } else {
+            this.size = 5;
         }
 
         this.physics.velocity = util.approach(
