@@ -46,7 +46,16 @@ function( Canvas, Player, vent ){
     });
 
     vent.on('game-over', function( submsg ){
-        vent.emit('message', 'Game Over', submsg);
+        vent.emit(
+            'message',
+            'Game Over',
+            submsg + '<br/><br/> Press \'R\' to try again.'
+        );
+        vent.on('keydown', function( ev ){
+            if ( ev.keyCode === 82 ){
+                window.location.href = window.location.href;
+            }
+        });
     });
 
     // Expose the interface
