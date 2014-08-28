@@ -81,7 +81,7 @@ function( vent, util ){
             );
         },
         enemyCount: function(){
-            enemyElem.innerHTML = 'Enemies let by: ' + enemyCount;
+            enemyElem.innerHTML = 'Enemies let by: ' + enemyCount + '/10';
         }
 
     };
