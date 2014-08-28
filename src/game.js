@@ -19,11 +19,7 @@ function( Canvas, Player, vent ){
         game;
 
     // Create the canvas stage that we'll be using for primary game entities
-    canvas = new Canvas('main', {
-        width: 800,
-        height: 600,
-        bgColor: "#000"
-    });
+    canvas = new Canvas();
 
     // Create the player entity
     player = new Player(canvas);

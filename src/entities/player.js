@@ -39,8 +39,8 @@ function( Sprite, vent, Laser, util, pool ){
      */
     proto.create = function(){
         this.position = {
-            x: this.canvas.width/2 - this.dims.width/2,
-            y: this.canvas.height - 75
+            x: this.ctx.canvas.width/2 - this.dims.width/2,
+            y: this.ctx.canvas.height - 75
         };
         this.isCreated = true;
         vent.on('keydown', this.move.bind(this));
@@ -75,9 +75,6 @@ function( Sprite, vent, Laser, util, pool ){
      * @return {void}
      */
     proto.render = function(){
-        if ( !this.isCreated ) {
-            return false;
-        }
         this.ctx.shadowBlur = 0;
         this.ctx.drawImage(this.img,
             this.position.x, this.position.y, this.dims.width, this.dims.height

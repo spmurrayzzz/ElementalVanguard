@@ -82,8 +82,8 @@ function( Sprite, util ){
      * Draws the Particle during `render` events
      * @return {void}
      */
-    proto.render = function(){
-        util.circle(this.ctx,
+    proto.render = function( ctx ){
+        util.circle(ctx,
             this.position.x, this.position.y, this.size, this.fillStyle
         );
     };

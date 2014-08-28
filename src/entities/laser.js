@@ -13,7 +13,6 @@ function( Sprite, util, vent ){
      */
     function Laser(){
         Sprite.apply(this, arguments);
-        this.ctx = this.canvas.ctx;
         this.size = 10;
         this.isCreated = false;
         this.physics = {
@@ -32,6 +31,7 @@ function( Sprite, util, vent ){
             lineWidth: 2,
             strokeStyle: '#444'
         };
+        console.log(this.ctx);
     }
 
     proto = Laser.prototype = Object.create(Sprite.prototype);

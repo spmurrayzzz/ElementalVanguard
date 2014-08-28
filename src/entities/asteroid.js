@@ -14,7 +14,6 @@ function( Sprite, vent, util ){
      */
     function Asteroid(){
         Sprite.apply(this, arguments);
-        this.ctx = this.canvas.ctx;
         this.size = util.random(30, 50);
         this.isCreated = false;
         this.physics = {

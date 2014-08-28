@@ -6,21 +6,14 @@ function( util, vent ){
 
     'use strict';
 
-    function Canvas( targetId, opts ){
-        this.elem = util.getById(targetId);
-        this.ctx = this.elem.getContext('2d');
-
-        this.offscreen = document.createElement('canvas');
-        this.offscreenCtx = this.offscreen.getContext('2d');
-
-        if ( opts !== undefined ) {
-            this.height = this.elem.height = opts.height;
-            this.width = this.elem.width = opts.width;
-            this.offscreen.height = opts.height;
-            this.offscreen.width = opts.width;
-            this.bgColor = opts.bgColor;
+    function Canvas(){
+        this.elems = util.QSA('canvas.m');
+        this.ctx = [];
+        for (var i = 0; i < this.elems.length; i++) {
+            this.ctx.push(this.elems[i].getContext('2d'));
         }
-
+        this.width = this.ctx[0].canvas.width;
+        this.height = this.ctx[0].canvas.height;
         this.entityCache = [];
         this.laserCache = [];
         this.hudCache = [];
@@ -48,9 +41,13 @@ function( util, vent ){
 
 
     proto.render = function( ){
-        var i;
+        var i,
+            ctx;
 
-        this.ctx.clearRect(0, 0, this.width, this.height);
+        for (i = 0; i < this.ctx.length; i++) {
+            ctx = this.ctx[i];
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        }
 
         for (i = 0; i < this.bgCache.length; i++) {
             this.bgCache[i].render();

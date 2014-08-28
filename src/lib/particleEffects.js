@@ -73,7 +73,7 @@ function( vent, util, Particle, pool ){
     render = function(){
         for (var i = 0; i < particles.length; i++) {
             var particle = particles[i];
-            particle.render();
+            particle.render( ctx );
         }
     };
 

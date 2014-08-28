@@ -13,7 +13,9 @@ function( vent, util ){
             throw new Error('Sprites require a canvas context');
         }
         this.canvas = canvas;
-        this.ctx = canvas.ctx;
+        if ( canvas.ctx && canvas.ctx.length ) {
+            this.ctx = canvas.ctx[Math.round(util.random(0, 4))];
+        }
         this.position = { x: 0, y: 0 };
         this.size = { width: 50, height: 50 };
         this.id = util.guid();
