@@ -18,7 +18,7 @@ function( Sprite, util ){
             speed: 2,
             friction: 2,
             velocity: 0,
-            velocityGoal: util.random(0.5, 3)
+            velocityGoal: util.random(0.5, 1.5)
         };
         this.fillStyle = 'rgba(241,241,241,' +
             util.random(0.1, 0.4) + ')';
