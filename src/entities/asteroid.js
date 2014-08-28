@@ -14,13 +14,13 @@ function( Sprite, vent, util ){
      */
     function Asteroid(){
         Sprite.apply(this, arguments);
-        this.size = util.random(30, 50);
+        this.size = util.random(15, 30);
         this.isCreated = false;
         this.physics = {
             speed: 2,
             friction: 2,
             velocity: 0,
-            velocityGoal: util.random(-1, -0.5)
+            velocityGoal: util.random(-0.5, -0.25)
          };
         this.fillStyle = [
             '#372720',
@@ -56,13 +56,10 @@ function( Sprite, vent, util ){
      * @return {void}
      */
     proto.update = function(){
-        this.physics.velocity = util.approach(
-          this.physics.velocityGoal, this.physics.velocity, this.physics.friction
-        );
         if ( this.position.y < 0 - this.size*2 ) {
             this.destroy();
         } else {
-            this.position.y = this.position.y + this.physics.velocity;
+            this.position.y = this.position.y + this.physics.velocityGoal;
         }
     };
 
