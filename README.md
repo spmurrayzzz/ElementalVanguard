@@ -49,5 +49,5 @@ open index.html
 
 HUD and Ship assets provided by [Scott O'Hara](https://github.com/scottaohara)
 
-WebAudio patch for [jsfxr](https://github.com/mneubrand/jsfxr) provided by
+WebAudio [patch](https://github.com/spmurrayzzz/ElementalVanguard/commits?author=kevincennis)for [jsfxr](https://github.com/mneubrand/jsfxr) provided by
 [Kevin Ennis](https://github.com/kevincennis)
