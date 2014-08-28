@@ -173,7 +173,7 @@ function( Sprite, vent, Laser, util, pool ){
         if ( this.fireActive ) {
             vent.emit('emit-fire',
                 this.position.x + this.dims.width/2,
-                this.position.y + this.dims.height/2
+                this.position.y + this.dims.height/2 - 10
             );
         }
     };

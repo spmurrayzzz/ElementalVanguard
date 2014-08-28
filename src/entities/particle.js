@@ -15,12 +15,12 @@ function( Sprite, util ){
      */
     function Particle( canvas, override ){
         Sprite.apply(this, arguments);
-        this.size = 2;
+        this.size = util.random(0.5, 1.5);
         this.physics = {
             speed: 0.5,
-            friction: 2,
+            friction: 0.09,
             velocity: 0,
-            velocityGoal: Math.random()*3 + 2
+            velocityGoal: util.random(1, 2)
         };
 
         this.direction = Math.random()*2*Math.PI;
@@ -32,7 +32,7 @@ function( Sprite, util ){
         };
 
         if ( !override ) {
-            this.life = util.random(30, 50);
+            this.life = util.random(15, 25);
             this.fillStyle = 'rgba(244,0,8,' +
                 Math.random() * ((1 - 0.5) + 0.5) + ')';
             this.position = {
