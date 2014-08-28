@@ -3,11 +3,12 @@
 }
 
 body {
-    color: #333;
     background-color: #111;
+    color: #fff;
+    font-family: "Courier New";
+    font-size: 18px;
     margin:0;
     padding: 0;
-    font-family: "Courier New";
 }
 
 img {
@@ -16,180 +17,158 @@ img {
 
 canvas {
     position: absolute;
-    border: none;
 }
 
 #game-container {
-    position: relative;
-    width: 800px;
     height: 600px;
+
 }
 
 #viewport {
-    width: 800px;
-    height: 600px;
-    top: 5%;
-    left: 50%;
-    padding: 0;
-    margin-left: -410px;
     border: 2px solid #222;
+    height: 600px;
+    left: 0;
+    margin: auto;
     position: absolute;
+    right: 0;
+    top: 5%;
+    width: 800px;
 }
 
-#score, #enemies-passed {
-    font-size: 18px;
-}
 
 #title-screen {
-    position: absolute;
-    width: 600;
-    padding: 10px 30px;
-    text-align: center;
     color: #e5e5e5;
+    font-size: 14px;
+    padding: 10px 40px;
+    text-align: center;
+    width: 600;
 }
 
-#title-screen .title {
+.title {
     display: none;
 }
 
-#title-screen .title li {
-    text-align: left;
-}
-
-#title-screen .title.on {
+.on {
     display: block;
 }
 
-#title-screen .title p {
-    text-align: center;
+.title li {
+    text-align: left;
 }
 
-#title-screen .title p.justify {
+.justify {
     text-align: justify;
 }
 
-#title-screen table {
-    font-size: 13px;
-    width: 100%;
+table {
     border: 1px #999 solid;
     border-bottom: none;
+    width: 100%;
 }
 
-#title-screen th {
-    padding: 10px;
-    margin: 0;
+th,
+td {
+    background-color: #444;
     border-bottom: 1px #999 solid;
-    background-color: #666;
+    margin: 0;
+    padding: 10px;
 }
 
-#title-screen td {
-    padding: 10px;
-    margin: 0;
-    border-bottom: 1px #999 solid;
+td {
+    background: none;
     border-left: 1px #999 solid;
 }
 
-#title-screen td:first-child {
+td:first-child {
     border-left: none;
 }
 
 #messenging {
-    position: absolute;
-    width: 800px;
+    color: #ddd;
     height: 600px;
-    color: #c4c4c4;
-    text-align: center;
-    padding-top: 200px;
     opacity: 0;
     overflow: hidden;
+    padding-top: 200px;
+    position: absolute;
+    text-align: center;
     transform: scale(0, 0);
     transition: opacity 1s linear, transform 1s linear;
-    -webkit-transition: opacity 1s linear, transform 1s linear;
+    width: 800px;
 }
 
-#messaging h1, #messaging h4 {
+.relative {
     position: relative;
 }
 
 #messenging.visible {
     opacity: 1;
     transform: scale(1, 1);
-    -webkit-transform: scale(1, 1);
 }
 
 .hud {
     background: #333;
     border-top: 1px solid #666;
-    color: #fff;
     list-style: none;
     margin: 0;
     overflow: hidden;
     padding: 0;
-    position: relative;
 }
 
 .hud li {
     float: left;
-    padding: 30px;
-    width: 34%;
+    padding: 22px;
     text-align: right;
+    width: 34%;
 }
 
 .hud .ico {
-    opacity: .3;
-    position: relative;
     width: 8%;
 }
 
-.hud a {
-    color: #f1f1f1;
+.ico {
+    opacity: .3;
+    position: relative;
 }
 
-.hud .ico.on {
+.ico.on {
     opacity: 1;
 }
+
 
 
 /*
     Attack Elements
 */
 .s-attack {
-    background: none;
-    cursor: pointer;
-    border: none;
     height: 100%;
     left: 0;
     position: absolute;
-    top: 0;
-    text-decoration: none;
+    top: 10px;
     width: 100%;
 }
 
 .s-attack:before {
     content: '';
     height: 7px;
-    left: 0;
+    left: 12px;
     position: absolute;
-    top: 10%;
+    top: 0;
+    transform: scale(.6);
     width: 7px;
 }
 
-.s-attack:active:before {
-    top: 12%;
-}
-
 #attack-e:before{
-    box-shadow: 18px 12px #856549,24px 12px #856549,30px 18px #856549,36px 24px #856549,12px 48px #856549,18px 48px #856549,6px 42px #856549,6px 36px #856549,6px 30px #856549,12px 30px #856549,12px 42px #856549,18px 42px #856549,24px 36px #856549,24px 30px #856549,36px 42px #856549,42px 24px #856549,48px 30px #856549,48px 36px #856549,36px 48px #856549,30px 48px #856549,24px 48px #856549,42px 42px #856549,42px 36px #856549,12px 18px #856549,12px 24px #856549,36px 12px #947c53,30px 12px #947c53,36px 18px #947c53,42px 18px #947c53,42px 30px #705e3e,36px 30px #705e3e,36px 36px #705e3e,30px 36px #705e3e,30px 42px #705e3e,30px 30px #705e3e,30px 24px #705e3e,24px 24px #705e3e,18px 24px #705e3e,18px 18px #705e3e,24px 18px #705e3e,18px 54px #7d6b59,24px 54px #7d6b59,30px 54px #7d6b59,36px 54px #7d6b59,42px 54px #7d6b59,42px 48px #7d6b59,48px 48px #7d6b59,48px 42px #7d6b59,18px 30px #7d6b59,18px 36px #7d6b59,12px 36px #7d6b59,24px 42px #7d6b59;
+    box-shadow: 18px 12px #864,24px 12px #864,30px 18px #864,36px 24px #864,12px 48px #864,18px 48px #864,6px 42px #864,6px 36px #864,6px 30px #864,12px 30px #864,12px 42px #864,18px 42px #864,24px 36px #864,24px 30px #864,36px 42px #864,42px 24px #864,48px 30px #864,48px 36px #864,36px 48px #864,30px 48px #864,24px 48px #864,42px 42px #864,42px 36px #864,12px 18px #864,12px 24px #864,36px 12px #973,30px 12px #973,36px 18px #973,42px 18px #973,42px 30px #753,36px 30px #753,36px 36px #753,30px 36px #753,30px 42px #753,30px 30px #753,30px 24px #753,24px 24px #753,18px 24px #753,18px 18px #753,24px 18px #753,18px 54px #765,24px 54px #765,30px 54px #765,36px 54px #765,42px 54px #765,42px 48px #765,48px 48px #765,48px 42px #765,18px 30px #765,18px 36px #765,12px 36px #765,24px 42px #765;
 }
 
 #attack-w:before {
-    box-shadow: 24px 12px #0bf,24px 18px #0bf,24px 24px #0bf,24px 36px #0bf,24px 42px #0bf,18px 48px #0bf,24px 48px #0bf,18px 42px #0bf,30px 42px #0bf,12px 42px #0bf,6px 36px #0bf,42px 36px #0bf,24px 6px #0bf,30px 24px #0bf,36px 24px #0bf,42px 30px #0bf,36px 36px #0bf,36px 30px #0bf,30px 36px #0bf,30px 30px #0bf,6px 30px #0bf,12px 24px #0bf,18px 18px #0bf,18px 12px #0bf,24px 30px #0bf,30px 18px #0bf,18px 24px #fff,18px 30px #fff,12px 30px #fff,12px 36px #0bf,18px 36px #fff,36px 48px #1414ff,42px 42px #1414ff,36px 42px #0bf,30px 54px #1414ff,30px 48px #1414ff;
+    box-shadow: 24px 12px #0bf,24px 18px #0bf,24px 24px #0bf,24px 36px #0bf,24px 42px #0bf,18px 48px #0bf,24px 48px #0bf,18px 42px #0bf,30px 42px #0bf,12px 42px #0bf,6px 36px #0bf,42px 36px #0bf,24px 6px #0bf,30px 24px #0bf,36px 24px #0bf,42px 30px #0bf,36px 36px #0bf,36px 30px #0bf,30px 36px #0bf,30px 30px #0bf,6px 30px #0bf,12px 24px #0bf,18px 18px #0bf,18px 12px #0bf,24px 30px #0bf,30px 18px #0bf,18px 24px #fff,18px 30px #fff,12px 30px #fff,12px 36px #0bf,18px 36px #fff,36px 48px #11f,42px 42px #11f,36px 42px #0bf,30px 54px #11f,30px 48px #11f;
 }
 
 #attack-a:before {
-    box-shadow: 36px 42px #fffaf2,36px 48px #fffaf2,30px 54px #fffaf2,24px 54px #fffaf2,18px 54px #fffaf2,12px 48px #fffaf2,6px 42px #fffaf2,0px 36px #fffaf2,0px 30px #fffaf2,0px 24px #fffaf2,6px 18px #fffaf2,12px 12px #fffaf2,18px 6px #fffaf2,24px 6px #fffaf2,36px 12px #fffaf2,30px 6px #fffaf2,42px 18px #fffaf2,48px 18px #fffaf2,54px 18px #fffaf2,48px 30px #fffaf2,42px 30px #fffaf2,36px 30px #fffaf2,30px 24px #fffaf2,24px 24px #fffaf2,18px 24px #fffaf2,12px 30px #fffaf2,18px 36px #fffaf2,24px 42px #fffaf2,48px 42px #fffaf2,54px 42px #fffaf2;
+    box-shadow: 36px 42px #ffe,36px 48px #ffe,30px 54px #ffe,24px 54px #ffe,18px 54px #ffe,12px 48px #ffe,6px 42px #ffe,0px 36px #ffe,0px 30px #ffe,0px 24px #ffe,6px 18px #ffe,12px 12px #ffe,18px 6px #ffe,24px 6px #ffe,36px 12px #ffe,30px 6px #ffe,42px 18px #ffe,48px 18px #ffe,54px 18px #ffe,48px 30px #ffe,42px 30px #ffe,36px 30px #ffe,30px 24px #ffe,24px 24px #ffe,18px 24px #ffe,12px 30px #ffe,18px 36px #ffe,24px 42px #ffe,48px 42px #ffe,54px 42px #ffe;
 }
 
 #attack-f:before {
-    box-shadow: 12px 42px #fcfc00,18px 48px #fcfc00,24px 48px #fcfc00,36px 48px #fcfc00,42px 48px #fcfc00,42px 42px #fcfc00,12px 12px #f00000,12px 18px #f00000,6px 24px #f00000,6px 36px #f00000,6px 42px #f00000,12px 48px #f00000,12px 54px #f00000,18px 54px #f00000,24px 54px #f00000,30px 54px #f00000,42px 54px #f00000,48px 54px #f00000,36px 54px #f00000,48px 48px #f00000,48px 42px #f00000,54px 36px #f00000,54px 30px #f00000,48px 24px #f00000,48px 18px #f00000,48px 12px #f00000,42px 6px #f00000,36px 12px #f00000,30px 18px #f00000,24px 12px #f00000,24px 24px #ff871f,30px 42px #ff871f,30px 48px #ff871f,24px 42px #ff871f,18px 36px #ff871f,18px 42px #ff871f,18px 30px #ff871f,18px 24px #ff871f,12px 24px #ff871f,36px 42px #ff871f,30px 30px #ff871f,42px 12px #ff871f,36px 24px #ff871f,42px 18px #ff871f,36px 18px #ff871f,42px 30px #ff871f,42px 36px #ff871f,48px 36px #ff871f,48px 30px #ff871f,24px 18px #ffff00,12px 6px #ffff00,12px 30px #ffff00,42px 24px #ffff00,36px 36px #ffff00,36px 30px #ffff00,6px 30px #ff0a0a,12px 36px #ff0a0a,30px 24px #ff0a0a,30px 36px #ff0a0a,24px 36px #ff0a0a,24px 30px #ff0a0a;
+    box-shadow: 12px 42px #ff0,18px 48px #ff0,24px 48px #ff0,36px 48px #ff0,42px 48px #ff0,42px 42px #ff0,12px 12px #e00,12px 18px #e00,6px 24px #e00,6px 36px #e00,6px 42px #e00,12px 48px #e00,12px 54px #e00,18px 54px #e00,24px 54px #e00,30px 54px #e00,42px 54px #e00,48px 54px #e00,36px 54px #e00,48px 48px #e00,48px 42px #e00,54px 36px #e00,54px 30px #e00,48px 24px #e00,48px 18px #e00,48px 12px #e00,42px 6px #e00,36px 12px #e00,30px 18px #e00,24px 12px #e00,24px 24px #f81,30px 42px #f81,30px 48px #f81,24px 42px #f81,18px 36px #f81,18px 42px #f81,18px 30px #f81,18px 24px #f81,12px 24px #f81,36px 42px #f81,30px 30px #f81,42px 12px #f81,36px 24px #f81,42px 18px #f81,36px 18px #f81,42px 30px #f81,42px 36px #f81,48px 36px #f81,48px 30px #f81,24px 18px #ff0,12px 6px #ff0,12px 30px #ff0,42px 24px #ff0,36px 36px #ff0,36px 30px #ff0,6px 30px #f00,12px 36px #f00,30px 24px #f00,30px 36px #f00,24px 36px #f00,24px 30px #f00;
 }
