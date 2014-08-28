@@ -21,17 +21,6 @@ function( Sprite, vent, util ){
             velocity: 0,
             velocityGoal: util.random(1, 2)
         };
-        this.orbiter = {
-            physics: {
-                friction: 2,
-                velocity: 1,
-                velocityGoal: 1
-            },
-            current: {
-                x: 0,
-                y: 0
-            }
-        };
         this.orbitAt = 0;
         this.orbitSpeed = 3;
         this.inc = 0.2;
@@ -183,10 +172,8 @@ function( Sprite, vent, util ){
      * @return {void}
      */
     proto.recycle = function(){
-        this.position = {
-            x: Math.random() * this.canvas.width,
-            y: 0 - this.size
-        };
+        this.position.x = Math.random() * this.canvas.width;
+        this.position.y = 0 - this.size;
         this.physics.velocityGoal = util.random(1, 2);
         this.destroyed = false;
         this.fillStyle = util.randomColor();
@@ -204,15 +191,10 @@ function( Sprite, vent, util ){
      * @return {void}
      */
     proto.setEffect = function( effect ){
-        if ( effect ) {
-            switch (effect) {
-                case 'water':
-                    this.waterEffect(true);
-                    break;
-                default:
-                    this.deactivateAllEffects();
-                    break;
-            }
+        if ( effect === 'water' ) {
+            this.waterEffect(true);
+        } else {
+            this.deactivateAllEffects();
         }
     };
 
@@ -223,7 +205,7 @@ function( Sprite, vent, util ){
      * @return {void}
      */
     proto.waterEffect = function( activate ){
-        this.effected = activate;
+        this.effected = !!activate;
         if ( activate ) {
             this.currentGradient = this.gradients.water;
             this.physics.velocityGoal = this.physics.velocityGoal * 0.3;
