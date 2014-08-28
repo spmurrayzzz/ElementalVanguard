@@ -56,6 +56,10 @@ canvas {
     display: block;
 }
 
+.ready {
+    color: rgba(120, 220, 0, 1);
+}
+
 .title li {
     text-align: left;
 }

@@ -25,6 +25,7 @@ function( vent, util ){
         icons,
         enemyElem,
         enemyCount,
+        firstTimeElemental,
         cfg;
 
 
@@ -117,6 +118,8 @@ function( vent, util ){
         };
         pauseCheck = true;
 
+        firstTimeElemental = true;
+
         vent.on('update', update);
         vent.on('render', render);
         vent.on('deactivate', resetCooldown);
@@ -139,6 +142,15 @@ function( vent, util ){
         vent.on('cooldown-end', function(){
             for (var i = 0; i < icons.length; i++) {
                 icons[i].classList.add('on');
+            }
+            vent.emit('elemental-ready');
+            if ( firstTimeElemental ) {
+                vent.emit(
+                    'message',
+                    '<p class="ready">Elemental Weapons Ready!</p>',
+                    2000
+                );
+                firstTimeElemental = false;
             }
         });
         vent.on('enemy-passed', function(){
