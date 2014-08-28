@@ -17,6 +17,8 @@ img {
 
 canvas {
     position: absolute;
+    transform: scale(2, 2);
+    transform-origin: 0 0;
 }
 
 #game-container {

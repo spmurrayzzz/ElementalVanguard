@@ -13,12 +13,12 @@ function( Sprite, util ){
      */
     function Star(){
         Sprite.apply(this, arguments);
-        this.size = util.random(0.3, 2);
+        this.size = util.random(0.1, 1);
         this.physics = {
             speed: 2,
             friction: 2,
             velocity: 0,
-            velocityGoal: util.random(1, 6)
+            velocityGoal: util.random(0.5, 3)
         };
         this.fillStyle = 'rgba(241,241,241,' +
             util.random(0.1, 0.4) + ')';
@@ -47,7 +47,7 @@ function( Sprite, util ){
 
     /**
      * Resets the Star object's position in coordinate space
-     * @return {void} 
+     * @return {void}
      */
     proto.restart = function(){
         this.position.x = Math.random() * this.canvas.width;

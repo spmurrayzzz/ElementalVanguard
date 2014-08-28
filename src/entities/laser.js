@@ -13,13 +13,13 @@ function( Sprite, util, vent ){
      */
     function Laser(){
         Sprite.apply(this, arguments);
-        this.size = 10;
+        this.size = 5;
         this.isCreated = false;
         this.physics = {
             speed: 2,
             friction: 2,
             velocity: 0,
-            velocityGoal: -6
+            velocityGoal: -3
         };
         this.position = {
             x: 100,

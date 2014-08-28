@@ -15,8 +15,8 @@ function( Sprite, vent, Laser, util, pool ){
         Sprite.apply(this, arguments);
         this.ctx = this.canvas.ctx[this.canvas.ctx.length-1];
         this.dims = {
-            width: 60,
-            height: 60
+            width: 30,
+            height: 30
         };
         this.physics = {
             speed: 2,
@@ -41,7 +41,7 @@ function( Sprite, vent, Laser, util, pool ){
     proto.create = function(){
         this.position = {
             x: this.ctx.canvas.width/2 - this.dims.width/2,
-            y: this.ctx.canvas.height - 75
+            y: this.ctx.canvas.height - 37
         };
         this.isCreated = true;
         vent.on('keydown', this.move.bind(this));
@@ -101,7 +101,7 @@ function( Sprite, vent, Laser, util, pool ){
             return;
         }
 
-        this.physics.velocityGoal = key === 37 ? -10 : 10;
+        this.physics.velocityGoal = key === 37 ? -6 : 6;
         this.keyPressed = true;
     };
 
@@ -136,7 +136,7 @@ function( Sprite, vent, Laser, util, pool ){
         var laser = pool.recycle('lasers'),
             pos = this.laserPosition;
 
-        this.laserPosition.x = this.position.x + 32;
+        this.laserPosition.x = this.position.x + 16;
         this.laserPosition.y = this.position.y;
 
         if ( !laser ) {
@@ -159,7 +159,7 @@ function( Sprite, vent, Laser, util, pool ){
      */
     proto.update = function(){
         this.physics.velocity = util.approach(
-          this.physics.velocityGoal, this.physics.velocity, 0.8
+          this.physics.velocityGoal, this.physics.velocity, 0.4
         );
 
         if ( this.position.x + this.physics.velocity >=

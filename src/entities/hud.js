@@ -43,8 +43,8 @@ function( vent, util ){
             },
             font: '20px Courier',
             textAlign: 'right',
-            height: 400,
-            currentHeight: 400,
+            height: 200,
+            currentHeight: 200,
             opts: {
                 fg: {
                     lineWidth: 10,
@@ -70,12 +70,12 @@ function( vent, util ){
         },
         cooldownTimer: function( ctx ){
             var c = cfg.cooldownTimer;
-            util.line(ctx, ctx.canvas.width - 25, ctx.canvas.height - 100,
-                ctx.canvas.width - 25, (ctx.canvas.height - 100) - c.height,
+            util.line(ctx, ctx.canvas.width - 15, ctx.canvas.height -50,
+                ctx.canvas.width - 15, (ctx.canvas.height -50) - c.height,
                 '#333', c.opts.bg
             );
-            util.line(ctx, ctx.canvas.width - 25, ctx.canvas.height - 100,
-                ctx.canvas.width - 25, (ctx.canvas.height - 100) - c.height * c.percent,
+            util.line(ctx, ctx.canvas.width - 15, ctx.canvas.height -50,
+                ctx.canvas.width - 15, (ctx.canvas.height -50) - c.height * c.percent,
                 c.fillStyle.current, c.opts.fg
             );
         },

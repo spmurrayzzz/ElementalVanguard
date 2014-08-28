@@ -14,12 +14,12 @@ function( Sprite, vent, util ){
     function Enemy(){
         Sprite.apply(this, arguments);
         this.fillStyle = util.randomColor();
-        this.size = 30;
+        this.size = 15;
         this.physics = {
             speed: 2,
-            friction: 2,
-            velocity: 0,
-            velocityGoal: util.random(1, 2)
+            friction: 0.01,
+            velocity: util.random(0.5, 1),
+            velocityGoal: 0.1
         };
         this.orbitAt = 0;
         this.orbitSpeed = 3;
@@ -89,7 +89,7 @@ function( Sprite, vent, util ){
         // Render primary body
         grd = this.ctx.createRadialGradient(
             this.position.x, this.position.y, this.size*1.5,
-            this.position.x + 20, this.position.y + 20, this.size/2
+            this.position.x + 10, this.position.y + 10, this.size/2
         );
         grd.addColorStop(0, this.currentGradient[0]);
         grd.addColorStop(1, this.currentGradient[1]);
@@ -103,8 +103,8 @@ function( Sprite, vent, util ){
         this.orbitAt += inc * this.orbitSpeed;
 
         util.circle(this.ctx,
-          this.position.x + (this.size + 5) * Math.cos(this.orbitAt * Math.PI),
-          this.position.y + (this.size + 5) * Math.sin(this.orbitAt * Math.PI),
+          this.position.x + (this.size + 2.5) * Math.cos(this.orbitAt * Math.PI),
+          this.position.y + (this.size + 2.5) * Math.sin(this.orbitAt * Math.PI),
           5, 'rgba(221,113,8,1.0)', this.orbiterDisplayProps
         );
 
@@ -115,8 +115,8 @@ function( Sprite, vent, util ){
               this.position.y + (this.size + i/4) * Math.sin((this.orbitAt-curr) * Math.PI),
               i/4, 'rgba(221, 113, 8, ' + alpha + ')'
             );
-            curr += inc * 0.5;
-            alpha -= inc * 0.3;
+            curr += inc * 1;
+            alpha -= inc * 0.6;
         }
     };
 
@@ -129,12 +129,6 @@ function( Sprite, vent, util ){
         if ( this.destroyed ) {
             return;
         }
-
-        this.physics.velocity = util.approach(
-          this.physics.velocityGoal,
-          this.physics.velocity,
-          this.physics.friction
-        );
 
         if ( this.position.y + this.physics.velocity >
             this.canvas.height + this.size ) {
@@ -174,7 +168,7 @@ function( Sprite, vent, util ){
     proto.recycle = function(){
         this.position.x = Math.random() * this.canvas.width;
         this.position.y = 0 - this.size;
-        this.physics.velocityGoal = util.random(1, 2);
+        this.physics.velocityGoal = util.random(0.1, 0.5);
         this.destroyed = false;
         this.fillStyle = util.randomColor();
     };
@@ -208,10 +202,10 @@ function( Sprite, vent, util ){
         this.effected = !!activate;
         if ( activate ) {
             this.currentGradient = this.gradients.water;
-            this.physics.velocityGoal = this.physics.velocityGoal * 0.3;
+            this.physics.velocityGoal = this.physics.velocity * 0.3;
         } else {
             this.currentGradient = this.gradients.default;
-            this.physics.velocityGoal = util.random(1, 2);
+            this.physics.velocityGoal = util.random(0.5, 1);
         }
     };
 
@@ -228,7 +222,7 @@ function( Sprite, vent, util ){
             this.physics.velocityGoal = 0;
         } else {
             this.currentGradient = this.gradients.default;
-            this.physics.velocityGoal = util.random(1, 2);
+            this.physics.velocityGoal = util.random(0.5, 1);
         }
     };
 

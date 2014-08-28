@@ -15,13 +15,13 @@ function( Sprite ){
         Sprite.apply(this, arguments);
         this.size = {
             width: 1,
-            height: 20
+            height: 10
         };
         this.physics = {
             speed: 2,
             friction: 2,
             velocity: 0,
-            velocityGoal: Math.random() * (10 - 6) + 6
+            velocityGoal: Math.random() * (5 - 3) + 3
         };
         this.fillStyle = 'rgba(255,255,255,0.15)';
         this.position = {
