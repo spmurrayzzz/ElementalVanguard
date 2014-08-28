@@ -2,6 +2,8 @@
 
 js13k 2014 submission
 
+Recommended browsers: Chrome, Safari
+
 ## Description/Lore
 
 *You are the first line of defense against an invasion of baddies that threaten
