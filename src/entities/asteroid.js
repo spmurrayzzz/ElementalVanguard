@@ -31,12 +31,6 @@ function( Sprite, vent, util ){
             x: 0,
             y: this.canvas.height + this.size
         };
-        this.displayProps = {
-            shadowOffsetX: 0,
-            shadowOffsetY: 0,
-            shadowBlur: 40,
-            shadowColor: '#684a3b'
-        };
         this.angle = Math.cos(Math.random());
     }
 
@@ -79,7 +73,7 @@ function( Sprite, vent, util ){
      */
     proto.render = function(){
         util.polygon(this.ctx, this.position.x, this.position.y, this.size, 7,
-            this.fillStyle[0], this.displayProps, this.angle
+            this.fillStyle[0], null, this.angle
         );
         util.polygon(this.ctx, this.position.x, this.position.y, this.size*0.8, 5,
             this.fillStyle[1], {}, this.angle

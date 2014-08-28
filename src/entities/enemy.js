@@ -29,8 +29,8 @@ function( Sprite, vent, util ){
             y: 0 - this.size*2
         };
         this.displayProps = {
-            shadowBlur: 40,
-            shadowColor: 'rgba(221,113,8,1.0)'
+            // shadowBlur: 0,
+            // shadowColor: 'rgba(221,113,8,1.0)'
         };
         this.gradients = {
             default: ['#800008', "#c3000b"],
