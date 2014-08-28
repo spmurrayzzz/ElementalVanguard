@@ -13,7 +13,6 @@ function( Sprite, vent, Laser, util, pool ){
      */
     function Player(){
         Sprite.apply(this, arguments);
-        this.ctx.fillStyle = "rgb(200,0,0)";
         this.dims = {
             width: 60,
             height: 60
@@ -26,30 +25,6 @@ function( Sprite, vent, Laser, util, pool ){
         };
         this.keyPressed = false;
         this.lastFired = new Date().getTime();
-        this.fillStyle = {
-            default: 'rgba(120, 220, 0, 1)',
-            fire: '#df4400'
-        };
-        this.currentFillStyle = this.fillStyle.default;
-        this.displayProps = {
-            default: {
-                shadowOffsetX: 0,
-                shadowOffsetY: 0,
-                shadowBlur: 40,
-                shadowColor: 'rgba(0, 220, 0, 0.6)',
-                lineWidth: 10,
-                strokeStyle: 'rgba(0, 100, 0, 0.7)'
-            },
-            fire: {
-                shadowOffsetX: 0,
-                shadowOffsetY: 0,
-                shadowBlur: 40,
-                shadowColor: '#df4400',
-                lineWidth: 10,
-                strokeStyle: '#df4400'
-            }
-        };
-        this.currentDisplayProps = this.displayProps.default;
         this.laserPosition = { x: 0, y: 0 };
         this.img = util.getById('player-img');
     }
@@ -87,13 +62,9 @@ function( Sprite, vent, Laser, util, pool ){
     proto.bindEvents = function(){
         Sprite.prototype.bindEvents.call(this);
         vent.on('elemental-fire-on', function(){
-            this.currentFillStyle = this.fillStyle.fire;
-            this.currentDisplayProps = this.displayProps.fire;
             this.fireActive = true;
         }.bind(this));
         vent.on('elemental-fire-off', function(){
-            this.currentFillStyle = this.fillStyle.default;
-            this.currentDisplayProps = this.displayProps.default;
             this.fireActive = false;
         }.bind(this));
     };
