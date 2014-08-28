@@ -1,4 +1,4 @@
-define('messenging',
+define('messaging',
 
 ['util', 'vent'],
 
