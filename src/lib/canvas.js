@@ -6,6 +6,10 @@ function( util, vent ){
 
     'use strict';
 
+    /**
+     * Canvas constructor
+     * (an OOP abstraction for several canvas layers)
+     */
     function Canvas(){
         this.elems = util.QSA('canvas.m');
         this.ctx = [];
@@ -25,6 +29,10 @@ function( util, vent ){
     var proto = Canvas.prototype;
 
 
+    /**
+     * Get the next canvas context in sequence
+     * @return {Object}
+     */
     proto.getNextContext = function(){
         var canvas = this.ctx[++this.canvasCounter];
         if ( this.canvasCounter >= this.ctx.length - 1 ) {
@@ -34,6 +42,10 @@ function( util, vent ){
     };
 
 
+    /**
+     * Bind event handlers to global event emitter
+     * @return {void}
+     */
     proto.bindEvents = function(){
         vent.on('render', this.render.bind(this));
         vent.on('bg-item-added', this.addBGItem.bind(this));
@@ -45,6 +57,11 @@ function( util, vent ){
     };
 
 
+    /**
+     * `render` event handler - handles rendering of all background items, laser
+     * items, and player/enemy entities.
+     * @return {void}
+     */
     proto.render = function( ){
         var i,
             ctx;
@@ -66,17 +83,31 @@ function( util, vent ){
     };
 
 
+    /**
+     * Adds a Sprite item to the entity cache
+     * @param {Sprite} sprite
+     * @return {void}
+     */
     proto.addSprite = function( sprite ){
         this.entityCache.push(sprite);
     };
 
 
+    /**
+     * Adds a Laser item to the laser cache and emits events for engine module
+     * @param {Laser} sprite
+     */
     proto.addLaser = function( sprite ){
         this.laserCache.push(sprite);
         vent.emit('laser-cache-updated', this.laserCache);
     };
 
 
+    /**
+     * Removes a Laser item matching its guid from the laserCache
+     * @param {Laser} sprite
+     * @return {void}
+     */
     proto.destroyLaser = function( sprite ) {
         var spliceTargets = [],
             laser,
@@ -95,6 +126,11 @@ function( util, vent ){
     };
 
 
+    /**
+     * Removes a Sprite item matching its guid from the entityCache
+     * @param {Sprite} sprite
+     * @return {void}
+     */
     proto.destroySprite = function( sprite ) {
         var entity;
 
@@ -107,11 +143,11 @@ function( util, vent ){
     };
 
 
-    proto.addHUDItem = function(){
-
-    };
-
-
+    /**
+     * Adds a background item to background entity cache
+     * @param {Sprite} sprite
+     * @return {void}
+     */
     proto.addBGItem = function( sprite ){
         this.bgCache.push(sprite);
     };
