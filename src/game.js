@@ -8,18 +8,28 @@
 
 define('game',
 
-['Canvas', 'Player', 'vent'],
+['Canvas', 'Player', 'vent', 'util'],
 
-function( Canvas, Player, vent ){
+function( Canvas, Player, vent, util ){
 
     'use strict';
 
     var canvas,
         player,
+        effectsCtx,
         game;
 
     // Create the canvas stage that we'll be using for primary game entities
     canvas = new Canvas();
+
+    // Grab an extra canvas for particle effects
+    effectsCtx = util.getById('effects').getContext('2d');
+    vent.on('render', function(){
+        effectsCtx.clearRect(
+            0, 0, effectsCtx.canvas.width, effectsCtx.canvas.height
+        );
+        vent.emit('effects-render');
+    });
 
     // Create the player entity
     player = new Player(canvas);
