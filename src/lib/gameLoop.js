@@ -9,6 +9,10 @@ function( vent ){
     var raf = window.requestAnimationFrame,
         paused = false;
 
+    /**
+     * Primary game frame tick, emit global events
+     * @return {void}
+     */
     function step(){
         if ( !paused ) {
             vent.emit('update');
