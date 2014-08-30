@@ -1,15 +1,23 @@
-define('titleScreen', ['util', 'vent'], function( util, vent ){
+define('titleScreen',
+
+['util', 'vent'],
+
+function( util, vent ){
 
     var init,
         bindEvents,
         screens,
         elem,
         next,
-        handler,
+        keyDownHandler,
         currentIndex,
         cacheElements;
 
 
+    /**
+     * Initialize the titleScreen module
+     * @return {void}
+     */
     init = function(){
         cacheElements();
         currentIndex = 0;
@@ -18,6 +26,10 @@ define('titleScreen', ['util', 'vent'], function( util, vent ){
     };
 
 
+    /**
+     * Cache the DOM elements needed for the module
+     * @return {void}
+     */
     cacheElements = function(){
         var nl = util.QSA('.title');
         elem = util.getById('title-screen');
@@ -28,18 +40,32 @@ define('titleScreen', ['util', 'vent'], function( util, vent ){
     };
 
 
+    /**
+     * Bind event handlers to global event emitter
+     * @return {void}
+     */
     bindEvents = function(){
-        vent.on('keydown', handler);
+        vent.on('keydown', keyDownHandler);
     };
 
 
-    handler = function( ev ){
+    /**
+     * Event handler for user keypress
+     * @param {Event} ev
+     * @return {void}
+     */
+    keyDownHandler = function( ev ){
         if ( ev.keyCode === 13 ){
             next();
         }
     };
 
 
+    /**
+     * Show next title screen, after last item ensure that the keydown handler
+     * is unbound and start the game.
+     * @return {void}
+     */
     next = function(){
         currentIndex++;
 
@@ -47,7 +73,7 @@ define('titleScreen', ['util', 'vent'], function( util, vent ){
             screens[currentIndex-1].classList.remove('on');
             elem.style.display = 'none';
             vent.emit('start-game');
-            vent.off('keydown', handler);
+            vent.off('keydown', keyDownHandler);
             return;
         }
 
