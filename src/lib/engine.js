@@ -22,12 +22,16 @@ function( vent, Enemy, pool, Laser, util ){
         passedEnemy,
         player,
         currentWave,
-        reportWave,
         msg,
         gameOver,
         lastCreated;
 
 
+    /**
+     * Initalize the game engine module
+     * @param  {Object} game - exposed game interface
+     * @return {void}
+     */
     init = function( game ){
         enemiesPassed = 0;
         enemyCache = [];
@@ -40,6 +44,10 @@ function( vent, Enemy, pool, Laser, util ){
     };
 
 
+    /**
+     * Bind event handlers to global event emitter
+     * @return {void}
+     */
     bindEvents = function(){
         vent.on('player-added', function( obj ){
             player = obj;
@@ -60,12 +68,20 @@ function( vent, Enemy, pool, Laser, util ){
             vent.on('deactivate', function(){
                 currentEffect = null;
             });
-            vent.on('start-game', reportWave);
+            vent.on('start-game', function(){
+                msg('Wave 1', 2000);
+            });
             vent.on('enemy-passed', passedEnemy);
             vent.on('game-over', gameOver);
         });
     };
 
+
+    /**
+     * Bound to `upaate` event - If 3 seconds has passed, create a new batch
+     * of enemies.
+     * @return {void}
+     */
     createEnemy = function(){
         var enemy,
             squadron;
@@ -101,6 +117,10 @@ function( vent, Enemy, pool, Laser, util ){
     };
 
 
+    /**
+     * Check for collisions between lasers and enemies - bound to `update`
+     * @return {void}
+     */
     checkLaserCollisions = function() {
         var dx,
             dy,
@@ -125,6 +145,9 @@ function( vent, Enemy, pool, Laser, util ){
     };
 
 
+    /**
+     * Check for collision between player and enemies - bound to `update`
+     */
     checkPlayerCollisions = function(){
         if ( !player ) {
             return;
@@ -157,6 +180,11 @@ function( vent, Enemy, pool, Laser, util ){
     };
 
 
+    /**
+     * Returns a function to get a new sqadron enemy formation (just number
+     * N enemies) from the current wave.
+     * @return {Number}    [description]
+     */
     getSquadron = (function(){
         var count = 0;
         vent.on('new-wave', function(){ count = 0; });
@@ -166,6 +194,10 @@ function( vent, Enemy, pool, Laser, util ){
     })();
 
 
+    /**
+     * Generate a new wave of enemies
+     * @return {Array}
+     */
     getWave = function(){
         var wave = [],
             count = 30;
@@ -180,11 +212,10 @@ function( vent, Enemy, pool, Laser, util ){
     };
 
 
-    reportWave = function(){
-        msg('Wave 1', 2000);
-    };
-
-
+    /**
+     * If an enemy gets by the player increment the counter and emit events
+     * @return {void}
+     */
     passedEnemy = function(){
         enemiesPassed++;
         if ( enemiesPassed === 10) {
@@ -193,6 +224,11 @@ function( vent, Enemy, pool, Laser, util ){
     };
 
 
+    /**
+     * Handler for game-over event. Destroy all enemys and stop creating
+     * new ones.
+     * @return {void}
+     */
     gameOver = function(){
         enemyCache.forEach(function( enemy ){
             enemy.destroy();
