@@ -8,6 +8,10 @@ function( vent, util ){
 
     var proto;
 
+    /**
+     * Sprite constructor (not to be used directly, should be extended)
+     * @param {Canvas} canvas
+     */
     function Sprite( canvas ){
         if ( canvas === undefined ) {
             throw new Error('Sprites require a canvas context');
@@ -25,6 +29,9 @@ function( vent, util ){
     proto = Sprite.prototype;
 
 
+    /**
+     * Binds event handlers to global event emitter
+     */
     proto.bindEvents = function(){
         var self = this;
         vent.on('create', function( game ){
@@ -34,25 +41,13 @@ function( vent, util ){
     };
 
 
+    /**
+     * Adds the entity to the canvas coordinate space
+     * @return {self}
+     */
     proto.create = function(){
         vent.emit('entity-added', this);
         return this;
-    };
-
-
-    proto.render = function(){};
-
-
-    proto.update = function(){};
-
-
-    proto.destroy = function(){
-        vent.emit(this.id + '-destroy');
-    };
-
-
-    proto.onDestroy = function( cb ){
-        vent.on(this.id + '-destroy', cb);
     };
 
 
