@@ -19,6 +19,11 @@ function( vent, util, Particle, pool ){
         groupName = 'particles'
         ;
 
+
+    /**
+     * Initalize the particleEffects module
+     * @return {void}
+     */
     init = function(){
         var cvs = util.getById('effects');
         ctx = cvs.getContext('2d');
@@ -47,9 +52,14 @@ function( vent, util, Particle, pool ){
         ];
     };
 
+
+    /**
+     * Bind event handlers to global event emitter
+     * @return {void}
+     */
     bindEvents = function(){
-        vent.on('start', function( game ){
-            init(game);
+        vent.on('start', function(){
+            init();
             vent.on('effects-render', render);
             vent.on('update', update);
             vent.on('kaboom!', explosion);
@@ -58,6 +68,10 @@ function( vent, util, Particle, pool ){
     };
 
 
+    /**
+     * `update` event handler - delegates to the Particle's update method
+     * @return {void}
+     */
     update = function(){
         for (var i = 0; i < particles.length; i++) {
             var particle = particles[i];
@@ -70,14 +84,24 @@ function( vent, util, Particle, pool ){
     };
 
 
+    /**
+     * `render` event handler - delegates to the Particle's render method
+     * @return {void}
+     */
     render = function(){
         for (var i = 0; i < particles.length; i++) {
             var particle = particles[i];
-            particle.render( ctx );
+            particle.render(ctx);
         }
     };
 
 
+    /**
+     * Create a series of particles to simulate an explosion particle effect
+     * @param  {Number} x
+     * @param  {Number} y
+     * @return {void}
+     */
     explosion = function( x, y ){
         var particleAmt = Math.random()*20 + 50,
             particle;
@@ -98,6 +122,12 @@ function( vent, util, Particle, pool ){
     };
 
 
+    /**
+     * Particle emitter function for fire elemental effect
+     * @param {Number} x
+     * @param {Number} y
+     * @return {void}
+     */
     emitFire = function( x, y ){
         var particle,
             fire;
