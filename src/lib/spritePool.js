@@ -7,11 +7,21 @@ define('spritePool', function(){
         recycle
         ;
 
+    /**
+     * Filter method for testing whether items are recyclable
+     * @param {Sprite} obj
+     */
     function recycleFilter( obj ){
         return obj.destroyed === true;
     }
 
 
+    /**
+     * Add a generated entity to the sprite pool
+     * @param  {String} name name of sprite pool
+     * @param  {Sprite} item sprite item to add
+     * @return {void}
+     */
     register = function( name, item ){
         if ( typeof registry[name] === 'undefined' ) {
             registry[name] = [];
@@ -20,6 +30,11 @@ define('spritePool', function(){
     };
 
 
+    /**
+     * Recycles a given sprite from the requested pool, otherwise returns false
+     * @param  {String} name name of sprite pool
+     * @return {Sprite|Boolean}
+     */
     recycle = function( name ) {
         if ( typeof registry[name] === 'undefined' ) {
             registry[name] = [];
@@ -35,6 +50,7 @@ define('spritePool', function(){
 
         return false;
     };
+
 
     return {
         register: register,
