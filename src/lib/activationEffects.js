@@ -18,11 +18,14 @@ function( vent, util ){
             decrement: 0.02,
             inProgress: false
         },
-        updateActivate,
-        renderActivate,
         bindEvents
         ;
 
+
+    /**
+     * Initialize the module
+     * @return {void}
+     */
     init = function(){
         var cvs = util.getById('effects');
         ctx = cvs.getContext('2d');
@@ -34,6 +37,10 @@ function( vent, util ){
     };
 
 
+    /**
+     * Bind event handlers to the global emitter
+     * @return {void}
+     */
     bindEvents = function(){
         vent.on('start', function( game ){
             init(game);
@@ -44,23 +51,21 @@ function( vent, util ){
     };
 
 
-    update = function(){
-        updateActivate();
-    };
-
-
-    render = function(){
-        renderActivate();
-    };
-
-
+    /**
+     * `activate` elemental effect event handler
+     * @return {[type]} [description]
+     */
     activate = function(){
         activateObj.opacity = 1;
         activateObj.inProgress = true;
     };
 
 
-    updateActivate = function(){
+    /**
+     * `update` event handler
+     * @return {void}
+     */
+    update = function(){
         if ( !activateObj.inProgress ) {
             return;
         }
@@ -72,7 +77,11 @@ function( vent, util ){
     };
 
 
-    renderActivate = function(){
+    /**
+     * `render` event handler
+     * @return {void}
+     */
+    render = function(){
         if ( !activateObj.inProgress ) {
             return;
         }
