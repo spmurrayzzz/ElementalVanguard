@@ -5,6 +5,12 @@ define('audio', ['jsfxr', 'vent'], function( jsfxr, vent ){
     var AC =  window.webkitAudioContext || window.AudioContext,
         ctx = new AC();
 
+    /**
+     * Register a new event for playing a given jsfxr sound
+     * @param  {String} namespace
+     * @param  {Array} sound
+     * @return {void}           
+     */
     function register( namespace, sound ){
         var buffer = jsfxr(sound, ctx);
 
