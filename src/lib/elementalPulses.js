@@ -19,6 +19,10 @@ function( vent, Asteroid, util ){
         effectActive = false;
 
 
+    /**
+     * This object will store context-bound references of elemental effect check
+     * handlers
+     */
     refCache = {
         checkAir: null,
         checkWater: null,
