@@ -23,12 +23,21 @@ function( Star, SpeedLine, vent, util ){
     };
 
 
+    /**
+     * Initialize the starField module
+     * @param  {Canvas} obj background canvas
+     * @return {void}
+     */
     init = function( obj ){
         canvas = obj;
         ctx = canvas.getContext('2d');
     };
 
 
+    /**
+     * Bind event handlers to global event emitter
+     * @return {void}
+     */
     bindEvents = function(){
         vent.on('start', function( ){
             init(util.getById('bg'));
@@ -38,6 +47,10 @@ function( Star, SpeedLine, vent, util ){
     };
 
 
+    /**
+     * Creare all the stars and lines for the field
+     * @return {void}
+     */
     create = function(){
         for (var i = 0; i < cfg.starCount; i++) {
             stars.push(new Star(canvas).create());
@@ -69,6 +82,11 @@ function( Star, SpeedLine, vent, util ){
     };
 
 
+    /**
+     * Bound to `update` event, update all positional coordinates and velocities
+     * for stars and lines.
+     * @return {void}
+     */
     update = function(){
         var newY,
             line,
