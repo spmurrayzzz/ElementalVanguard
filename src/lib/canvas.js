@@ -53,7 +53,6 @@ function( util, vent ){
         vent.on('entity-destroyed', this.destroySprite.bind(this));
         vent.on('laser-added', this.addLaser.bind(this));
         vent.on('laser-destroyed', this.destroyLaser.bind(this));
-        vent.on('hud-item-added', this.addHUDItem.bind(this));
     };
 
 
