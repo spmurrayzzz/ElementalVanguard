@@ -15,17 +15,14 @@ img {
     display: none;
 }
 
-#hi-score {
+.hi {
     position: absolute;
     width: 100%;
     z-index: 20;
 }
 
 #hi-wave {
-    position: absolute;
     text-align: right;
-    width: 100%;
-    z-index: 20;
 }
 
 canvas {
@@ -38,7 +35,6 @@ canvas {
 
 #game-container {
     height: 600px;
-
 }
 
 #viewport {
@@ -58,7 +54,6 @@ canvas {
     font-size: 14px;
     padding: 10px 40px;
     text-align: center;
-    width: 600;
 }
 
 .title {
@@ -70,7 +65,7 @@ canvas {
 }
 
 .ready {
-    color: rgba(120, 220, 0, 1);
+    color: #78dc00;
 }
 
 .title li {
