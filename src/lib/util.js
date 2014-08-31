@@ -2,6 +2,15 @@ define('util', function(){
 
     'use strict';
 
+
+    /**
+     * Approach function for velocities, returns a number that approaches
+     * targetX based on currentX and a given deltaT.
+     * @param  {Number} targetX
+     * @param  {Number} currentX
+     * @param  {Number} deltaT
+     * @return {Number}
+     */
     function approach( targetX, currentX, deltaT ) {
         var diff = targetX - currentX;
 
@@ -15,11 +24,21 @@ define('util', function(){
     }
 
 
+    /**
+     * Return a random number in a range from min to max.
+     * @param  {Number} min
+     * @param  {Number} max
+     * @return {Number}
+     */
     function random( min, max ) {
         return Math.random() * (max - min) + min;
     }
 
 
+    /**
+     * Generate a globally unique identifier (for Sprites).
+     * @return {String}
+     */
     function guid() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
@@ -28,11 +47,25 @@ define('util', function(){
     }
 
 
+    /**
+     * Generate a random CSS color string.
+     * @return {String}
+     */
     function randomColor() {
         return '#'+Math.floor(Math.random()*16777215).toString(16);
     }
 
 
+    /**
+     * Draw a circle to a given context `ctx`.
+     * @param  {Object} ctx       canvas 2d context
+     * @param  {Number} x         x coordinate
+     * @param  {Number} y         y coordinate
+     * @param  {Number} radius    raidus of circle
+     * @param  {String} fillStyle CSS color value
+     * @param  {Object} opts      additional options for context
+     * @return {void}
+     */
     function circle( ctx, x, y, radius, fillStyle, opts ) {
         var key;
 
@@ -51,6 +84,17 @@ define('util', function(){
     }
 
 
+    /**
+     * Draw a rectangle to a given context `ctx`.
+     * @param  {Object} ctx       canvas 2d context
+     * @param  {Number} x         x coordinate
+     * @param  {Number} y         y coordinate
+     * @param  {Number} width
+     * @param  {Number} height
+     * @param  {String} fillStyle CSS color value
+     * @param  {Object} opts      additional options for context
+     * @return {void}
+     */
     function rect( ctx, x, y, width, height, fillStyle, opts ) {
         var key;
 
@@ -66,6 +110,17 @@ define('util', function(){
     }
 
 
+    /**
+     * Draws a line from x1,y1 to x2,y2 in a given context `ctx`.
+     * @param  {Object} ctx         canvas 2d context
+     * @param  {Number} x1
+     * @param  {Number} y1
+     * @param  {Number} x2
+     * @param  {Number} y2
+     * @param  {String} strokeStyle CSS color value
+     * @param  {Object} opts        additional options for context
+     * @return {void}
+     */
     function line( ctx, x1, y1, x2, y2, strokeStyle, opts ) {
         var key;
 
@@ -82,26 +137,19 @@ define('util', function(){
     }
 
 
-    function lineRotate( ctx, x1, y1, x2, y2, rotate, opts ) {
-        var key;
-
-        ctx.save();
-        ctx.beginPath();
-        ctx.translate(x1, y1);
-        ctx.rotate(-rotate);
-        ctx.moveTo(0, 0);
-        ctx.lineTo( x2 - x1, y2 - y1 );
-        if ( opts !== undefined ) {
-            for ( key in opts ) {
-                ctx[key] = opts[key];
-            }
-        }
-        ctx.stroke();
-        ctx.restore();
-        ctx.stroke();
-    }
-
-
+    /**
+     * Draws a variable sided polygon to a given context `ctx`.
+     * @param  {Object} ctx           canvas 2d context
+     * @param  {Number} x             x origin
+     * @param  {Number} y             y origin
+     * @param  {Number} radius        radius of shape
+     * @param  {Number} sides         number of sides
+     * @param  {String} fillStyle     CSS color value
+     * @param  {Object} opts          additional options for context
+     * @param  {Number} startAngle    initial starting angle
+     * @param  {Boolean} anticlockwise
+     * @return {void}
+     */
     function polygon( ctx, x, y, radius, sides, fillStyle, opts, startAngle, anticlockwise ) {
         var key,
             a;
@@ -136,19 +184,11 @@ define('util', function(){
     }
 
 
-    function text( ctx, txt, x, y, fillStyle, opts ) {
-        var key;
-
-        ctx.fillStyle = fillStyle;
-        if ( opts !== undefined ) {
-            for ( key in opts ) {
-                ctx[key] = opts[key];
-            }
-        }
-        ctx.fillText(txt, x, y);
-    }
-
-
+    /**
+     * Capitalize the first letter of a given string
+     * @param  {String} str
+     * @return {String}
+     */
     function capitalize ( str ){
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
@@ -165,9 +205,7 @@ define('util', function(){
         circle: circle,
         rect: rect,
         line: line,
-        lineRotate: lineRotate,
         polygon: polygon,
-        text: text,
         capitalize: capitalize
     };
 
