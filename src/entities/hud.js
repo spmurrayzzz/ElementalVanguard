@@ -278,6 +278,13 @@ function( vent, util ){
     };
 
 
+    /**
+     * Getter/setter for localStorage items
+     * @param  {String} method set|get
+     * @param  {String} name   key name
+     * @param  {String} val    value to store
+     * @return {String}        
+     */
     stored = function( method, name, val ){
         return window.localStorage[method + 'Item'](name, val);
     };
