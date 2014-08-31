@@ -26,8 +26,7 @@ function( vent, util ){
         enemyElem,
         enemyCount,
         firstTimeElemental,
-        getStored,
-        setStored,
+        stored,
         hiItems,
         cfg;
 
@@ -175,20 +174,19 @@ function( vent, util ){
     bindEvents = function(){
         vent.on('start', function( obj ){
             init(obj);
-            hiItems.score.innerHTML = getStored('score') || 0;
-            hiItems.wave.innerHTML = getStored('wave') || 1;
+            hiItems.score.innerHTML = stored('get', 'score') || 0;
+            hiItems.wave.innerHTML = stored('get', 'wave') || 1;
         });
         vent.on('enemy-down', function(){
             score += 2;
-            if ( getStored('score') < score ) {
-                setStored('score', score);
+            if ( stored('get', 'score') < score ) {
+                stored('set', 'score', score);
                 hiItems.score.innerHTML = score;
-                console.log(hiItems);
             }
         });
         vent.on('new-wave', function( waveNum ){
-            if ( getStored ('wave') < waveNum ) {
-                setStored('wave', waveNum);
+            if ( stored('get', 'wave') < waveNum ) {
+                stored('set', 'wave', waveNum);
                 vent.emit('hi-wave-update', waveNum);
                 hiItems.wave.innerHTML = waveNum;
             }
@@ -287,13 +285,8 @@ function( vent, util ){
     };
 
 
-    getStored = function( name ){
-        return window.localStorage.getItem(name);
-    };
-
-
-    setStored = function( name, val ){
-        return window.localStorage.setItem(name, val);
+    stored = function( method, name, val ){
+        return window.localStorage[method + 'Item'](name, val);
     };
 
 
