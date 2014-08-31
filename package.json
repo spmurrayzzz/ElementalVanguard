@@ -1,6 +1,6 @@
 {
-  "name": "js13k-2014",
-  "version": "0.1.0",
+  "name": "ElementalVanguard",
+  "version": "2.0.0",
   "description": "js13k 2014 game submission.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
