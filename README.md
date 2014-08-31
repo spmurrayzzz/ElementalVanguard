@@ -49,6 +49,14 @@ npm install
 open index.html
 ```
 
+## To build game source
+
+```bash
+grunt
+# or to build on file save
+grunt watch
+```
+
 ## Credits
 
 HUD and Ship assets provided by [Scott O'Hara](https://github.com/scottaohara)
