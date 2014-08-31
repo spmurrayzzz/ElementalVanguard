@@ -4,7 +4,7 @@ js13k 2014 submission
 
 Recommended browser: Chrome
 
-Demo available @ [http://spmurrayzzz.com/dropbox/elemental]
+Demo available @ http://spmurrayzzz.com/dropbox/elemental
 
 ## Description/Lore
 
