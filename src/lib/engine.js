@@ -95,7 +95,7 @@ function( vent, Enemy, pool, Laser, util ){
             waveCount++;
             currentWave = getWave();
             squadron = getSquadron(currentWave);
-            vent.emit('new-wave');
+            vent.emit('new-wave', waveCount);
             vent.emit('message', 'Wave ' + parseInt(waveCount + 1), 2000);
         }
 

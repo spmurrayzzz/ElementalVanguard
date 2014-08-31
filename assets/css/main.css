@@ -15,6 +15,19 @@ img {
     display: none;
 }
 
+#hi-score {
+    position: absolute;
+    width: 100%;
+    z-index: 20;
+}
+
+#hi-wave {
+    position: absolute;
+    text-align: right;
+    width: 100%;
+    z-index: 20;
+}
+
 canvas {
     position: absolute;
     transform: scale(2, 2);

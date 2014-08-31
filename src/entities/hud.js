@@ -26,6 +26,9 @@ function( vent, util ){
         enemyElem,
         enemyCount,
         firstTimeElemental,
+        getStored,
+        setStored,
+        hiItems,
         cfg;
 
 
@@ -109,6 +112,11 @@ function( vent, util ){
         enemyElem = util.getById('enemies-passed');
         enemyCount = 0;
 
+        hiItems = {
+            score: util.getById('score-number'),
+            wave: util.getById('wave-number'),
+        };
+
         cooldownTimer = {
             current: 20,
             lastChecked: Date.now(),
@@ -167,9 +175,23 @@ function( vent, util ){
     bindEvents = function(){
         vent.on('start', function( obj ){
             init(obj);
+            hiItems.score.innerHTML = getStored('score') || 0;
+            hiItems.wave.innerHTML = getStored('wave') || 1;
         });
         vent.on('enemy-down', function(){
             score += 2;
+            if ( getStored('score') < score ) {
+                setStored('score', score);
+                hiItems.score.innerHTML = score;
+                console.log(hiItems);
+            }
+        });
+        vent.on('new-wave', function( waveNum ){
+            if ( getStored ('wave') < waveNum ) {
+                setStored('wave', waveNum);
+                vent.emit('hi-wave-update', waveNum);
+                hiItems.wave.innerHTML = waveNum;
+            }
         });
     };
 
@@ -262,6 +284,16 @@ function( vent, util ){
      */
     draw = function( name ){
         drawItems[name](ctx);
+    };
+
+
+    getStored = function( name ){
+        return window.localStorage.getItem(name);
+    };
+
+
+    setStored = function( name, val ){
+        return window.localStorage.setItem(name, val);
     };
 
 
