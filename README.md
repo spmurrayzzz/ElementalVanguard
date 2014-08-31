@@ -4,6 +4,8 @@ js13k 2014 submission
 
 Recommended browser: Chrome
 
+Demo available @ [http://spmurrayzzz.com/dropbox/elemental]
+
 ## Description/Lore
 
 *You are the first line of defense against an invasion of baddies that threaten
