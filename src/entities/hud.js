@@ -8,7 +8,6 @@ function( vent, util ){
 
     var init,
         ctx,
-        canvas,
         update,
         render,
         bindEvents,
@@ -45,7 +44,6 @@ function( vent, util ){
                 fire: 'rgba(255, 0, 0, 1)'
             },
             font: '20px Courier',
-            textAlign: 'right',
             height: 200,
             currentHeight: 200,
             opts: {
@@ -96,11 +94,6 @@ function( vent, util ){
     init = function(){
         var cvs = util.getById('hud-canvas');
         ctx = cvs.getContext('2d');
-        canvas = {
-            width: cvs.width,
-            height: cvs.height,
-            ctx: ctx
-        };
 
         activeIcon = null;
         icons = util.QSA('.ico');
